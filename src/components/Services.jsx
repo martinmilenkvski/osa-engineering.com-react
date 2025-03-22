@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Services.css";
+import Card from "./Card";
 
 const Services = () => {
   const hrRef = useRef(null);
@@ -21,18 +22,26 @@ const Services = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="">
       <hr ref={hrRef} className="growing-hr mt-16" />
       <p>OUR SERVICES</p>
 
       <h2 className="text-8xl mb-12">
         Our Range of Mechanical Engineering Services
       </h2>
+      </div>
 
       <div class="container">
-        <div class="card">Card 1</div>
-        <div class="card">Card 2</div>
-        <div class="card">Card 3</div>
+        <div className=" card">
+          <Card  />
+        </div>
+        <div className=" card">
+          <Card  />
+        </div>
+        <div className="card">
+          <Card />
+        </div>
       </div>
     </div>
   );
