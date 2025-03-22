@@ -1,4 +1,3 @@
-
 import "./App.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
@@ -9,7 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div>
       <Nav />
       <Header />
       <Services />

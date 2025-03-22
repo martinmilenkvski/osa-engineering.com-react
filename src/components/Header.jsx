@@ -18,11 +18,10 @@ const Header = () => {
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
-        <h1 className="text-center text-8xl  text-white md:text-8xl max-w-3xl">
-          Your <span className="text-red-500">Partner</span> in Mechanical
-          Engineering
+        <h1 className="text-center text-9xl text-white md:text-9xl max-w-4xl mb-10 leading-tight">
+          Your <span className="text-yellow-500">Partner </span>in Engineering
         </h1>
-        <p className="mt-4 text-center text-lg  tracking-wider text-white max-w-3xl">
+        <p className="mt-4 text-center text-lg tracking-wider text-white max-w-3xl leading-relaxed">
           Design. Prototype. Manufacture. Assemble. We use advanced computer
           modeling (finite element analysis) to accurately predict how
           structures will perform under stress and pressure
