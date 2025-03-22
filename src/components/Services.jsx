@@ -12,8 +12,8 @@ const Services = () => {
         const scrollPercentage =
           (window.scrollY /
             (document.documentElement.scrollHeight - window.innerHeight)) *
-          400;
-        hrRef.current.style.width = `${scrollPercentage}%`;
+          100;
+        hrRef.current.style.width = `${scrollPercentage+20}%`;
       }
     };
 
