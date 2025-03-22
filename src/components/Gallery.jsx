@@ -121,6 +121,8 @@ const Gallery = () => {
   };
 
   return (
+
+    
     <div
       className="gallery-wrapper"
       ref={containerRef}

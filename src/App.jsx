@@ -7,6 +7,7 @@ import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Card from "./components/Card";
+import Success from "./components/Success";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <>
                 <Header />
                 <Services />
+                <Success />
                 <Gallery />
                 <Contact />
               </>
