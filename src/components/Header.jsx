@@ -18,11 +18,14 @@ const Header = () => {
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
-        <h1 className="text-center text-5xl font-extrabold text-white md:text-6xl">
-          Your Partnership in Mechanical Engineering
+        <h1 className="text-center text-8xl  text-white md:text-8xl max-w-3xl">
+          Your <span className="text-red-500">Partner</span> in Mechanical
+          Engineering
         </h1>
-        <p className="mt-4 text-center text-lg uppercase tracking-wider text-white">
-          Design. Prototype. Manufacture. Assemble.
+        <p className="mt-4 text-center text-lg  tracking-wider text-white max-w-3xl">
+          Design. Prototype. Manufacture. Assemble. We use advanced computer
+          modeling (finite element analysis) to accurately predict how
+          structures will perform under stress and pressure
         </p>
       </div>
     </div>
