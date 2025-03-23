@@ -8,7 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Card from "./components/Card";
 import Success from "./components/Success";
-
+import NumbersSection from "./components/NumbersSection";
 function App() {
   return (
     <Router>
@@ -25,6 +25,7 @@ function App() {
                 <Success />
                 <Gallery />
                 <Contact />
+                <NumbersSection />
               </>
             }
           />
