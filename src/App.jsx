@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import Card from "./components/Card";
 import Success from "./components/Success";
 import NumbersSection from "./components/NumbersSection";
+import LogoMarquee from "./components/LogoMarquee";
+
 function App() {
   return (
     <Router>
@@ -23,6 +25,7 @@ function App() {
                 <Header />
                 <Services />
                 <Success />
+                <LogoMarquee />
                 <Gallery />
                 <Contact />
                 <NumbersSection />
