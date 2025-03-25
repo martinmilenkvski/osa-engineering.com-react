@@ -18,6 +18,7 @@ const Card = () => {
           <p className="text-gray-500 text-lg font-light mt-4 ml-4">
             From Prototype to Product
           </p>
+          <hr></hr>
         </div>
         <p className="text-gray-500 text-lg font-light mt-4 mb-4 w-4/5">
           With years of experience, we’ve mastered the art of translating
