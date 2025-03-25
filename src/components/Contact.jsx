@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// rework the multi step form 
 const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -19,7 +20,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission - you can connect to your backend here
+    // Subminiton zadrzi ja
     console.log("Form submitted:", formData);
     // Reset form after submission (optional)
     setFormData({
