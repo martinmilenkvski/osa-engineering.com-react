@@ -14,7 +14,8 @@ import LogoMarquee from "./components/LogoMarquee";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col items-center justify-center">
+      {/* light theme 1 */}
+      <div className="flex flex-col items-center justify-center light-theme-1">
         <Nav />
         <Routes>
           <Route path="/card" element={<Card />} />
