@@ -3,43 +3,47 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-yellow-400 rounded-t-3xl px-8 py-12 md:py-16">
+    <footer className="w-full bg-yellow-400 rounded-t-3xl px-4 sm:px-6 md:px-8 py-8 md:py-12 lg:py-16">
       <div className="max-w-7xl mx-auto">
         {/* Logo and Company Name */}
-        <div className="flex items-center mb-16">
+        <div className="flex items-center mb-8 md:mb-16">
           <svg
-            className="w-10 h-10 mr-4"
+            className="w-8 h-8 md:w-10 md:h-10 mr-3 md:mr-4"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
             {/* Simple placeholder for the goat/bull logo - replace with your actual logo */}
             <path d="M12,2L1,21H23L12,2M12,6L19.5,19H4.5L12,6Z" />
           </svg>
-          <h2 className="text-5xl font-bold">O.S.A. MK</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+            O.S.A. MK
+          </h2>
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-16 mb-8 md:mb-12">
           {/* Left Column */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Take a Look</h3>
-            <div className="flex flex-col space-y-4">
+          <div className="mb-6 sm:mb-0">
+            <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
+              Take a Look
+            </h3>
+            <div className="flex flex-col space-y-3 md:space-y-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center hover:underline"
+                className="inline-flex items-center hover:underline text-sm md:text-base"
               >
                 CONTACT US <span className="ml-2">↗</span>
               </Link>
 
-              <div className="flex items-center space-x-4 mt-6">
+              <div className="flex items-center space-x-3 md:space-x-4 mt-4 md:mt-6">
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-yellow-400 rounded-full p-2.5 hover:opacity-90 transition-opacity"
+                  className="bg-black text-yellow-400 rounded-full p-2 md:p-2.5 hover:opacity-90 transition-opacity"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5 md:w-6 md:h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -50,10 +54,10 @@ const Footer = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-yellow-400 rounded-full p-2.5 hover:opacity-90 transition-opacity"
+                  className="bg-black text-yellow-400 rounded-full p-2 md:p-2.5 hover:opacity-90 transition-opacity"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5 md:w-6 md:h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -65,14 +69,14 @@ const Footer = () => {
           </div>
 
           {/* Middle Column */}
-          <div>
+          <div className="mb-6 sm:mb-0">
             <Link
               to="/"
-              className="inline-flex items-center text-xl font-bold mb-6 hover:underline"
+              className="inline-flex items-center text-lg md:text-xl font-bold mb-4 md:mb-6 hover:underline"
             >
               HOME <span className="ml-2">↗</span>
             </Link>
-            <p className="mt-6">
+            <p className="mt-4 md:mt-6 text-sm md:text-base">
               Explore our
               <br />
               Latest Work
@@ -81,15 +85,24 @@ const Footer = () => {
 
           {/* Right Column */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Check us out</h3>
-            <div className="space-y-4">
+            <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
+              Check us out
+            </h3>
+            <div className="space-y-3 md:space-y-4 text-sm md:text-base">
               <p>Have any questions?</p>
-              <p>
+              <p className="break-words">
                 Please don't hesitate to
                 <br />
-                call at +389 75 488 726 +389 70 268 809
+                call at{" "}
+                <a href="tel:+38975488726" className="hover:underline">
+                  +389 75 488 726
+                </a>{" "}
+                or{" "}
+                <a href="tel:+38970268809" className="hover:underline">
+                  +389 70 268 809
+                </a>
               </p>
-              <p>
+              <p className="break-words">
                 Got something to share?
                 <br />
                 Ping us at{" "}
@@ -105,10 +118,12 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <hr className="border-black/20 my-8" />
+        <hr className="border-black/20 my-6 md:my-8" />
 
         {/* Copyright */}
-        <div className="text-sm">© {new Date().getFullYear()} by OSA MK</div>
+        <div className="text-xs md:text-sm">
+          © {new Date().getFullYear()} by OSA MK
+        </div>
       </div>
     </footer>
   );

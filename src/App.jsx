@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       {/* light theme 1 */}
-      <div className="flex flex-col items-center justify-center light-theme-1">
+      <div className="flex flex-col items-center justify-center">
         <Nav />
         <Routes>
           <Route path="/card" element={<Card />} />
