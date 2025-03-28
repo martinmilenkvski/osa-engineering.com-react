@@ -26,18 +26,19 @@ const Nav = () => {
         <img src="" alt="logo" className="h-12" />
 
         <ul className="flex items-center gap-8">
-          <li className="text-white hover:text-yellow-500 transition-colors cursor-pointer">
-            Home
-          </li>
-          <li className="text-white hover:text-yellow-500 transition-colors cursor-pointer">
-            Services
-          </li>
-          <li className="text-white hover:text-yellow-500 transition-colors cursor-pointer">
-            Gallery
-          </li>
-          <li className="text-white hover:text-yellow-500 transition-colors cursor-pointer">
-            Contact
-          </li>
+          {["Home", "Services", "Gallery", "Contact"].map((item) => (
+            <li
+              key={item}
+              className="text-white relative group cursor-pointer"
+            >
+              <span className="transition-colors duration-300 group-hover:text-yellow-500">
+                {item}
+              </span>
+              <span
+                className="absolute left-0 bottom-0 w-0 h-1 bg-yellow-500 transition-all duration-500 group-hover:w-full"
+              ></span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
