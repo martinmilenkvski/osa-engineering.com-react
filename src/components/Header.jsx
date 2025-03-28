@@ -21,7 +21,7 @@ const Header = () => {
         <h1 className="text-center text-9xl text-white md:text-9xl max-w-4xl mb-10 leading-tight animate-slide-in-up">
           Your <span className="text-yellow-500">Partner </span>in Engineering
         </h1>
-        <p className="mt-4 text-center text-lg tracking-wider text-white max-w-3xl leading-relaxed animate-fade-in-delay">
+        <p className="mt-4 text-center text-lg tracking-wider text-white max-w-2xl leading-relaxed animate-fade-in-delay">
           Design. Prototype. Manufacture. Assemble. We use advanced computer
           modeling (finite element analysis) to accurately predict how
           structures will perform under stress and pressure.
