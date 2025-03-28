@@ -13,6 +13,9 @@ export default {
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        "fade-in": "fadeIn 1.5s ease-in-out",
+        "fade-in-delay": "fadeIn 2s ease-in-out",
+        "slide-in-up": "slideInUp 1.5s ease-out",
       },
       keyframes: {
         marquee: {
