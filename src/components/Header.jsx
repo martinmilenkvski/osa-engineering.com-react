@@ -23,7 +23,7 @@ const Header = () => {
         </h1>
         <p className="mt-4 text-center text-lg tracking-wider text-white max-w-2xl leading-relaxed animate-fade-in-delay">
           Design. Prototype. Manufacture. Assemble. We use advanced computer
-          modeling (finite element analysis) to accurately predict how
+          modeling to accurately predict how
           structures will perform under stress and pressure.
         </p>
       </div>
