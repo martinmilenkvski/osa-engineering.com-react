@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-// rework the multi step form 
+// rework the multi step form
 const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -9,6 +10,33 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+
+    // First name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,32 +44,116 @@ const Contact = () => {
       ...prevState,
       [name]: value,
     }));
+
+    // Clear error when field is updated
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: null,
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Subminiton zadrzi ja
-    console.log("Form submitted:", formData);
-    // Reset form after submission (optional)
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
-    // You could also show a success message
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulating form submission
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log("Form submitted:", formData);
+
+      // Reset form and show success
+      setFormSubmitted(true);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (formSubmitted) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="w-full max-w-6xl mx-auto py-20 px-8 flex flex-col items-center text-center"
+      >
+        <div className="bg-yellow-50 p-10 rounded-lg shadow-md w-full max-w-xl">
+          <div className="mb-6 text-yellow-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 mx-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <h2 className="text-3xl font-bold mb-4">Thank You!</h2>
+          <p className="text-lg mb-6">
+            Your message has been submitted successfully. We'll get back to you
+            as soon as possible.
+          </p>
+          <button
+            onClick={() => setFormSubmitted(false)}
+            className="py-3 px-6 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-full transition-colors duration-300"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <div className="w-full max-w-6xl mx-auto py-20 px-8">
-      <h1 className="text-5xl font-bold mb-16">Contact us</h1>
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-5xl font-bold mb-6"
+      >
+        Contact us
+      </motion.h1>
 
-      <form onSubmit={handleSubmit}>
+      <motion.p
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="text-lg mb-16 max-w-3xl"
+      >
+        Have questions or want to discuss your engineering project? Reach out to
+        our team and we'll get back to you shortly.
+      </motion.p>
+
+      <motion.form
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        onSubmit={handleSubmit}
+        className="bg-white rounded-lg p-8 shadow-sm"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="flex flex-col">
             <label htmlFor="firstName" className="mb-2 font-medium">
-              First name
+              First name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -49,10 +161,14 @@ const Contact = () => {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              placeholder="First name"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors"
-              required
+              placeholder="Your first name"
+              className={`py-3 px-4 border-b ${
+                errors.firstName ? "border-red-500" : "border-gray-300"
+              } focus:border-yellow-500 outline-none transition-colors rounded-t-md`}
             />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+            )}
           </div>
 
           <div className="flex flex-col">
@@ -65,8 +181,8 @@ const Contact = () => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              placeholder="Last name"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors"
+              placeholder="Your last name"
+              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors rounded-t-md"
             />
           </div>
         </div>
@@ -82,10 +198,14 @@ const Contact = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Email"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors"
-              required
+              placeholder="your.email@example.com"
+              className={`py-3 px-4 border-b ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } focus:border-yellow-500 outline-none transition-colors rounded-t-md`}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
           <div className="flex flex-col">
@@ -98,8 +218,8 @@ const Contact = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Phone"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors"
+              placeholder="+1 (123) 456-7890"
+              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors rounded-t-md"
             />
           </div>
         </div>
@@ -113,19 +233,52 @@ const Contact = () => {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Message"
-            className="w-full py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors resize-none min-h-[100px]"
-            required
+            placeholder="Tell us about your project or inquiry..."
+            className={`w-full py-3 px-4 border-b ${
+              errors.message ? "border-red-500" : "border-gray-300"
+            } focus:border-yellow-500 outline-none transition-colors resize-none min-h-[150px] rounded-t-md`}
           ></textarea>
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+          )}
         </div>
 
         <button
           type="submit"
-          className="w-full py-4 px-8 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-full transition-colors duration-300"
+          disabled={isSubmitting}
+          className={`w-full py-4 px-8 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-full transition-colors duration-300 flex items-center justify-center ${
+            isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+          }`}
         >
-          Submit
+          {isSubmitting ? (
+            <>
+              <svg
+                className="animate-spin -ml-1 mr-3 h-5 w-5 text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Submitting...
+            </>
+          ) : (
+            "Submit Message"
+          )}
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };
