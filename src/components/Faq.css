@@ -1,0 +1,29 @@
+.growing-hr {
+  height: 2px;
+  background-color: #000;
+  width: 20%;
+  transition: width 0.5s ease-out;
+  border: none;
+}
+
+.dark .growing-hr {
+  background-color: #fff;
+}
+
+.animate-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-text.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .faq-container {
+    background-color: #111827;
+    color: #fff;
+  }
+}

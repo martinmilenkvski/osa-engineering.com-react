@@ -53,6 +53,17 @@ const Header = () => {
           modeling to accurately predict how structures will perform under
           stress and pressure.
         </motion.p>
+        <motion.div 
+          className="mt-8"
+          variants={itemVariants}
+        >
+          <a 
+            href="/contact" 
+            className="bg-yellow-500 hover:bg-yellow-400 text-black font-medium py-3 px-8 rounded-md transition-colors duration-300 shadow-lg"
+          >
+            Get Started Today
+          </a>
+        </motion.div>
       </motion.div>
     </div>
   );

@@ -24,38 +24,50 @@ const Nav = () => {
       }`}
     >
       <div className="flex justify-between items-center">
-        <img src="" alt="logo" className="h-12" />
+        {/* Logo on the left */}
+        <div className="flex-shrink-0">
+          <img src="" alt="logo" className="h-12" />
+        </div>
 
-        {/* Hamburger Menu */}
+        {/* Hamburger Menu - Mobile only */}
         <button
-          className="block md:hidden text-white text-3xl"
+          className="block md:hidden text-white text-3xl ml-auto"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           ☰
         </button>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-8">
-          {["Home", "Services", "Gallery", "Contact"].map((item) => (
-            <li
-              key={item}
-              className="text-white relative group cursor-pointer hover:text-yellow-500"
-            >
-              <span className="transition-colors duration-300 group-hover:text-yellow-500">
-                {item}
-              </span>
-              <span
-                className="absolute left-0 bottom-0 w-0 h-1 bg-yellow-500 transition-all duration-500 group-hover:w-full"
-              ></span>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop Navigation - Links in the middle */}
+        <div className="hidden md:flex items-center justify-center flex-1 mx-8">
+          <ul className="flex items-center gap-8">
+            {["Home", "Services", "Gallery"].map((item) => (
+              <li
+                key={item}
+                className="text-white relative group cursor-pointer hover:text-yellow-500"
+              >
+                <span className="transition-colors duration-300 group-hover:text-yellow-500">
+                  {item}
+                </span>
+                <span
+                  className="absolute left-0 bottom-0 w-0 h-1 bg-yellow-500 transition-all duration-500 group-hover:w-full"
+                ></span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact button on the right */}
+        <div className="hidden md:block">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium px-6 py-2 rounded-md transition-colors duration-300">
+            Contact
+          </button>
+        </div>
       </div>
 
-      {/* Fullscreen Menu */}
+      {/* Fullscreen Menu - Mobile only */}
       {menuOpen && (
         <div className="fixed inset-0 bg-black flex flex-col items-center justify-center gap-8 z-40">
-          {["Home", "Services", "Gallery", "Contact"].map((item) => (
+          {["Home", "Services", "Gallery"].map((item) => (
             <button
               key={item}
               className="text-white text-4xl hover:text-yellow-500"
@@ -64,6 +76,12 @@ const Nav = () => {
               {item}
             </button>
           ))}
+          <button
+            className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium px-8 py-3 rounded-md mt-4 text-2xl"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </button>
           <button
             className="absolute top-8 right-8 text-white text-3xl"
             onClick={() => setMenuOpen(false)}

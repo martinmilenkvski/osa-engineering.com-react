@@ -10,6 +10,7 @@ import Card from "./components/Card";
 import Success from "./components/Success";
 import NumbersSection from "./components/NumbersSection";
 import LogoMarquee from "./components/LogoMarquee";
+import Faq from "./components/FAQ";
 
 function App() {
   return (
@@ -26,10 +27,11 @@ function App() {
                 <Header />
                 <Services />
                 <Success />
-                <LogoMarquee />
                 <Gallery />
-                <Contact />
+                <LogoMarquee />
+                <Faq />
                 <NumbersSection />
+                <Contact />
               </>
             }
           />
