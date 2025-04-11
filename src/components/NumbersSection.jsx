@@ -44,7 +44,7 @@ const Counter = ({ from, to }) => {
   }, [from, to]);
 
   return (
-    <span style={{ display: "inline-block", fontWeight: "bold" }}>
+    <span style={{ display: "inline-block", }}>
       {Math.floor(count).toLocaleString()}
     </span>
   );
@@ -87,7 +87,7 @@ const NumbersSection = () => {
       <p className="text-lg uppercase">COMPANY</p>
 
       <div className="flex items-start mt-4">
-        <h2 className="text-8xl">
+        <h2 className="text-7xl">
           <span className="text-yellow-300">O.S.A.</span> in Numbers
         </h2>
       </div>
@@ -97,32 +97,32 @@ const NumbersSection = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={controls}
       >
-        <div className="flex flex-col">
-          <h3 className="text-7xl mb-8 font-bold">
+        <div className="flex flex-col items-center">
+          <h3 className="text-7xl mb-8 ">
             <Counter from={0} to={6} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
           <p className="text-lg">Employees</p>
         </div>
 
-        <div className="flex flex-col">
-          <h3 className="text-7xl mb-8 font-bold">
+        <div className="flex flex-col items-center">
+          <h3 className="text-7xl mb-8 ">
             <Counter from={0} to={31} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
           <p className="text-lg">Years of Experience</p>
         </div>
 
-        <div className="flex flex-col">
-          <h3 className="text-7xl mb-8 font-bold">
+        <div className="flex flex-col items-center">
+          <h3 className="text-7xl mb-8 ">
             <Counter from={0} to={108} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
-          <p className="text-lg">Partners Worldwide</p>
+          <p className="text-lg text-center">Partners Worldwide</p>
         </div>
 
-        <div className="flex flex-col">
-          <h3 className="text-7xl mb-8 font-bold">
+        <div className="flex flex-col items-center">
+          <h3 className="text-7xl mb-8 ">
             <Counter from={0} to={2000000} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
