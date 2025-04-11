@@ -44,7 +44,7 @@ const Counter = ({ from, to }) => {
   }, [from, to]);
 
   return (
-    <span style={{ display: "inline-block", }}>
+    <span style={{ display: "inline-block" }}>
       {Math.floor(count).toLocaleString()}
     </span>
   );
@@ -82,51 +82,53 @@ const NumbersSection = () => {
   return (
     <div
       ref={sectionRef}
-      className="flex flex-col items-start justify-start w-full bg-black p-16 text-white"
+      className="flex flex-col items-start justify-start w-full bg-black p-8 md:p-16 lg:p-section text-white"
     >
-      <p className="text-lg uppercase">COMPANY</p>
+      <p className="text-sm md:text-base uppercase tracking-wider text-gray-400 mb-4">
+        COMPANY
+      </p>
 
-      <div className="flex items-start mt-4">
-        <h2 className="text-7xl">
-          <span className="text-yellow-300">O.S.A.</span> in Numbers
+      <div className="flex items-start">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl">
+          <span className="text-primary">O.S.A.</span> in Numbers
         </h2>
       </div>
 
       <motion.div
-        className="flex flex-wrap justify-between w-full mt-24 mb-8 gap-8"
+        className="flex flex-wrap justify-between w-full mt-16 md:mt-24 gap-8 md:gap-12"
         initial={{ opacity: 0, y: 50 }}
         animate={controls}
       >
         <div className="flex flex-col items-center">
-          <h3 className="text-7xl mb-8 ">
+          <h3 className="text-5xl md:text-6xl mb-8">
             <Counter from={0} to={6} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
-          <p className="text-lg">Employees</p>
+          <p className="text-base md:text-lg">Employees</p>
         </div>
 
         <div className="flex flex-col items-center">
-          <h3 className="text-7xl mb-8 ">
+          <h3 className="text-5xl md:text-6xl mb-8">
             <Counter from={0} to={31} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
-          <p className="text-lg">Years of Experience</p>
+          <p className="text-base md:text-lg">Years of Experience</p>
         </div>
 
         <div className="flex flex-col items-center">
-          <h3 className="text-7xl mb-8 ">
+          <h3 className="text-5xl md:text-6xl mb-8">
             <Counter from={0} to={108} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
-          <p className="text-lg text-center">Partners Worldwide</p>
+          <p className="text-base md:text-lg text-center">Partners Worldwide</p>
         </div>
 
         <div className="flex flex-col items-center">
-          <h3 className="text-7xl mb-8 ">
+          <h3 className="text-5xl md:text-6xl mb-8">
             <Counter from={0} to={2000000} />
           </h3>
           <hr className="w-full border-t border-gray-700 mb-6" />
-          <p className="text-lg">Capital</p>
+          <p className="text-base md:text-lg">Capital</p>
         </div>
       </motion.div>
     </div>

@@ -7,7 +7,7 @@ const Header = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3, // Stagger animations for child elements
+        staggerChildren: 0.3,
       },
     },
   };
@@ -30,36 +30,33 @@ const Header = () => {
       </video>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex h-full flex-col items-center justify-center px-4"
+        className="relative z-10 flex h-full flex-col items-center justify-center px-8 md:px-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
-          className="text-center text-9xl text-white md:text-7xl max-w-4xl mb-10 leading-tight"
+          className="text-center text-5xl sm:text-6xl md:text-7xl text-white max-w-5xl mb-12 leading-tight"
           variants={itemVariants}
         >
-          Your <span className="text-yellow-500">Partner </span>in Engineering
+          Your <span className="text-primary">Partner </span>in Engineering
         </motion.h1>
         <motion.p
-          className="mt-4 text-center text-base text-white max-w-2xl leading-relaxed font-light"
+          className="mt-6 text-center text-base md:text-lg text-white max-w-2xl leading-relaxed font-light"
           variants={itemVariants}
         >
           Design. Prototype. Manufacture. Assemble. We use advanced computer
           modeling to accurately predict how structures will perform under
           stress and pressure.
         </motion.p>
-        <motion.div 
-          className="mt-8"
-          variants={itemVariants}
-        >
-          <a 
-            href="/contact" 
-            className="bg-yellow-500 hover:bg-yellow-400 text-black font-medium py-3 px-8 rounded-md transition-colors duration-300 shadow-lg"
+        <motion.div className="mt-12" variants={itemVariants}>
+          <a
+            href="/contact"
+            className="bg-primary hover:bg-primary-light text-black font-medium py-4 px-10 rounded-standard transition-colors duration-300 shadow-lg"
           >
             Get Started Today
           </a>

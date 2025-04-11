@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-// rework the multi step form
 const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -87,10 +86,10 @@ const Contact = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="w-full max-w-6xl mx-auto py-20 px-8 flex flex-col items-center text-center"
+        className="w-full max-w-6xl mx-auto py-16 md:py-24 lg:py-section px-8 md:px-16 flex flex-col items-center text-center"
       >
-        <div className="bg-yellow-50 p-10 rounded-lg shadow-md w-full max-w-xl">
-          <div className="mb-6 text-yellow-500">
+        <div className="bg-yellow-50 p-12 rounded-standard shadow-md w-full max-w-xl">
+          <div className="mb-8 text-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-16 w-16 mx-auto"
@@ -106,14 +105,14 @@ const Contact = () => {
               />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Thank You!</h2>
-          <p className="text-lg mb-6">
+          <h2 className="text-3xl font-bold mb-6">Thank You!</h2>
+          <p className="text-lg mb-8">
             Your message has been submitted successfully. We'll get back to you
             as soon as possible.
           </p>
           <button
             onClick={() => setFormSubmitted(false)}
-            className="py-3 px-6 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-full transition-colors duration-300"
+            className="py-3 px-8 bg-primary hover:bg-primary-light text-black font-medium rounded-standard transition-colors duration-300"
           >
             Send Another Message
           </button>
@@ -123,36 +122,41 @@ const Contact = () => {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-20 px-8">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-5xl font-bold mb-6"
-      >
-        Contact us
-      </motion.h1>
+    <div className="w-full max-w-6xl mx-auto py-16 md:py-24 lg:py-section px-8 md:px-16">
+      <div className="mb-16">
+        <p className="text-sm md:text-base uppercase tracking-wider text-gray-600 mb-4">
+          Get in Touch
+        </p>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8"
+        >
+          Contact us
+        </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-lg mb-16 max-w-3xl"
-      >
-        Have questions or want to discuss your engineering project? Reach out to
-        our team and we'll get back to you shortly.
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg max-w-3xl"
+        >
+          Have questions or want to discuss your engineering project? Reach out
+          to our team and we'll get back to you shortly.
+        </motion.p>
+      </div>
 
       <motion.form
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
         onSubmit={handleSubmit}
-        className="bg-white rounded-lg p-8 shadow-sm"
+        className="bg-white rounded-standard p-8 md:p-12 shadow-sm"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
           <div className="flex flex-col">
-            <label htmlFor="firstName" className="mb-2 font-medium">
+            <label htmlFor="firstName" className="mb-3 font-medium">
               First name <span className="text-red-500">*</span>
             </label>
             <input
@@ -162,17 +166,17 @@ const Contact = () => {
               value={formData.firstName}
               onChange={handleChange}
               placeholder="Your first name"
-              className={`py-3 px-4 border-b ${
+              className={`py-4 px-5 border-b ${
                 errors.firstName ? "border-red-500" : "border-gray-300"
-              } focus:border-yellow-500 outline-none transition-colors rounded-t-md`}
+              } focus:border-primary outline-none transition-colors rounded-t-md`}
             />
             {errors.firstName && (
-              <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+              <p className="text-red-500 text-sm mt-2">{errors.firstName}</p>
             )}
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="lastName" className="mb-2 font-medium">
+            <label htmlFor="lastName" className="mb-3 font-medium">
               Last name
             </label>
             <input
@@ -182,14 +186,14 @@ const Contact = () => {
               value={formData.lastName}
               onChange={handleChange}
               placeholder="Your last name"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors rounded-t-md"
+              className="py-4 px-5 border-b border-gray-300 focus:border-primary outline-none transition-colors rounded-t-md"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-2 font-medium">
+            <label htmlFor="email" className="mb-3 font-medium">
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -199,17 +203,17 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="your.email@example.com"
-              className={`py-3 px-4 border-b ${
+              className={`py-4 px-5 border-b ${
                 errors.email ? "border-red-500" : "border-gray-300"
-              } focus:border-yellow-500 outline-none transition-colors rounded-t-md`}
+              } focus:border-primary outline-none transition-colors rounded-t-md`}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              <p className="text-red-500 text-sm mt-2">{errors.email}</p>
             )}
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="phone" className="mb-2 font-medium">
+            <label htmlFor="phone" className="mb-3 font-medium">
               Phone
             </label>
             <input
@@ -219,13 +223,13 @@ const Contact = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (123) 456-7890"
-              className="py-3 px-4 border-b border-gray-300 focus:border-yellow-500 outline-none transition-colors rounded-t-md"
+              className="py-4 px-5 border-b border-gray-300 focus:border-primary outline-none transition-colors rounded-t-md"
             />
           </div>
         </div>
 
         <div className="mb-12">
-          <label htmlFor="message" className="mb-2 font-medium">
+          <label htmlFor="message" className="mb-3 font-medium">
             Message <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -234,19 +238,19 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             placeholder="Tell us about your project or inquiry..."
-            className={`w-full py-3 px-4 border-b ${
+            className={`w-full py-4 px-5 border-b ${
               errors.message ? "border-red-500" : "border-gray-300"
-            } focus:border-yellow-500 outline-none transition-colors resize-none min-h-[150px] rounded-t-md`}
+            } focus:border-primary outline-none transition-colors resize-none min-h-[180px] rounded-t-md`}
           ></textarea>
           {errors.message && (
-            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+            <p className="text-red-500 text-sm mt-2">{errors.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-4 px-8 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-full transition-colors duration-300 flex items-center justify-center ${
+          className={`w-full py-4 px-10 bg-primary hover:bg-primary-light text-black font-medium rounded-standard transition-colors duration-300 flex items-center justify-center ${
             isSubmitting ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >

@@ -19,14 +19,14 @@ const Nav = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 px-8 py-6 transition-colors duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 px-8 md:px-16 py-8 transition-colors duration-300 ${
         scrolled ? "bg-black" : "bg-transparent"
       }`}
     >
       <div className="flex justify-between items-center">
         {/* Logo on the left */}
         <div className="flex-shrink-0">
-          <img src="" alt="logo" className="h-12" />
+          <img src="/logos/Logo.svg" alt="logo" className="h-12" />
         </div>
 
         {/* Hamburger Menu - Mobile only */}
@@ -38,19 +38,17 @@ const Nav = () => {
         </button>
 
         {/* Desktop Navigation - Links in the middle */}
-        <div className="hidden md:flex items-center justify-center flex-1 mx-8">
-          <ul className="flex items-center gap-8">
+        <div className="hidden md:flex items-center justify-center flex-1 mx-12">
+          <ul className="flex items-center gap-10">
             {["Home", "Services", "Gallery"].map((item) => (
               <li
                 key={item}
-                className="text-white relative group cursor-pointer hover:text-yellow-500"
+                className="text-white relative group cursor-pointer hover:text-primary"
               >
-                <span className="transition-colors duration-300 group-hover:text-yellow-500">
+                <span className="transition-colors duration-300 group-hover:text-primary">
                   {item}
                 </span>
-                <span
-                  className="absolute left-0 bottom-0 w-0 h-1 bg-yellow-500 transition-all duration-500 group-hover:w-full"
-                ></span>
+                <span className="absolute left-0 bottom-0 w-0 h-1 bg-primary transition-all duration-500 group-hover:w-full"></span>
               </li>
             ))}
           </ul>
@@ -58,7 +56,7 @@ const Nav = () => {
 
         {/* Contact button on the right */}
         <div className="hidden md:block">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium px-6 py-2 rounded-md transition-colors duration-300">
+          <button className="bg-primary hover:bg-primary-light text-black font-medium px-8 py-3 rounded-standard transition-colors duration-300">
             Contact
           </button>
         </div>
@@ -66,18 +64,18 @@ const Nav = () => {
 
       {/* Fullscreen Menu - Mobile only */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black flex flex-col items-center justify-center gap-8 z-40">
+        <div className="fixed inset-0 bg-black flex flex-col items-center justify-center gap-12 z-40">
           {["Home", "Services", "Gallery"].map((item) => (
             <button
               key={item}
-              className="text-white text-4xl hover:text-yellow-500"
+              className="text-white text-3xl hover:text-primary"
               onClick={() => setMenuOpen(false)}
             >
               {item}
             </button>
           ))}
           <button
-            className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium px-8 py-3 rounded-md mt-4 text-2xl"
+            className="bg-primary hover:bg-primary-light text-black font-medium px-8 py-3 rounded-standard mt-8 text-xl"
             onClick={() => setMenuOpen(false)}
           >
             Contact

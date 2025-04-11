@@ -1,28 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-yellow-400 rounded-t-3xl px-4 sm:px-6 md:px-8 py-8 md:py-12 lg:py-16">
+    <footer className="w-full bg-primary rounded-t-3xl px-8 md:px-16 py-12 md:py-16 lg:py-section">
       <div className="max-w-7xl mx-auto">
         {/* Logo and Company Name */}
-        <div className="flex items-center mb-8 md:mb-16">
+        <div className="flex items-center mb-12 md:mb-16">
           <img
-            src="/logos/Logo.svg" height="70px" width="70px" className="mr-2"></img>
-          <h2 className="text-3xl md:text-4xl lg:text-6xl">
-            O.S.A. MK
-          </h2>
+            src="/logos/Logo.svg"
+            height="70px"
+            width="70px"
+            className="mr-4 text-primary filter brightness-0 invert sepia-100 hue-rotate-0 saturate-10000"
+          ></img>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl">O.S.A. MK</h2>
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-16 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16 lg:gap-24 mb-12 md:mb-16">
           {/* Left Column */}
-          <div className="mb-6 sm:mb-0">
-            <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
+          <div className="mb-8 sm:mb-0">
+            <h3 className="text-lg md:text-xl font-bold mb-6 md:mb-8">
               Take a Look
             </h3>
-            <div className="flex flex-col space-y-3 md:space-y-4">
+            <div className="flex flex-col space-y-4 md:space-y-6">
               <Link
                 to="/contact"
                 className="inline-flex items-center hover:underline text-sm md:text-base"
@@ -30,12 +32,12 @@ const Footer = () => {
                 CONTACT US <span className="ml-2">↗</span>
               </Link>
 
-              <div className="flex items-center space-x-3 md:space-x-4 mt-4 md:mt-6">
+              <div className="flex items-center space-x-4 md:space-x-6 mt-6 md:mt-8">
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-yellow-400 rounded-full p-2 md:p-2.5 hover:opacity-90 transition-opacity"
+                  className="bg-secondary text-primary rounded-full p-3 hover:opacity-90 transition-opacity"
                 >
                   <svg
                     className="w-5 h-5 md:w-6 md:h-6"
@@ -49,7 +51,7 @@ const Footer = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-yellow-400 rounded-full p-2 md:p-2.5 hover:opacity-90 transition-opacity"
+                  className="bg-secondary text-primary rounded-full p-3 hover:opacity-90 transition-opacity"
                 >
                   <svg
                     className="w-5 h-5 md:w-6 md:h-6"
@@ -64,14 +66,14 @@ const Footer = () => {
           </div>
 
           {/* Middle Column */}
-          <div className="mb-6 sm:mb-0">
+          <div className="mb-8 sm:mb-0">
             <Link
               to="/"
-              className="inline-flex items-center text-lg md:text-xl font-bold mb-4 md:mb-6 hover:underline"
+              className="inline-flex items-center text-lg md:text-xl font-bold mb-6 md:mb-8 hover:underline"
             >
               HOME <span className="ml-2">↗</span>
             </Link>
-            <p className="mt-4 md:mt-6 text-sm md:text-base">
+            <p className="mt-6 md:mt-8 text-base">
               Explore our
               <br />
               Latest Work
@@ -80,10 +82,10 @@ const Footer = () => {
 
           {/* Right Column */}
           <div>
-            <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
+            <h3 className="text-lg md:text-xl font-bold mb-6 md:mb-8">
               Check us out
             </h3>
-            <div className="space-y-3 md:space-y-4 text-sm md:text-base">
+            <div className="space-y-4 md:space-y-6 text-base">
               <p>Have any questions?</p>
               <p className="break-words">
                 Please don't hesitate to
@@ -113,22 +115,20 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <motion.hr 
-          className="border-black/20 my-6 md:my-8"
-          initial={{ scaleX: 0,  transformOrigin: "left" }}
+        <motion.hr
+          className="border-black/20 my-8 md:my-10"
+          initial={{ scaleX: 0, transformOrigin: "left" }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeInOut",
-            delay: 0.2 
+            delay: 0.2,
           }}
         />
 
         {/* Copyright */}
-        <div className="text-xs md:text-sm">
-          © {new Date().getFullYear()} by OSA MK
-        </div>
+        <div className="text-sm">© {new Date().getFullYear()} by OSA MK</div>
       </div>
     </footer>
   );
