@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -27,7 +22,7 @@ const Gallery = () => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  // Gallery items 
+  // Gallery items
   const items = [
     {
       id: "precision-engineering",
@@ -121,8 +116,6 @@ const Gallery = () => {
   };
 
   return (
-
-    
     <div
       className="gallery-wrapper"
       ref={containerRef}
@@ -172,19 +165,30 @@ const Gallery = () => {
               }}
             />
 
-            {/* Background image */}
+            {/* Use regular img instead of background-image for better mobile support */}
             <motion.div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                transform: "scale(1.05)",
+                overflow: "hidden",
               }}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-            />
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+                loading="eager"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  transform: "scale(1.05)",
+                }}
+              />
+            </motion.div>
 
             {/* Content */}
             <motion.div
@@ -291,11 +295,21 @@ const Gallery = () => {
                   position: "absolute",
                   width: "100%",
                   height: "100%",
-                  backgroundImage: `url(${fullscreenItem.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  overflow: "hidden",
                 }}
-              />
+              >
+                <img
+                  src={fullscreenItem.image}
+                  alt={fullscreenItem.title}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  loading="eager"
+                />
+              </div>
 
               <motion.div
                 style={{
