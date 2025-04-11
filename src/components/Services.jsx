@@ -35,7 +35,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="flex flex-col" ref={sectionRef}>
+    <div className="flex flex-col items-center" ref={sectionRef}>
       <div className="px-8 md:px-16 w-full">
         <hr ref={hrRef} className="growing-hr mt-16" />
 

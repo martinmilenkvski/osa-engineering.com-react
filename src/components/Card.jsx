@@ -34,7 +34,7 @@ const Card = () => {
   return (
     <motion.div
       ref={ref}
-      className="bg-white text-black flex flex-col md:flex-row items-stretch rounded-lg shadow-md overflow-hidden w-full md:w-4/5 mx-auto my-8"
+      className="bg-white text-black flex flex-col md:flex-row items-stretch rounded-lg shadow-md overflow-hidden w-full  mx-auto my-8"
       style={{ minHeight: "400px" }}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
@@ -58,7 +58,7 @@ const Card = () => {
         className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"
         variants={textVariants}
       >
-        <h2 className="text-xl md:text-2xl font-bold mb-3">
+        <h2 className="text-xl md:text-2xl font-bold mb-3 mt-12">
           Design and Prototyping
         </h2>
 
@@ -83,7 +83,7 @@ const Card = () => {
         <div className="h-px w-full bg-gray-200 my-8"></div>
 
         {/* Description - kept minimal */}
-        <p className="text-gray-700 text-sm leading-relaxed max-w-lg">
+        <p className="text-gray-700 text-sm leading-relaxed max-w-lg mb-12">
           Our engineers translate concepts into tangible designs with precision
           and expertise in materials, tolerances, and manufacturing processes.
         </p>
