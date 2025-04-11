@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 const Footer = () => {
   return (
@@ -7,15 +8,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         {/* Logo and Company Name */}
         <div className="flex items-center mb-8 md:mb-16">
-          <svg
-            className="w-8 h-8 md:w-10 md:h-10 mr-3 md:mr-4"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            {/* Simple placeholder for the goat/bull logo - replace with your actual logo */}
-            <path d="M12,2L1,21H23L12,2M12,6L19.5,19H4.5L12,6Z" />
-          </svg>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+          <img
+            src="/logos/Logo.svg" height="70px" width="70px" className="mr-2"></img>
+          <h2 className="text-3xl md:text-4xl lg:text-6xl">
             O.S.A. MK
           </h2>
         </div>
@@ -118,7 +113,17 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <hr className="border-black/20 my-6 md:my-8" />
+        <motion.hr 
+          className="border-black/20 my-6 md:my-8"
+          initial={{ scaleX: 0,  transformOrigin: "left" }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 1.2, 
+            ease: "easeInOut",
+            delay: 0.2 
+          }}
+        />
 
         {/* Copyright */}
         <div className="text-xs md:text-sm">
