@@ -28,7 +28,8 @@ const Card = () => {
   return (
     <motion.div
       ref={ref}
-      className="card bg-white text-black flex flex-col md:flex-row items-center justify-center rounded-lg"
+      className="bg-white text-black flex flex-col md:flex-row items-center justify-center rounded-lg shadow-md"
+      style={{ minHeight: "400px" }}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"} // Trigger animation based on visibility
     >
@@ -36,7 +37,7 @@ const Card = () => {
       <motion.img
         src="../images/1.avif"
         alt="Design and Prototyping"
-        className="w-full md:w-1/2 object-cover"
+        className="w-full md:w-1/2 object-cover h-[300px] md:h-[400px]"
         variants={imageVariants}
       />
 
@@ -65,7 +66,7 @@ const Card = () => {
           </p>
         </div>
         <p className="text-gray-500 text-sm md:text-base font-light mt-4 mb-4">
-          With years of experience, we’ve mastered the art of translating
+          With years of experience, we've mastered the art of translating
           concepts into tangible designs. Our engineers understand the
           intricacies of materials, tolerances, and manufacturing processes.
         </p>

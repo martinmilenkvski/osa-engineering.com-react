@@ -10,13 +10,13 @@ import Card from "./components/Card";
 import Success from "./components/Success";
 import NumbersSection from "./components/NumbersSection";
 import LogoMarquee from "./components/LogoMarquee";
-import Faq from "./components/FAQ";
+import FAQ from "./components/FAQ";
 
 function App() {
   return (
     <Router>
       {/* light theme 1 */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col">
         <Nav />
         <Routes>
           <Route path="/card" element={<Card />} />
@@ -29,8 +29,8 @@ function App() {
                 <Success />
                 <Gallery />
                 <LogoMarquee />
-                <Faq />
                 <NumbersSection />
+                <FAQ />
                 <Contact />
               </>
             }
