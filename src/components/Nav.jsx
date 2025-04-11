@@ -38,7 +38,7 @@ const Nav = () => {
         </button>
 
         {/* Desktop Navigation - Links in the middle */}
-        <div className="hidden md:flex items-center justify-center flex-1 mx-12">
+        <div className="hidden md:flex items-center justify-center flex-1 mx-12 text-sm">
           <ul className="flex items-center gap-10">
             {["Home", "Services", "Gallery"].map((item) => (
               <li
@@ -56,7 +56,7 @@ const Nav = () => {
 
         {/* Contact button on the right */}
         <div className="hidden md:block">
-          <button className="bg-primary hover:bg-primary-light text-black font-medium px-8 py-3 rounded-standard transition-colors duration-300">
+          <button className="border border-white text-white text-sm font-medium px-8 py-3 rounded-standard transition-colors duration-300 hover:bg-white hover:text-black">
             Contact
           </button>
         </div>
@@ -75,7 +75,7 @@ const Nav = () => {
             </button>
           ))}
           <button
-            className="bg-primary hover:bg-primary-light text-black font-medium px-8 py-3 rounded-standard mt-8 text-xl"
+            className="border border-white text-white font-medium px-8 py-3 rounded-standard mt-8 text-xl hover:bg-white hover:text-black"
             onClick={() => setMenuOpen(false)}
           >
             Contact

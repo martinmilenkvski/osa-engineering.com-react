@@ -40,13 +40,17 @@ const Header = () => {
         animate="visible"
       >
         <motion.h1
-          className="text-center text-5xl sm:text-6xl md:text-7xl text-white max-w-5xl mb-12 leading-tight"
+          className="text-center text-5xl sm:text-6xl md:text-7xl text-white max-w-5xl mb-8 leading-tight"
           variants={itemVariants}
         >
-          Your <span className="text-primary">Partner </span>in Engineering
+          Your{" "}
+          <span className="text-primary font tracking-wide">
+            Partner{" "}
+          </span>
+          in Engineering
         </motion.h1>
         <motion.p
-          className="mt-6 text-center text-base md:text-lg text-white max-w-2xl leading-relaxed font-light"
+          className=" text-center text-sm md:text-base text-white max-w-2xl leading-relaxed "
           variants={itemVariants}
         >
           Design. Prototype. Manufacture. Assemble. We use advanced computer
