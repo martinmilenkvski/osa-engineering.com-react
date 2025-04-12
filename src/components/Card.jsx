@@ -11,15 +11,19 @@ const Card = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 1, ease: "easeOut", delay: 0.3 }, // added delay of 0.3 sec
     },
   };
 
   const imageVariants = {
-    hidden: { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" },
+    hidden: {
+      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+      scale: 1.2, // start zoomed in
+    },
     visible: {
       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-      transition: { duration: 0.8, ease: "easeOut" },
+      scale: 1, // zoom out to normal size
+      transition: { duration: 1.2, ease: "easeOut" },
     },
   };
 
