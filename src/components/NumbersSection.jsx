@@ -89,7 +89,7 @@ const NumbersSection = () => {
       </p>
 
       <div className="flex items-start">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl">
+        <h2 className="text-4xl sm:text-5xl md:text-7xl">
           <span className="text-primary">O.S.A.</span> in Numbers
         </h2>
       </div>

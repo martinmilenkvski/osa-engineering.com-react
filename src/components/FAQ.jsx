@@ -39,10 +39,10 @@ function FAQ() {
     <section className="py-16 md:py-24 lg:py-section bg-gray-50">
       <div className="max-w-6xl mx-auto px-8 md:px-16">
         <div className="text-center mb-16">
-          <p className="text-sm md:text-base uppercase tracking-wider text-gray-600 mb-4">
+          <p className="text-sm md:text-lg uppercase tracking-wider text-gray-600 mb-4">
             Support
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl">
             Frequently Asked Questions
           </h2>
         </div>
