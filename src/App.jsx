@@ -6,7 +6,6 @@ import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Card from "./components/Card";
 import Success from "./components/Success";
 import NumbersSection from "./components/NumbersSection";
 import LogoMarquee from "./components/LogoMarquee";
@@ -19,7 +18,7 @@ function App() {
       <div className="flex flex-col">
         <Nav />
         <Routes>
-          <Route path="/card" element={<Card />} />
+         
           <Route
             path="/"
             element={

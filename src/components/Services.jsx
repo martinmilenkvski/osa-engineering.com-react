@@ -24,7 +24,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="flex flex-col" ref={sectionRef}>
+    <div className="flex flex-col bg-gray-100" ref={sectionRef}>
       {/* Header area with extra padding and larger titles */}
       <div className="px-8 md:px-16 w-full  md:pt-14 py-2">
         <motion.hr
@@ -45,14 +45,14 @@ const Services = () => {
           <p
             className={`animate-text ${
               isVisible ? "animate-visible" : ""
-            } text-lg md:text-lg mt-8`}
+            } text-lg md:text-xl mt-8`}
           >
             // O.S.A
           </p>
         </div>
 
         <h2
-          className={`text-5xl md:text-6xl lg:text-7xl font text-left animate-text ${
+          className={`text-5xl md:text-6xl lg:text-7xl text-left animate-text ${
             isVisible ? "animate-visible" : ""
           } mt-4`}
           style={{ transitionDelay: "200ms" }}
