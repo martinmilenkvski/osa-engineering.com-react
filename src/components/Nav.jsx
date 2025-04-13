@@ -50,7 +50,7 @@ const Nav = () => {
 
         {/* Desktop Navigation - Links in the middle */}
         <div
-          className={`hidden md:flex items-center justify-center flex-1 mx-12 text-sm ${
+          className={`hidden md:flex items-center justify-center flex-1 mx-12 text-base ${
             mounted ? "animate-slideInDown" : "opacity-0"
           }`}
         >
@@ -78,11 +78,12 @@ const Nav = () => {
             mounted ? "animate-slideInRight" : "opacity-0"
           }`}
         >
-          <button className="border border-white text-white text-sm font-medium px-8 py-3 rounded-standard transition-colors duration-300 hover:bg-white hover:text-black">
+          <button className="border border-white text-white text-base font-medium px-8 py-3 rounded-full transition-colors duration-300 hover:bg-white hover:text-black">
             Contact
           </button>
         </div>
       </div>
+    
 
       {/* Fullscreen Menu - Mobile only */}
       {menuOpen && (

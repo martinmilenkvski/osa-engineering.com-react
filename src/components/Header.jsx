@@ -1,8 +1,14 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useTransform, useScroll } from "framer-motion";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { scrollY } = useScroll();
+  
+  // Create a motion value that scales down as the user scrolls
+  const scale = useTransform(scrollY, [0, 300], [1, 0.8]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
+  const yTranslate = useTransform(scrollY, [0, 300], [0, -50]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,7 +39,14 @@ const Header = () => {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <motion.div 
+      className="relative h-screen w-full overflow-hidden"
+      style={{ 
+        scale,
+        opacity,
+        y: yTranslate
+      }}
+    >
       <video
         autoPlay
         loop
@@ -72,7 +85,7 @@ const Header = () => {
 
         <motion.div variants={itemVariants}>
           <motion.button
-            className="bg-primary hover:bg-transparent text-black hover:text-primary border-2 border-primary py-3 px-8 rounded-lg flex items-center transition-all duration-300"
+            className="bg-primary hover:bg-transparent text-black hover:text-primary border-2 border-primary py-3 px-8 rounded-full flex items-center transition-all duration-300"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             whileHover={{ scale: 1.05 }}
@@ -102,7 +115,7 @@ const Header = () => {
           </motion.button>
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
