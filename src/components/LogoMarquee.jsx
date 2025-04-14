@@ -44,7 +44,7 @@ const LogoMarquee = () => {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-20 md:h-24 lg:h-32 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 ease-in-out"
+                className="h-32 md:h-40 lg:h-48 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 ease-in-out"
                 loading="lazy" // Use lazy loading for images not immediately visible
               />
             </div>
