@@ -27,9 +27,17 @@ const Footer = () => {
             <div className="flex flex-col space-y-4 md:space-y-6">
               <Link
                 to="/contact"
-                className="inline-flex items-center hover:underline text-sm md:text-base"
+                className="inline-flex items-center hover:underline text-sm md:text-xl"
               >
-                CONTACT US <span className="ml-2">↗</span>
+                CONTACT US{" "}
+                <span className="ml-4">
+                  <img
+                    src="./images/arrow2.svg"
+                    height={18}
+                    width={18}
+                    alt=""
+                  />
+                </span>
               </Link>
 
               <div className="flex items-center space-x-4 md:space-x-6 mt-6 md:mt-8">
@@ -71,7 +79,10 @@ const Footer = () => {
               to="/"
               className="inline-flex items-center text-lg md:text-xl font-bold mb-6 md:mb-8 hover:underline"
             >
-              HOME <span className="ml-2">↗</span>
+              HOME{" "}
+              <span className="ml-4">
+                <img src="./images/arrow2.svg" height={18} width={18} alt="" />
+              </span>
             </Link>
             <p className="mt-6 md:mt-8 text-base">
               Explore our
