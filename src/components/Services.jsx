@@ -4,22 +4,11 @@ import "./Services.css";
 import Card from "./Card";
 
 const Services = () => {
-  const hrRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (hrRef.current) {
-        // Calculate scroll percentage
-        const scrollPercentage =
-          (window.scrollY /
-            (document.documentElement.scrollHeight - window.innerHeight)) *
-          100;
-        hrRef.current.style.width = `${scrollPercentage + 20}%`;
-      }
-
-      // Check if section is visible
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         const isInView = rect.top <= window.innerHeight * 0.75;
@@ -30,30 +19,51 @@ const Services = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check visibility on mount
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="flex flex-col items-center" ref={sectionRef}>
-      <div className="px-8 md:px-16 w-full">
-        <hr ref={hrRef} className="growing-hr mt-16" />
+    <div className="flex flex-col bg-gray-100" ref={sectionRef}>
+      {/* Header area with extra padding and larger titles */}
+      <div className="px-8 md:px-16 w-full  md:pt-14 py-2">
+        <motion.hr
+          className="border-black/20 mt-2"
+          initial={{ scaleX: 0, transformOrigin: "left" }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 2.2, ease: "easeInOut", delay: 0.8 }}
+        />
+        <div className="flex  justify-between mt-4">
+          <p
+            className={`animate-text ${
+              isVisible ? "animate-visible" : ""
+            } text-lg md:text-xl mt-8`}
+          >
+            OUR SERVICES
+          </p>
 
-        <p className={`animate-text ${isVisible ? "animate-visible" : ""}`}>
-          OUR SERVICES
-        </p>
+          <p
+            className={`animate-text ${
+              isVisible ? "animate-visible" : ""
+            } text-lg md:text-xl mt-8`}
+          >
+            // O.S.A
+          </p>
+        </div>
 
         <h2
-          className={`text-4xl md:text-5xl lg:text-6xl mb-4 font-bold text-left animate-text ${
+          className={`text-5xl md:text-6xl lg:text-7xl text-left animate-text ${
             isVisible ? "animate-visible" : ""
-          }`}
+          } mt-4`}
           style={{ transitionDelay: "200ms" }}
         >
-          Our Range of Engineering Services
+          Our <span className="text-yellow-500">Range</span> of <br></br>
+          Engineering Services
         </h2>
       </div>
 
-      <div className="container px-8 md:px-16">
+      {/* Sticky Cards container (layout defined in Services.css) */}
+      <div className="w-full md:px-2 card-container">
         <div
           className={`card animate-text ${isVisible ? "animate-visible" : ""}`}
           style={{ transitionDelay: "400ms" }}

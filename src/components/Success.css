@@ -6,3 +6,34 @@
   margin: 20px 0;
   transition: width 0.3s ease-out; /* Faster transition for smoother scrolling */
 }
+
+/* Add these animation styles to your existing CSS */
+
+.translate-y-10 {
+  transform: translateY(40px);
+}
+
+.translate-y-0 {
+  transform: translateY(0);
+}
+
+.scale-95 {
+  transform: scale(0.95);
+}
+
+.scale-100 {
+  transform: scale(1);
+}
+
+/* Make sure transitions are smooth */
+.transition-all {
+  transition-property: all;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+.duration-1500 {
+  transition-duration: 1500ms;
+}
