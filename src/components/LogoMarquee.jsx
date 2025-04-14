@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion"; // Import motion
 
 const LogoMarquee = () => {
   // Define logos directly within the component
@@ -7,22 +8,49 @@ const LogoMarquee = () => {
     { id: 2, src: "/logos/Draksler.png", alt: "Draksler" },
     { id: 3, src: "/logos/FomaSystems.png", alt: "Foma Systems" },
     { id: 4, src: "/logos/Kromberg.png", alt: "Kromberg" },
-    // Add more logos as needed
   ];
 
   // Duplicate logos for a seamless loop effect
   const duplicatedLogos = [...defaultLogos, ...defaultLogos];
 
+  // Animation variants for text
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
-    <div className="w-full bg-white py-12 md:py-16 lg:py-20">
+    <div className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden"> {/* Added overflow-hidden */}
       {/* Header Text */}
       <div className="mb-8 md:mb-12 text-center">
-        <p className="text-base md:text-lg lg:text-xl uppercase text-gray-600 tracking-wider">
+        <motion.p
+          className="text-base md:text-lg lg:text-xl uppercase text-gray-600 tracking-wider"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
+          variants={textVariants}
+        >
           OUR PARTNERS
-        </p>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 text-gray-900">
+        </motion.p>
+        <motion.h2
+          className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 text-gray-900"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
+          variants={{
+            ...textVariants,
+            visible: { // Override visible state for delay
+              ...textVariants.visible,
+              transition: { ...textVariants.visible.transition, delay: 0.2 } // Add delay
+            }
+          }}
+        >
           Trusted by Industry <span className="text-yellow-500">Leaders</span>
-        </h2>
+        </motion.h2>
       </div>
 
       {/* Marquee Container */}
