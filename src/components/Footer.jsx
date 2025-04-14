@@ -10,11 +10,11 @@ const Footer = () => {
         <div className="flex items-center mb-12 md:mb-16">
           <img
             src="/logos/Logo.svg"
-            height="70px"
-            width="70px"
-            className="mr-4 text-primary filter brightness-0 invert sepia-100 hue-rotate-0 saturate-10000"
+            height="100px"
+            width="100px"
+            className="mr-4 "
           ></img>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl">O.S.A. MK</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-7xl">O.S.A. MK</h2>
         </div>
 
         {/* Main Footer Content */}
