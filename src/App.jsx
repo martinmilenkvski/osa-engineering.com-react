@@ -25,7 +25,6 @@ function App() {
                 <Header />
                 <Services />
                 <Success />
-
                 <LogoMarquee />
                 <Gallery />
                 <NumbersSection />
