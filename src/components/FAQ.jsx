@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react"; // Import useRef
+import { motion, useInView } from "framer-motion"; // Import motion and useInView
 
 function FAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const sectionRef = useRef(null); // Ref for the section
+  // Change amount from 0.2 to 0.5
+  const isInView = useInView(sectionRef, { once: true, amount: 0.5 }); // Trigger when 50% is visible
 
   const faqs = [
     {
@@ -35,21 +39,65 @@ function FAQ() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  // Animation variants
+  const titleVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 }, // Stagger FAQ items
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="py-16 md:py-24 lg:py-section bg-gray-50">
+    <section
+      ref={sectionRef}
+      className="py-16 md:py-24 lg:py-section bg-gray-50"
+    >
       <div className="max-w-6xl mx-auto px-8 md:px-16">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={titleVariants} // Apply title animation variants
+        >
           <p className="text-sm md:text-lg uppercase tracking-wider text-gray-600 mb-4">
             Support
           </p>
           <h2 className="text-4xl sm:text-5xl md:text-7xl">
             Frequently Asked Questions
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          variants={containerVariants} // Apply container variants for staggering
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {faqs.map((faq, index) => (
-            <div key={index} className="mb-6">
+            <motion.div
+              key={index}
+              className="mb-6"
+              variants={itemVariants} // Apply item animation variants
+            >
               <button
                 className="flex justify-between items-center w-full p-6 font-medium text-left bg-white border border-gray-200 rounded-standard focus:ring-4 focus:ring-gray-200"
                 onClick={() => toggleAccordion(index)}
@@ -71,14 +119,25 @@ function FAQ() {
                   ></path>
                 </svg>
               </button>
+              {/* Animate the answer panel */}
               {activeIndex === index && (
-                <div className="p-6 bg-white border border-t-0 border-gray-200 rounded-b-standard">
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden" // Add overflow hidden for smooth height animation
+                >
+                  <div className="p-6 bg-white border border-t-0 border-gray-200 rounded-b-standard">
+                    <p className="text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
