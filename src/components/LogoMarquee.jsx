@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { motion } from "framer-motion"; // Import motion
 
-const LogoMarquee = ({ logos = [] }) => {
-  const [isImagesLoaded, setIsImagesLoaded] = useState(false);
-
-  // Using actual logos from your project
+const LogoMarquee = () => {
+  // Define logos directly within the component
   const defaultLogos = [
     { id: 1, src: "/logos/Alkaloid.png", alt: "Alkaloid" },
     { id: 2, src: "/logos/Draksler.png", alt: "Draksler" },
@@ -11,89 +10,73 @@ const LogoMarquee = ({ logos = [] }) => {
     { id: 4, src: "/logos/Kromberg.png", alt: "Kromberg" },
   ];
 
-  const logosToDisplay = logos.length > 0 ? logos : defaultLogos;
+  // Duplicate logos for a seamless loop effect
+  const duplicatedLogos = [...defaultLogos, ...defaultLogos];
 
-  useEffect(() => {
-    // Preload images to prevent rendering issues on mobile
-    const preloadImages = () => {
-      const imagePromises = logosToDisplay.map((logo) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = logo.src;
-          img.onload = resolve;
-          img.onerror = reject;
-        });
-      });
-
-      Promise.all(imagePromises)
-        .then(() => setIsImagesLoaded(true))
-        .catch((err) => console.error("Error preloading images:", err));
-    };
-
-    preloadImages();
-  }, [logosToDisplay]);
+  // Animation variants for text
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
   return (
-    <div className="w-full bg-white py-8 sm:py-12 md:py-16">
-      <div className="mb-6 sm:mb-8 text-center">
-        <p className="text-sm sm:text-base md:text-lg uppercase text-gray-600">
+    <div className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden"> {/* Added overflow-hidden */}
+      {/* Header Text */}
+      <div className="mb-8 md:mb-12 text-center">
+        <motion.p
+          className="text-base md:text-lg lg:text-xl uppercase text-gray-600 tracking-wider"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
+          variants={textVariants}
+        >
           OUR PARTNERS
-        </p>
-        <h2 className="text-2xl sm:text-3xl md:text-6xl font-bold mt-2">
-          Trusted by Industry Leaders
-        </h2>
+        </motion.p>
+        <motion.h2
+          className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 text-gray-900"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
+          variants={{
+            ...textVariants,
+            visible: { // Override visible state for delay
+              ...textVariants.visible,
+              transition: { ...textVariants.visible.transition, delay: 0.2 } // Add delay
+            }
+          }}
+        >
+          Trusted by Industry <span className="text-yellow-500">Leaders</span>
+        </motion.h2>
       </div>
 
-      <div className="relative w-full overflow-hidden">
-        {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 z-10 h-full w-12 sm:w-16 md:w-24 bg-gradient-to-r from-white to-transparent"></div>
-        <div className="absolute top-0 right-0 z-10 h-full w-12 sm:w-16 md:w-24 bg-gradient-to-l from-white to-transparent"></div>
+      {/* Marquee Container */}
+      <div className="relative w-full max-w-6xl mx-auto overflow-hidden group">
+        {/* Gradient Overlays for fade effect */}
+        <div className="absolute top-0 left-0 z-10 h-full w-16 md:w-24 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 z-10 h-full w-16 md:w-24 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
 
-        {/* Marquee container - wider than viewport with overflow hidden */}
-        <div className="relative flex overflow-hidden py-4">
-          {/* First set of logos - original */}
-          <div
-            className={`flex animate-marquee whitespace-nowrap ${
-              isImagesLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {logosToDisplay.map((logo, index) => (
-              <div
-                key={`${logo.id}-${index}`}
-                className="flex items-center justify-center mx-8 sm:mx-12 md:mx-16"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-36 sm:h-42 md:h-48 max-w-[300px] sm:max-w-[450px] md:max-w-[600px] object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                  loading="eager"
-                  style={{ display: "block" }}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Second set of logos - offset with different animation */}
-          <div
-            className={`flex animate-marquee2 whitespace-nowrap ${
-              isImagesLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {logosToDisplay.map((logo, index) => (
-              <div
-                key={`dup-${logo.id}-${index}`}
-                className="flex items-center justify-center mx-8 sm:mx-12 md:mx-16"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-36 sm:h-42 md:h-48 max-w-[300px] sm:max-w-[450px] md:max-w-[600px] object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                  loading="eager"
-                  style={{ display: "block" }}
-                />
-              </div>
-            ))}
-          </div>
+        {/* Animated Logo Track */}
+        {/* Apply a CSS animation (e.g., 'animate-marquee') defined in your global CSS or tailwind.config.js */}
+        {/* The 'group-hover:pause' class is optional for pausing on hover */}
+        <div className="flex animate-marquee group-hover:pause">
+          {duplicatedLogos.map((logo, index) => (
+            <div
+              key={`${logo.id}-${index}`} // Unique key for each item, including duplicates
+              className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16 flex items-center justify-center"
+              style={{ minWidth: "150px" }} // Ensure logos don't collapse too much
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                className="h-32 md:h-40 lg:h-48 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 ease-in-out"
+                loading="lazy" // Use lazy loading for images not immediately visible
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -101,3 +84,20 @@ const LogoMarquee = ({ logos = [] }) => {
 };
 
 export default LogoMarquee;
+
+// Note: Ensure you have the 'animate-marquee' keyframes defined in your CSS.
+// Example CSS for the animation (place in your global CSS file):
+/*
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); } // Translate by half the total width (since logos are duplicated)
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite; // Adjust duration as needed
+}
+
+.group-hover\:pause:hover .animate-marquee { // Optional: Pause animation on hover
+  animation-play-state: paused;
+}
+*/
