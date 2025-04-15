@@ -65,20 +65,19 @@ const Services = () => {
       {/* Sticky Cards container (layout defined in Services.css) */}
       <div className="w-full md:px-2 card-container">
         <div
-          className={`card animate-text ${isVisible ? "animate-visible" : ""}`}
-          style={{ transitionDelay: "400ms" }}
+          className="card" 
+        
         >
           <Card />
         </div>
         <div
-          className={`card animate-text ${isVisible ? "animate-visible" : ""}`}
-          style={{ transitionDelay: "600ms" }}
+          className="card" 
         >
           <Card />
         </div>
         <div
-          className={`card animate-text ${isVisible ? "animate-visible" : ""}`}
-          style={{ transitionDelay: "800ms" }}
+          className="card" 
+          
         >
           <Card />
         </div>
