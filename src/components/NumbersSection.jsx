@@ -41,7 +41,7 @@ const NumberCounter = ({ from, to, label, format, suffix = "" }) => {
     <div className="text-center px-4"> {/* Added padding for spacing */}
       <span
         ref={nodeRef}
-        className="block text-5xl sm:text-6xl md:text-7xl font-bold text-primary" // Use primary color for numbers
+        className="block text-5xl sm:text-6xl md:text-7xl  text-primary" // Use primary color for numbers
       >
         {initialDisplayValue + suffix}
       </span>
@@ -94,7 +94,7 @@ const NumbersSection = () => {
           <p className="text-sm md:text-base uppercase tracking-wider text-gray-400 mb-3 md:mb-4">
             Our Impact
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white"> {/* Title text white */}
+          <h2 className="text-4xl sm:text-5xl md:text-6xl  text-white"> {/* Title text white */}
             By the <span className="text-primary">Numbers</span>
           </h2>
         </motion.div>
