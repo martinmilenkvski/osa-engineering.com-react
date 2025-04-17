@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import "./Services.css";
 import Card from "./Card";
+import cardData from "../data/cardData"; // Adjust the import path if necessary
 
 const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -62,25 +63,26 @@ const Services = () => {
         </h2>
       </div>
 
-      {/* Sticky Cards container (layout defined in Services.css) */}
+      
       <div className="w-full md:px-2 card-container">
-        <div
-          className="card" 
+        {cardData.map((data) => (
+          <div className="card">
+            <Card
+              key={data.id} // Important for list rendering
+              imageSrc={data.imageSrc}
+              imageAlt={data.imageAlt}
+              title={data.title}
+              subtitle={data.subtitle}
+              stat1Value={data.stat1Value}
+              stat1Label={data.stat1Label}
+              stat2Value={data.stat2Value}
+              stat2Label={data.stat2Label}
+              description={data.description}
+            />
+          </div>
+        ))}
+
         
-        >
-          <Card />
-        </div>
-        <div
-          className="card" 
-        >
-          <Card />
-        </div>
-        <div
-          className="card" 
-          
-        >
-          <Card />
-        </div>
       </div>
     </div>
   );
