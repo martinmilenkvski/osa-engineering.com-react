@@ -108,7 +108,7 @@ const Contact = () => {
           <h2 className="text-3xl font-bold mb-6">Thank You!</h2>
           <p className="text-lg mb-8">
             Your message has been submitted successfully. We'll get back to you
-            as soon as possible.
+            ASAP.
           </p>
           <button
             onClick={() => setFormSubmitted(false)}

@@ -56,7 +56,7 @@ const Card = ({
   return (
     <motion.div
       ref={ref}
-      className="bg-white text-black flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden w-full md:w-4/5 mx-auto p-4 sm:p-6 md:p-8 gap-6 md:gap-8"
+      className="bg-white text-black flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden w-full md:w-4/6 mx-auto p-4 sm:p-6 md:p-8 gap-6 md:gap-8"
       style={{ minHeight: "400px" }}
     >
       {/* Image container */}
