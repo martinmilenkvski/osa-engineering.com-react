@@ -139,7 +139,7 @@ const Footer = () => {
                 to="/"
                 className="inline-flex items-center text-lg md:text-xl font-bold mb-6 md:mb-8 hover:underline"
               >
-                HOME{" "}
+                Links{" "}
                 <span className="ml-4">
                   <img src="./images/arrow2.svg" height={18} width={18} alt="" />
                 </span>
