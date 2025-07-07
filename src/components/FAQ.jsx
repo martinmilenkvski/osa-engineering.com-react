@@ -11,7 +11,7 @@ function FAQ() {
     {
       question: "What services does OSA Engineering provide?",
       answer:
-        "OSA Engineering provides a range of services including custom engineering solutions, CNC machining, automation systems, and technical consulting. Our team specializes in delivering high-quality engineering solutions tailored to meet specific client needs.",
+        "OSA Engineering provides a range of services including custom engineering solutions, CNC machining, and technical consulting. Our team specializes in delivering high-quality engineering solutions tailored to meet specific client needs.",
     },
     {
       question: "How can I request a quote for a project?",
