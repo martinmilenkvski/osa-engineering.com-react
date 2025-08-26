@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-// Accept props for dynamic content
 const Card = ({
   imageSrc,
   imageAlt,
@@ -14,133 +13,96 @@ const Card = ({
   description,
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.8 });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-
-  const imageVariants = {
-    hidden: {
-      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
-      scale: 1.4, // start zoomed in
-    },
-    visible: {
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-      scale: 1, // zoom out to normal size
-      transition: { duration: 2, ease: "easeOut" }, // Added delay: 0.5
-      
-    },
-  };
-
-  const textContainerVariants = {
-    hidden: { opacity: 0 },
+  const variants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      transition: {
-        duration: 0.1, // Duration for the container itself (can be short)
-        ease: "easeOut",
-        delay: 0.5, // Delay before the first child starts animating
-        staggerChildren: 0.2, // Time between each child's animation start (adjusted from 0.3)
-      },
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
-  // New variant for individual text items - adjusted for slide up fade in
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 }, // Start invisible and 50px lower
+  const imageVariants = {
+    hidden: { scale: 1.2, opacity: 0 },
     visible: {
-      opacity: 1, // Fade in
-      y: 0,       // Slide up to original position
-      transition: { duration: 1.5, ease: "easeOut" }, // Adjusted duration from 2
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <motion.div
-      ref={ref}
-      className="bg-white text-black flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden w-full md:w-4/6 mx-auto p-4 sm:p-6 md:p-8 gap-6 md:gap-8"
-      style={{ minHeight: "400px" }}
-    >
-      {/* Image container */}
-      <div className="w-full md:w-1/2 overflow-hidden relative min-h-[220px] sm:min-h-[250px] md:min-h-[300px] rounded-lg mb-6 md:mb-0">
-        <motion.div
-          className="w-full h-full"
-          variants={imageVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="w-full h-full object-cover absolute inset-0"
-            loading="eager"
-            style={{
-              display: "block",
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </motion.div>
-      </div>
-
-      {/* Content section - apply textContainerVariants */}
+    <div className="container mx-auto px-4 py-12">
       <motion.div
-        className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-center"
-        variants={textContainerVariants} // Use container variants
+        ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
+        className="bg-white rounded-xl overflow-hidden shadow-2xl max-w-5xl mx-auto border border-gray-100"
       >
-        {/* Wrap title with motion and apply itemVariants */}
-        <motion.h2 variants={itemVariants} className="text-xl md:text-5xl mb-3">
-          {title}
-        </motion.h2>
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Image Section */}
+          <motion.div
+            variants={imageVariants}
+            className="relative h-[300px] md:h-[600px] bg-gray-100"
+          >
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
 
-        {/* Wrap subtitle with motion and apply itemVariants */}
-        <motion.p
-          variants={itemVariants}
-          className="text-gray-600 text-xs sm:text-sm mb-6 sm:mb-8 md:mb-10 lg:mb-12"
-        >
-          {subtitle}
-        </motion.p>
+          {/* Content Section */}
+          <div className="p-8 md:p-12 flex flex-col gap-8">
+            <div>
+              <motion.h2
+                variants={variants}
+                className="text-3xl md:text-4xl font-bold text-zinc-800 mb-4"
+              >
+                {title}
+              </motion.h2>
+              <motion.p
+                variants={variants}
+                className="text-lg md:text-xl text-zinc-600"
+              >
+                {subtitle}
+              </motion.p>
+            </div>
 
-        {/* Wrap stats container with motion and apply itemVariants */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col space-y-4 sm:space-y-6"
-        >
-          <div>
-            <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl">
-              {stat1Value}
-            </span>
-            <p className="text-gray-500 text-xs sm:text-sm mt-1 sm:mt-2">
-              {stat1Label}
-            </p>
+            <motion.div
+              variants={variants}
+              className="grid grid-cols-2 gap-8 py-8 border-y border-gray-200"
+            >
+              <div>
+                <span className="block text-3xl md:text-4xl font-bold text-zinc-800">
+                  {stat1Value}
+                </span>
+                <span className="block mt-2 text-base text-zinc-600">
+                  {stat1Label}
+                </span>
+              </div>
+              <div>
+                <span className="block text-3xl md:text-4xl font-bold text-zinc-800">
+                  {stat2Value}
+                </span>
+                <span className="block mt-2 text-base text-zinc-600">
+                  {stat2Label}
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.p
+              variants={variants}
+              className="text-lg leading-relaxed text-zinc-600"
+            >
+              {description}
+            </motion.p>
           </div>
-          <div className="h-px w-full bg-gray-200 my-4 sm:my-6 md:my-8"></div>
-          <div>
-            <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl">
-              {stat2Value}
-            </span>
-            <p className="text-gray-500 text-xs sm:text-sm mt-1 sm:mt-2">
-              {stat2Label}
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Wrap separator with motion and apply itemVariants */}
-        <motion.div
-          variants={itemVariants}
-          className="h-px w-full bg-gray-200 my-4 sm:my-6 md:my-8"
-        ></motion.div>
-
-        {/* Wrap description with motion and apply itemVariants */}
-        <motion.p
-          variants={itemVariants}
-          className="text-gray-700 text-sm leading-relaxed max-w-lg"
-        >
-          {description}
-        </motion.p>
+        </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
