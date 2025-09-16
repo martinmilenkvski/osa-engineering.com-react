@@ -34,8 +34,8 @@ const Nav = () => {
             mounted ? "animate-slideInLeft" : "opacity-0"
           }`}
         >
-          <img src="/logos/Logo-y.svg" alt="logo" className="h-12" />
-          <h1>O.S.A</h1>
+          <img src="/logos/Logo-y.svg" alt="logo" className="h-8" />
+          <h1 className="text-4xl">O.S.A</h1>
         </div>
 
         {/* Hamburger Menu - Mobile only */}

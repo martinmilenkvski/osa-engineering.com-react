@@ -69,7 +69,7 @@ const Header = () => {
       >
         <div className="w-full flex flex-row items-center justify-between">
           <motion.h1
-            className="font-inter text-left text-7xl sm:text-6xl md:text-[128px] font-medium text-white mb-8 leading-tight"
+            className="font-inter text-left text-7xl sm:text-6xl md:text-[128px] font-medium text-white mb-2  leading-tight"
             variants={itemVariants}
           >
             Your{" "}
@@ -148,12 +148,12 @@ const Header = () => {
               className="w-16 h-16 rounded-full border-2 border-white z-10"
             />
             <div className="flex pl-8">
-              <span className="text-5xl text-white">+300</span>
+              <span className="text-4xl text-white">+300</span>
               <div>
-                <h2 className="pl-4 font-inter text-right text-sm md:text-base text-white max-w-xl leading-relaxed mb-0">
+                <h2 className="pl-4 font-inter text-left text-sm md:text-base text-white max-w-xl leading-relaxed mb-0">
                   Satisfied
                 </h2>
-                <h2 className="pl-4 font-inter text-right text-sm md:text-base text-white max-w-xl leading-relaxed mb-0">
+                <h2 className="pl-4 font-inter text-left text-sm md:text-base text-white max-w-xl leading-relaxed mb-0">
                   Clients
                 </h2>
               </div>
