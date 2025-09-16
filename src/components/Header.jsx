@@ -4,7 +4,7 @@ import { motion, useTransform, useScroll } from "framer-motion";
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { scrollY } = useScroll();
-  
+
   // Create a motion value that scales down as the user scrolls
   const scale = useTransform(scrollY, [0, 300], [1, 0.8]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
@@ -39,12 +39,12 @@ const Header = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="relative h-screen w-full overflow-hidden"
-      style={{ 
+      style={{
         scale,
         opacity,
-        y: yTranslate
+        y: yTranslate,
       }}
     >
       <video
@@ -62,26 +62,23 @@ const Header = () => {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex h-full flex-col items-center justify-center px-8 md:px-16"
+        className="relative z-10 flex h-full flex-col  justify-center px-8 md:px-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
+
+        
         <motion.h1
-          className="font-inter text-center text-5xl sm:text-6xl md:text-8xl font-medium text-white max-w-5xl mb-8 leading-tight"
+          className="font-inter text-left text-7xl sm:text-6xl md:text-[150px] font-medium text-white mb-8 leading-tight"
           variants={itemVariants}
         >
-          Your <span className="text-primary font tracking-wide">Partner </span>
-          in Engineering
+          Your{" "}
+          <span className="text-primary tracking-wide">
+            Partner
+            <span className="ml-2 align-super text-[60px] leading-none">™</span>
+          </span>
         </motion.h1>
-        <motion.p
-          className="font-inter text-center text-sm md:text-base text-white max-w-2xl leading-relaxed mb-10"
-          variants={itemVariants}
-        >
-          Design. Prototype. Manufacture. Assemble. We use advanced computer
-          modeling to accurately predict how structures will perform under
-          stress and pressure.
-        </motion.p>
 
         <motion.div variants={itemVariants}>
           <motion.button
@@ -114,6 +111,24 @@ const Header = () => {
             </motion.div>
           </motion.button>
         </motion.div>
+
+        <div className="w-full flex flex-row items-center justify-around gap-8">
+          <motion.p
+            className="font-inter text-left text-sm md:text-base text-white max-w-xl leading-relaxed mb-0"
+            variants={itemVariants}
+          >
+            Design. Prototype. Manufacture. Assemble. We use advanced computer
+            modeling to accurately predict how structures will perform under
+            stress and pressure.
+          </motion.p>
+
+          <motion.h1
+            className="font-inter text-left text-5xl sm:text-6xl md:text-[150px] font-medium text-white mb-0 leading-tight"
+            variants={itemVariants}
+          >
+            in Engineering
+          </motion.h1>
+        </div>
       </motion.div>
     </motion.div>
   );
