@@ -98,9 +98,16 @@ const Header = () => {
               className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-64 text-white"
               variants={itemVariants}
             >
-              <h3 className="text-lg font-semibold mb-2">[ 1 ] Design. Prototype. Manufacture. Assemble.</h3>
-              <p className="text-sm leading-relaxed mb-4">We use advanced computer modeling to accurately predict how structures will perform under stress and pressure.</p>
-              <button className="bg-primary text-black py-2 px-4 rounded-full hover:bg-transparent hover:text-primary border border-primary transition-all">Learn More</button>
+              <h3 className="text-lg font-semibold mb-2">
+                [ 1 ] Design. Prototype. Manufacture. Assemble.
+              </h3>
+              <p className="text-sm leading-relaxed mb-4">
+                We use advanced computer modeling to accurately predict how
+                structures will perform under stress and pressure.
+              </p>
+              <button className="bg-primary text-black py-2 px-4 rounded-full hover:bg-transparent hover:text-primary border border-primary transition-all">
+                Learn More
+              </button>
             </motion.div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8">
