@@ -68,33 +68,71 @@ const Header = () => {
         animate="visible"
       >
         <div className="w-full flex flex-row items-center justify-between">
-          <motion.h1
-            className="font-inter text-left text-7xl sm:text-6xl md:text-[128px] font- text-white mb-2  leading-tight"
-            variants={itemVariants}
-          >
-            Your{" "}
-            <span className="text-primary tracking-wide">
-              Partner
-              <span className="ml-2 align-super text-[60px] leading-none">
-                ™
-              </span>
-            </span>
-          </motion.h1>
-
-          <div className="flex items-center gap-4">
-            {/* Avatars overlapping */}
-
-            {/* Get Started Button */}
-            {/* Wrap button in motion.div for staggered animation */}
-
-            <motion.p
-              className="font-inter text-right text-sm md:text-base text-white max-w-64 leading-relaxed mb-0"
+          <div>
+            <motion.h1
+              className="font-inter text-left text-7xl sm:text-6xl md:text-[128px] font- text-white mb-2  leading-tight"
               variants={itemVariants}
             >
-              [ 1 ]  Design. Prototype. Manufacture. Assemble. We use advanced computer
-              modeling to accurately predict how structures will perform under
-              stress and pressure.
-            </motion.p>
+              Your{" "}
+              <span className="text-primary tracking-wide">
+                Partner
+                <span className="ml-2 align-super text-[60px] leading-none">
+                  ™
+                </span>
+              </span>
+            </motion.h1>
+
+            <motion.h1
+              className="font-inter text-left text-5xl sm:text-6xl md:text-[128px] font-medium text-white mb-0 leading-tight"
+              variants={itemVariants}
+            >
+              in Engineering
+            </motion.h1>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            {/* Avatars overlapping */}
+            {/* Wrap button in motion.div for staggered animation */}
+
+            <motion.div
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-64 text-white"
+              variants={itemVariants}
+            >
+              <h3 className="text-lg font-semibold mb-2">[ 1 ] Design. Prototype. Manufacture. Assemble.</h3>
+              <p className="text-sm leading-relaxed mb-4">We use advanced computer modeling to accurately predict how structures will perform under stress and pressure.</p>
+              <button className="bg-primary text-black py-2 px-4 rounded-full hover:bg-transparent hover:text-primary border border-primary transition-all">Learn More</button>
+            </motion.div>
+
+            <div className="w-full flex flex-row items-center justify-between gap-8">
+              <div className="flex -space-x-3 items-end justify-stretch">
+                <img
+                  src="https://i.pravatar.cc/48?img=1"
+                  alt="avatar 1"
+                  className="w-12 h-12 rounded-full border-2 border-white z-30"
+                />
+                <img
+                  src="https://i.pravatar.cc/48?img=2"
+                  alt="avatar 2"
+                  className="w-12 h-12 rounded-full border-2 border-white z-20"
+                />
+                <img
+                  src="https://i.pravatar.cc/48?img=3"
+                  alt="avatar 3"
+                  className="w-12 h-12 rounded-full border-2 border-white z-10"
+                />
+                <div className="flex pl-8">
+                  <span className="text-4xl text-white">+300</span>
+                  <div>
+                    <h2 className="pl-4 font-inter text-left text-sm md:text-base text-gray-400 max-w-xl leading-relaxed mb-0">
+                      Satisfied
+                    </h2>
+                    <h2 className="pl-4 font-inter text-left text-sm md:text-base  text-gray-400  max-w-xl leading-relaxed mb-0">
+                      Clients
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <motion.div variants={itemVariants}>
               {/* <motion.button
@@ -128,44 +166,6 @@ const Header = () => {
               </motion.button> */}
             </motion.div>
           </div>
-        </div>
-
-        <div className="w-full flex flex-row items-center justify-between gap-8">
-          <div className="flex -space-x-3 items-end justify-stretch">
-            <img
-              src="https://i.pravatar.cc/48?img=1"
-              alt="avatar 1"
-              className="w-16 h-16 rounded-full border-2 border-white z-30"
-            />
-            <img
-              src="https://i.pravatar.cc/48?img=2"
-              alt="avatar 2"
-              className="w-16 h-16  rounded-full border-2 border-white z-20"
-            />
-            <img
-              src="https://i.pravatar.cc/48?img=3"
-              alt="avatar 3"
-              className="w-16 h-16 rounded-full border-2 border-white z-10"
-            />
-            <div className="flex pl-8">
-              <span className="text-4xl text-white">+300</span>
-              <div>
-                <h2 className="pl-4 font-inter text-left text-sm md:text-base text-gray-400 max-w-xl leading-relaxed mb-0">
-                  Satisfied
-                </h2>
-                <h2 className="pl-4 font-inter text-left text-sm md:text-base  text-gray-400  max-w-xl leading-relaxed mb-0">
-                  Clients
-                </h2>
-              </div>
-            </div>
-          </div>
-
-          <motion.h1
-            className="font-inter text-left text-5xl sm:text-6xl md:text-[128px] font-medium text-white mb-0 leading-tight"
-            variants={itemVariants}
-          >
-            in Engineering
-          </motion.h1>
         </div>
       </motion.div>
     </motion.div>
