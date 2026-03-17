@@ -32,11 +32,11 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="w-full bg-[#080808] border-t border-white/10">
-      <div className="flex flex-col lg:flex-row min-h-screen">
+    <section id="services" className="w-full bg-[#080808] border-t border-white/10 relative z-10">
+      <div className="flex flex-col lg:flex-row min-h-screen pt-[20vh] lg:pt-0">
         
         {/* --- LEFT: STICKY INFO BLOCK --- */}
-        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
           
           <motion.div 
             initial="initial"
@@ -50,7 +50,7 @@ const Services = () => {
             
             <motion.h2 
               variants={titleContainerVars}
-              className="text-5xl lg:text-7xl font-bold tracking-tighter uppercase leading-[0.9]"
+              className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]"
             >
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">CORE</motion.span>
@@ -60,12 +60,19 @@ const Services = () => {
               </div>
             </motion.h2>
             
+            <motion.div 
+              variants={fadeUpVars}
+              className="mt-12 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
+            >
+              <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.4)]"></div>
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
+            </motion.div>
+
             <motion.p 
               variants={fadeUpVars}
-              transition={{ delay: 0.4 }}
-              className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs"
+              className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-sm"
             >
-              Reductive multi-axis operations. From high-tensile alloys to complex aerospace geometries, our protocols deliver absolute dimensional stability.
+              Systematic reductive machining solutions for high-tolerance applications. Mission-critical components realized through adaptive motion control systems.
             </motion.p>
           </motion.div>
 
@@ -84,8 +91,8 @@ const Services = () => {
           </motion.div>
         </div>
 
-        {/* --- RIGHT: SCROLLING CONTENT (Static Cards as requested) --- */}
-        <div className="w-full lg:w-[65%] p-4 lg:p-20 space-y-[10vh] lg:space-y-[30vh] pb-[20vh] lg:pb-[50vh]">
+        {/* --- RIGHT: SCROLLING CONTENT --- */}
+        <div className="w-full lg:w-[65%] p-4 lg:px-20 lg:py-[20vh] space-y-[20vh] lg:space-y-[40vh] pb-[50vh] lg:pb-[20vh]">
           {cardData.map((data, index) => (
             <Card
               key={data.id}

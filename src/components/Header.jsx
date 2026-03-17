@@ -220,7 +220,7 @@ const Header = () => {
         </div>
 
         <div className="flex justify-between items-end mt-4 lg:mt-0">
-          <h3 className="text-2xl lg:text-4xl font-bold tracking-tighter uppercase leading-[0.9]">
+          <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-[0.9]">
             Begin<br/>Transmission
           </h3>
           <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />

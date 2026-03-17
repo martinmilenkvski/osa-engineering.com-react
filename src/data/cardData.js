@@ -1,7 +1,8 @@
+// Updated with technical illustrations
 const cardData = [
   {
     id: 1,
-    imageSrc: "/images/1.avif",
+    imageSrc: "/images/precision_design.png",
     imageAlt: "Design and Prototyping",
     title: "Design and Prototyping",
     subtitle: "Transforming concepts into precision-engineered solutions.",
@@ -14,7 +15,7 @@ const cardData = [
   },
   {
     id: 2,
-    imageSrc: "/images/2.avif", // Use a different image
+    imageSrc: "/images/advanced_engineering.png",
     imageAlt: "Advanced Manufacturing",
     title: "Advanced Manufacturing",
     subtitle: "State-of-the-art production capabilities.",
@@ -27,7 +28,7 @@ const cardData = [
   },
   {
     id: 3,
-    imageSrc: "/images/3.avif", // Use another different image
+    imageSrc: "/images/seamless_integration.png",
     imageAlt: "Testing and Validation",
     title: "Testing and Validation",
     subtitle: "Ensuring reliability and performance.",
@@ -38,7 +39,19 @@ const cardData = [
     description:
       "Rigorous testing protocols guarantee that every product meets the highest standards of quality and durability.",
   },
-  
+  {
+    id: 4,
+    imageSrc: "/images/lifecycle_support.png",
+    imageAlt: "Life-cycle Support",
+    title: "Life-cycle Support",
+    subtitle: "Continuous optimization and maintenance.",
+    stat1Value: "24/7",
+    stat1Label: "Technical Monitoring",
+    stat2Value: "15 min",
+    stat2Label: "Response Time",
+    description:
+      "Commitment to excellence beyond the production line with comprehensive support and predictive maintenance systems.",
+  },
 ];
 
 export default cardData;
