@@ -1,146 +1,100 @@
-import { useState, useRef } from "react"; // Import useRef
-import { motion, useInView } from "framer-motion"; // Import motion and useInView
+import React from "react";
+import { Plus } from "lucide-react";
 
-function FAQ() {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const sectionRef = useRef(null); // Ref for the section
-  // Change amount from 0.2 to 0.5
-  const isInView = useInView(sectionRef, { once: true, amount: 0.5 }); // Trigger when 50% is visible
-
+const FAQ = () => {
   const faqs = [
     {
-      question: "What services does OSA Engineering provide?",
-      answer:
-        "OSA Engineering provides a range of services including custom engineering solutions, CNC machining, automation systems, and technical consulting. Our team specializes in delivering high-quality engineering solutions tailored to meet specific client needs.",
+      q: "What are your standard dimensional tolerances?",
+      a: "Our standard machining protocol maintains tolerances within ±0.005mm. For aerospace or medical-grade components, we can achieve even tighter linear and geometric constraints as per technical specifications."
     },
     {
-      question: "How can I request a quote for a project?",
-      answer:
-        "You can request a quote by filling out the contact form on our website or directly contacting our team via email or phone. Please provide as much detail as possible about your project requirements to help us provide an accurate quote.",
+      q: "Which materials are supported in your multi-axis systems?",
+      a: "We operate on a broad spectrum including architectural steel, high-tensile tool steels, aerospace aluminum alloys, stainless steels (304/316), brass, copper, and industrial polymers."
     },
     {
-      question: "What industries do you serve?",
-      answer:
-        "We serve a wide range of industries including manufacturing, automotive, pharmaceuticals, and more. Our versatile engineering expertise allows us to adapt to various industry requirements and standards.",
+      q: "How do you handle rapid prototyping vs. mass production?",
+      a: "Our setup is optimized for both small-batch technical prototypes and high-volume industrial fulfillment. We utilize modular fixturing to minimize transition times between varied reductive protocols."
     },
     {
-      question: "What is your project timeline?",
-      answer:
-        "Project timelines vary depending on complexity and scope. We work closely with clients to establish realistic timeframes and maintain transparent communication throughout the process to ensure timely delivery.",
-    },
-    {
-      question: "Do you offer maintenance services for completed projects?",
-      answer:
-        "Yes, we offer maintenance and support services for all our completed projects. We believe in building long-term relationships with our clients and providing ongoing support to ensure the continued success of implemented solutions.",
-    },
+      q: "Do you provide material certification and inspection logs?",
+      a: "Yes. Every component can be delivered with a full audit trail including raw material certification, heat-map reports, and coordinate measuring machine (CMM) verification logs."
+    }
   ];
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
-  // Animation variants
-  const titleVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.3 }, // Stagger FAQ items
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      className="py-16 md:py-24 lg:py-section bg-gray-50"
-    >
-      <div className="max-w-6xl mx-auto px-8 md:px-16">
-        <motion.div
-          className="text-center mb-16"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={titleVariants} // Apply title animation variants
-        >
-          <p className="text-sm md:text-lg uppercase tracking-wider text-gray-600 mb-4">
-            Support
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl">
-            Frequently Asked Questions
-          </h2>
-        </motion.div>
+    <section id="faq" className="w-full bg-[#080808] border-t border-white/10">
+      <div className="flex flex-col lg:flex-row min-h-[60vh]">
+        
+        {/* --- LEFT: LOCKED VIEWFINDER --- */}
+        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[#FFC800] font-mono text-xs">INDEX [04]</span>
+              <div className="h-px w-8 bg-[#FFC800]"></div>
+            </div>
+            
+            <h2 className="text-5xl lg:text-7xl font-bold tracking-tighter uppercase leading-[0.9]">
+              QUERY<br />
+              <span className="text-white/40">PROTOCOL.</span>
+            </h2>
+            
+            <p className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
+              Technical documentation and operational standards. Review our baseline protocols for precision engineering and fulfillment.
+            </p>
+          </div>
 
-        <motion.div
-          className="max-w-3xl mx-auto"
-          variants={containerVariants} // Apply container variants for staggering
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              className="mb-6"
-              variants={itemVariants} // Apply item animation variants
-            >
-              <button
-                className="flex justify-between items-center w-full p-6 font-medium text-left bg-white border border-gray-200 rounded-standard focus:ring-4 focus:ring-gray-200"
-                onClick={() => toggleAccordion(index)}
-                aria-expanded={activeIndex === index}
-              >
-                <span className="text-lg font-semibold">{faq.question}</span>
-                <svg
-                  className={`w-6 h-6 transform ${
-                    activeIndex === index ? "rotate-180" : ""
-                  } transition-transform duration-200`}
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              {/* Animate the answer panel */}
-              {activeIndex === index && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden" // Add overflow hidden for smooth height animation
-                >
-                  <div className="p-6 bg-white border border-t-0 border-gray-200 rounded-b-standard">
-                    <p className="text-gray-600 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
+          <div className="hidden lg:block p-6 border border-white/10 bg-white/5">
+             <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-4">Encryption Status</div>
+             <div className="flex justify-between items-end gap-1">
+                {[20, 10, 30, 15, 25, 10, 40, 5].map((h, i) => (
+                   <div key={i} className="w-1 bg-white/20 animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 100}ms` }}></div>
+                ))}
+                <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter">SECURE</span>
+             </div>
+          </div>
+        </div>
+
+        {/* --- RIGHT: ACCORDIONS --- */}
+        <div className="w-full lg:w-[65%] divide-y divide-white/10">
+          {faqs.map((faq, idx) => (
+            <details key={idx} className="group outline-none">
+              <summary className="flex items-center justify-between p-8 lg:p-12 cursor-pointer list-none group-hover:bg-white/5 transition-colors">
+                <div className="flex items-center gap-6 lg:gap-10">
+                   <span className="font-mono text-sm text-[#FFC800]">0{idx + 1}</span>
+                   <h3 className="text-xl lg:text-3xl font-bold tracking-tighter uppercase text-white group-open:text-[#FFC800] transition-colors pr-4">
+                     {faq.q}
+                   </h3>
+                </div>
+                <div className="relative w-6 h-6 flex-shrink-0">
+                  <div className="absolute top-1/2 left-0 w-full h-px bg-white/30 group-open:bg-[#FFC800] transition-colors"></div>
+                  <div className="absolute top-0 left-1/2 w-px h-full bg-white/30 group-open:rotate-90 group-open:opacity-0 transition-all duration-500"></div>
+                </div>
+              </summary>
+              <div className="px-8 lg:px-[12.5rem] pb-12 lg:pb-20">
+                <p className="text-sm lg:text-base text-white/60 leading-relaxed font-light max-w-2xl">
+                  {faq.a}
+                </p>
+                <div className="mt-10 flex items-center gap-4">
+                   <div className="h-px w-20 bg-white/10"></div>
+                   <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">End_Log_Entry</span>
+                </div>
+              </div>
+            </details>
           ))}
-        </motion.div>
+          
+          <div className="p-12 lg:p-20 bg-white/5 flex flex-col items-center justify-center text-center">
+             <Plus size={32} className="text-white/10 mb-6" />
+             <p className="text-sm text-white/40 font-light max-w-sm">
+               Still require technical clarification? Our engineering lead is available for direct consultation.
+             </p>
+             <a href="#contact" className="mt-8 px-8 py-4 border border-[#FFC800] text-[#FFC800] font-mono text-[10px] tracking-[0.3em] uppercase hover:bg-[#FFC800] hover:text-black transition-all">
+                Send_Priority_Query
+             </a>
+          </div>
+        </div>
       </div>
     </section>
   );
-}
+};
 
 export default FAQ;

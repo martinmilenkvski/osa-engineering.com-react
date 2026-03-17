@@ -1,103 +1,92 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion";
 
 const LogoMarquee = () => {
-  // Define logos directly within the component
-  const defaultLogos = [
-    { id: 1, src: "/logos/Alkaloid.png", alt: "Alkaloid" },
-    { id: 2, src: "/logos/Draksler.png", alt: "Draksler" },
-    { id: 3, src: "/logos/FomaSystems.png", alt: "Foma Systems" },
-    { id: 4, src: "/logos/Kromberg.png", alt: "Kromberg" },
+  const logos = [
+    { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-812" },
+    { name: "Draksler", src: "/logos/Draksler.png", id: "U-441" },
+    { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-290" },
+    { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-717" },
   ];
 
-  // Duplicate logos for a seamless loop effect
-  const duplicatedLogos = [...defaultLogos, ...defaultLogos];
-
-  // Animation variants for text
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  // Extend list for a seamless loop
+  const extendedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
 
   return (
-    <div className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden"> {/* Added overflow-hidden */}
-      {/* Header Text */}
-      <div className="mb-8 md:mb-12 text-center">
-        <motion.p
-          className="text-base md:text-lg lg:text-xl uppercase text-gray-600 tracking-wider"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
-          variants={textVariants}
-        >
-          OUR PARTNERS
-        </motion.p>
-        <motion.h2
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 text-gray-900"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
-          variants={{
-            ...textVariants,
-            visible: { // Override visible state for delay
-              ...textVariants.visible,
-              transition: { ...textVariants.visible.transition, delay: 0.2 } // Add delay
-            }
-          }}
-        >
-          Trusted by Industry <span className="text-yellow-500">Leaders</span>
-        </motion.h2>
+    <section className="py-24 bg-[#FFC800] border-y border-black/10 overflow-hidden relative font-mono text-black">
+      
+      {/* --- TECHNICAL HEADER --- */}
+      <div className="absolute top-0 left-0 right-0 h-10 border-b border-black/5 flex items-center justify-between px-8 bg-black/5">
+        <div className="flex items-center gap-4">
+          <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
+          <span className="text-[9px] font-bold text-black/60 uppercase tracking-[0.2em]">
+            Conveyor_Line_01 // Verified Partners
+          </span>
+        </div>
+        <span className="text-[9px] text-black/30">SYS_STABLE // 99.8%</span>
       </div>
 
-      {/* Marquee Container */}
-      <div className="relative w-full max-w-6xl mx-auto overflow-hidden group">
-        {/* Gradient Overlays for fade effect */}
-        <div className="absolute top-0 left-0 z-10 h-full w-16 md:w-24 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 z-10 h-full w-16 md:w-24 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-
-        {/* Animated Logo Track */}
-        {/* Apply a CSS animation (e.g., 'animate-marquee') defined in your global CSS or tailwind.config.js */}
-        {/* The 'group-hover:pause' class is optional for pausing on hover */}
-        <div className="flex animate-marquee group-hover:pause">
-          {duplicatedLogos.map((logo, index) => (
-            <div
-              key={`${logo.id}-${index}`} // Unique key for each item, including duplicates
-              className="flex-shrink-0 mx-8 md:mx-12 lg:mx-16 flex items-center justify-center"
-              style={{ minWidth: "150px" }} // Ensure logos don't collapse too much
+      {/* --- STEPPER CONVEYOR --- */}
+      <div className="mt-10 overflow-hidden relative">
+        <motion.div 
+          className="flex"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ 
+            duration: 120, // Significantly slowed down for a heavy industrial feel
+            ease: "linear", 
+            repeat: Infinity 
+          }}
+          style={{ width: "fit-content" }}
+        >
+          {extendedLogos.map((logo, idx) => (
+            <div 
+              key={idx} 
+              className="flex-shrink-0 w-[320px] lg:w-[480px] h-56 lg:h-80 border-r border-black/10 flex flex-col items-center justify-center relative group hover:bg-black/[0.03] transition-colors"
             >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className="h-32 md:h-40 lg:h-48 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 ease-in-out"
-                loading="lazy" // Use lazy loading for images not immediately visible
-              />
+              {/* Background ID */}
+              <span className="absolute top-4 left-6 text-[10px] text-black/10 font-bold tracking-widest leading-none">
+                PART_{logo.id}
+              </span>
+
+              {/* Logo Container */}
+              <div className="relative p-12">
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  className="h-16 lg:h-28 w-auto filter brightness-0 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
+                />
+              </div>
+
+              {/* Status Footer */}
+              <div className="absolute bottom-10 left-0 right-0 flex items-center justify-between px-8 opacity-40 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-black rounded-full"></div>
+                  <span className="text-[8px] font-bold text-black tracking-widest uppercase">QC_PASSED</span>
+                </div>
+                <span className="text-[8px] text-black/30 uppercase tracking-[0.3em]">SEC-0{idx % 9}</span>
+              </div>
+
+              {/* Technical Corners */}
+              <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-black/10 group-hover:border-black transition-colors"></div>
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-black/10 group-hover:border-black transition-colors"></div>
             </div>
           ))}
+        </motion.div>
+      </div>
+
+      {/* --- TECHNICAL FOOTER --- */}
+      <div className="absolute bottom-0 left-0 right-0 h-10 border-t border-black/5 flex items-center justify-between px-8 bg-black/5">
+        <div className="flex gap-8">
+          <span className="text-[9px] text-black/40 tracking-widest opacity-50">SYNC: ENABLED</span>
+          <span className="text-[9px] text-black/40 tracking-widest opacity-50">FREQ: 60Hz</span>
+        </div>
+        <div className="text-[9px] text-black/20 tracking-[0.4em]">
+          SCANNING_[{logos.length}]_NODES
         </div>
       </div>
-    </div>
+
+    </section>
   );
 };
 
 export default LogoMarquee;
-
-// Note: Ensure you have the 'animate-marquee' keyframes defined in your CSS.
-// Example CSS for the animation (place in your global CSS file):
-/*
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); } // Translate by half the total width (since logos are duplicated)
-}
-
-.animate-marquee {
-  animation: marquee 40s linear infinite; // Adjust duration as needed
-}
-
-.group-hover\:pause:hover .animate-marquee { // Optional: Pause animation on hover
-  animation-play-state: paused;
-}
-*/

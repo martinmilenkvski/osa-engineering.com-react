@@ -2,9 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════
+   AI STUDIO REDESIGN — GLOBAL STYLES
+   ═══════════════════════════════════════════ */
+
 :root {
-  font-family: "Helvetica Neue Light", "Helvetica Light", "Helvetica",
-    sans-serif;
+  font-family: "Helvetica Neue Light", "Helvetica Light", "Helvetica", sans-serif;
   line-height: 1.2;
- /* Light weight */
+  color: #f4f4f4;
+  background-color: #080808;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #FFC800;
+  color: #000;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: #FFC800; }
+
+/* ─── Logo Marquee Ticker ─── */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: 200%;
+  animation: ticker 20s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+.partner-logo {
+  height: 2.5rem;
+  width: auto;
+  filter: brightness(0) opacity(0.8);
+  transition: all 0.4s ease;
+}
+
+@media (min-width: 1024px) {
+  .partner-logo {
+    height: 5rem;
+  }
+}
+
+.partner-logo:hover {
+  filter: brightness(0) opacity(1);
+  transform: scale(1.05);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
 }
