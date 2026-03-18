@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Plus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQ = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
   const faqs = [
     {
       q: "What are your standard dimensional tolerances?",
@@ -18,79 +20,184 @@ const FAQ = () => {
     {
       q: "Do you provide material certification and inspection logs?",
       a: "Yes. Every component can be delivered with a full audit trail including raw material certification, heat-map reports, and coordinate measuring machine (CMM) verification logs."
+    },
+    {
+      q: "What is your typical turnaround time for custom components?",
+      a: "Turnaround times vary based on complexity and volume. Standard prototyping runs take 3-5 business days, while full production runs are scheduled according to our current queue and material availability."
+    },
+    {
+      q: "Do you offer post-machining surface treatments?",
+      a: "Yes, we coordinate various finishing processes including anodizing, hard-coat anodizing, powder coating, electropolishing, and custom thermal treatments to meet your exact surface specifications."
     }
   ];
+
+  const toggleFaq = (idx) => {
+    setActiveIndex(activeIndex === idx ? null : idx);
+  };
+
+  // --- ANIMATION VARIANTS ---
+  const ease = [0.16, 1, 0.3, 1];
+
+  const fadeUpVars = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 1.2, ease }
+    },
+    viewport: { once: true, margin: "-50px" }
+  };
+
+  const wordVars = {
+    initial: { y: "110%" },
+    whileInView: { 
+      y: 0,
+      transition: { duration: 1.2, ease }
+    }
+  };
+
+  const titleContainerVars = {
+    initial: {},
+    whileInView: { 
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const listContainerVars = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.4 }
+    }
+  };
+
+  const rowVars = {
+    initial: { opacity: 0, x: -20 },
+    whileInView: { opacity: 1, x: 0, transition: { duration: 0.6, ease } }
+  };
 
   return (
     <section id="faq" className="w-full bg-[#080808] border-t border-white/10">
       <div className="flex flex-col lg:flex-row min-h-[60vh]">
         
         {/* --- LEFT: LOCKED VIEWFINDER --- */}
-        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-3 mb-8">
+        <div className="w-full lg:w-[35%] h-auto lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32 relative z-10 shrink-0 bg-[#080808]">
+          <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true }}>
+            <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [04]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
-            </div>
+            </motion.div>
             
-            <h2 className="text-5xl lg:text-7xl font-bold tracking-tighter uppercase leading-[0.9]">
-              QUERY<br />
-              <span className="text-white/40">PROTOCOL.</span>
-            </h2>
+            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-7xl font-bold tracking-tighter uppercase leading-[0.9]">
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block">QUERY</motion.span>
+              </div>
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block text-white/40">PROTOCOL.</motion.span>
+              </div>
+            </motion.h2>
             
-            <p className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
               Technical documentation and operational standards. Review our baseline protocols for precision engineering and fulfillment.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="hidden lg:block p-6 border border-white/10 bg-white/5">
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            transition={{ delay: 0.8, duration: 1 }} 
+            viewport={{ once: true }} 
+            className="hidden lg:block p-6 border border-white/10 bg-white/5"
+          >
              <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-4">Encryption Status</div>
-             <div className="flex justify-between items-end gap-1">
-                {[20, 10, 30, 15, 25, 10, 40, 5].map((h, i) => (
-                   <div key={i} className="w-1 bg-white/20 animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 100}ms` }}></div>
+             <div className="flex items-end gap-1 h-12">
+                {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
+                   <motion.div 
+                     key={i} 
+                     className="bg-[#FFC800]/30 w-full flex-1 origin-bottom" 
+                     animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
+                     transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
+                   />
                 ))}
-                <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter">SECURE</span>
+                <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-4 mb-1">SECURE</span>
              </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* --- RIGHT: ACCORDIONS --- */}
-        <div className="w-full lg:w-[65%] divide-y divide-white/10">
-          {faqs.map((faq, idx) => (
-            <details key={idx} className="group outline-none">
-              <summary className="flex items-center justify-between p-8 lg:p-12 cursor-pointer list-none group-hover:bg-white/5 transition-colors">
-                <div className="flex items-center gap-6 lg:gap-10">
-                   <span className="font-mono text-sm text-[#FFC800]">0{idx + 1}</span>
-                   <h3 className="text-xl lg:text-3xl font-bold tracking-tighter uppercase text-white group-open:text-[#FFC800] transition-colors pr-4">
-                     {faq.q}
-                   </h3>
-                </div>
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <div className="absolute top-1/2 left-0 w-full h-px bg-white/30 group-open:bg-[#FFC800] transition-colors"></div>
-                  <div className="absolute top-0 left-1/2 w-px h-full bg-white/30 group-open:rotate-90 group-open:opacity-0 transition-all duration-500"></div>
-                </div>
-              </summary>
-              <div className="px-8 lg:px-[12.5rem] pb-12 lg:pb-20">
-                <p className="text-sm lg:text-base text-white/60 leading-relaxed font-light max-w-2xl">
-                  {faq.a}
-                </p>
-                <div className="mt-10 flex items-center gap-4">
-                   <div className="h-px w-20 bg-white/10"></div>
-                   <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">End_Log_Entry</span>
-                </div>
-              </div>
-            </details>
-          ))}
+        <div className="w-full lg:w-[65%] pt-12 lg:pt-24 flex flex-col">
+          <motion.div 
+            variants={listContainerVars}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col divide-y divide-white/10 border-b border-white/10"
+          >
+            {faqs.map((faq, idx) => {
+              const isOpen = activeIndex === idx;
+              
+              return (
+                <motion.div key={idx} variants={rowVars} className="group outline-none hover:bg-white/[0.02] transition-colors duration-500 relative">
+                  <div className="absolute left-0 top-0 bottom-0 w-px bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+                  <div onClick={() => toggleFaq(idx)} className="flex items-center justify-between p-8 lg:p-12 cursor-pointer select-none">
+                    <div className="flex items-center gap-6 lg:gap-10 w-full lg:w-auto">
+                       <span className={`font-mono text-[10px] tracking-widest transition-colors ${isOpen ? 'text-[#FFC800]' : 'text-white/30 group-hover:text-[#FFC800]'}`}>0{idx + 1}</span>
+                       <h3 className={`text-lg lg:text-2xl font-bold tracking-tighter uppercase transition-colors pr-4 ${isOpen ? 'text-[#FFC800]' : 'text-white'}`}>
+                         {faq.q}
+                       </h3>
+                    </div>
+                    <div className="relative w-6 h-6 flex-shrink-0">
+                      <div className={`absolute top-1/2 left-0 w-full h-px transition-colors duration-500 ${isOpen ? 'bg-[#FFC800]' : 'bg-white/30 group-hover:bg-[#FFC800]'}`}></div>
+                      <div className={`absolute top-0 left-1/2 w-px h-full transition-all duration-500 ${isOpen ? 'rotate-90 opacity-0 bg-[#FFC800]' : 'bg-white/30 group-hover:bg-[#FFC800]'}`}></div>
+                    </div>
+                  </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-8 lg:px-[6.5rem] pb-12 lg:pb-20">
+                          <p className="text-sm lg:text-base text-white/60 leading-relaxed font-light max-w-2xl">
+                            {faq.a}
+                          </p>
+                          <div className="mt-10 flex items-center gap-4">
+                             <div className="h-px w-20 bg-white/10"></div>
+                             <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">End_Log_Entry</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </motion.div>
           
-          <div className="p-12 lg:p-20 bg-white/5 flex flex-col items-center justify-center text-center">
-             <Plus size={32} className="text-white/10 mb-6" />
-             <p className="text-sm text-white/40 font-light max-w-sm">
+          <motion.div 
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={titleContainerVars}
+            className="p-12 lg:p-24 bg-white/[0.01] flex flex-col items-center justify-center text-center relative overflow-hidden mt-auto"
+          >
+             <motion.div variants={fadeUpVars}>
+                <Plus size={32} className="text-[#FFC800]/50 mb-6 animate-spin-slow" />
+             </motion.div>
+             <motion.p variants={fadeUpVars} className="text-sm text-white/40 font-light max-w-sm mb-8">
                Still require technical clarification? Our engineering lead is available for direct consultation.
-             </p>
-             <a href="#contact" className="mt-8 px-8 py-4 border border-[#FFC800] text-[#FFC800] font-mono text-[10px] tracking-[0.3em] uppercase hover:bg-[#FFC800] hover:text-black transition-all">
-                Send_Priority_Query
-             </a>
-          </div>
+             </motion.p>
+             <motion.a 
+               variants={fadeUpVars}
+               href="#contact" 
+               className="px-8 py-4 border border-[#FFC800]/30 text-[#FFC800] font-mono text-[10px] tracking-[0.3em] uppercase hover:bg-[#FFC800] hover:text-black transition-all duration-500 relative group"
+             >
+                <div className="absolute inset-0 bg-[#FFC800]/10 group-hover:bg-transparent transition-colors animate-pulse"></div>
+                <span className="relative z-10">Send_Priority_Query</span>
+             </motion.a>
+          </motion.div>
         </div>
       </div>
     </section>

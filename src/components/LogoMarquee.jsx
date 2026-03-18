@@ -2,91 +2,132 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const LogoMarquee = () => {
+  const ease = [0.16, 1, 0.3, 1];
+
+  const containerVars = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVars = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease }
+    }
+  };
+
   const logos = [
     { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-812" },
     { name: "Draksler", src: "/logos/Draksler.png", id: "U-441" },
     { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-290" },
     { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-717" },
+    
+    { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-813" },
+    { name: "Draksler", src: "/logos/Draksler.png", id: "U-442" },
+    { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-291" },
+    { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-718" },
   ];
 
-  // Extend list for a seamless loop
-  const extendedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
-
   return (
-    <section className="py-24 bg-[#FFC800] border-y border-black/10 overflow-hidden relative font-mono text-black">
+    <section className="w-full bg-[#080808] border-t border-white/10 font-mono py-16 lg:py-32">
       
       {/* --- TECHNICAL HEADER --- */}
-      <div className="absolute top-0 left-0 right-0 h-10 border-b border-black/5 flex items-center justify-between px-8 bg-black/5">
+      <div className="px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 bg-white/[0.02]">
         <div className="flex items-center gap-4">
-          <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
-          <span className="text-[9px] font-bold text-black/60 uppercase tracking-[0.2em]">
-            Conveyor_Line_01 // Verified Partners
+          <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
+          <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
+            Verified_Counterparties //
           </span>
         </div>
-        <span className="text-[9px] text-black/30">SYS_STABLE // 99.8%</span>
-      </div>
-
-      {/* --- STEPPER CONVEYOR --- */}
-      <div className="mt-10 overflow-hidden relative">
-        <motion.div 
-          className="flex"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ 
-            duration: 120, // Significantly slowed down for a heavy industrial feel
-            ease: "linear", 
-            repeat: Infinity 
-          }}
-          style={{ width: "fit-content" }}
-        >
-          {extendedLogos.map((logo, idx) => (
-            <div 
-              key={idx} 
-              className="flex-shrink-0 w-[320px] lg:w-[480px] h-56 lg:h-80 border-r border-black/10 flex flex-col items-center justify-center relative group hover:bg-black/[0.03] transition-colors"
-            >
-              {/* Background ID */}
-              <span className="absolute top-4 left-6 text-[10px] text-black/10 font-bold tracking-widest leading-none">
-                PART_{logo.id}
-              </span>
-
-              {/* Logo Container */}
-              <div className="relative p-12">
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="h-16 lg:h-28 w-auto filter brightness-0 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
-                />
-              </div>
-
-              {/* Status Footer */}
-              <div className="absolute bottom-10 left-0 right-0 flex items-center justify-between px-8 opacity-40 group-hover:opacity-100 transition-opacity">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-black rounded-full"></div>
-                  <span className="text-[8px] font-bold text-black tracking-widest uppercase">QC_PASSED</span>
-                </div>
-                <span className="text-[8px] text-black/30 uppercase tracking-[0.3em]">SEC-0{idx % 9}</span>
-              </div>
-
-              {/* Technical Corners */}
-              <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-black/10 group-hover:border-black transition-colors"></div>
-              <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-black/10 group-hover:border-black transition-colors"></div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* --- TECHNICAL FOOTER --- */}
-      <div className="absolute bottom-0 left-0 right-0 h-10 border-t border-black/5 flex items-center justify-between px-8 bg-black/5">
         <div className="flex gap-8">
-          <span className="text-[9px] text-black/40 tracking-widest opacity-50">SYNC: ENABLED</span>
-          <span className="text-[9px] text-black/40 tracking-widest opacity-50">FREQ: 60Hz</span>
+          <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
+            Net_Status: Stable
+          </span>
+          <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
+            Active_Nodes: {logos.length}
+          </span>
         </div>
-        <div className="text-[9px] text-black/20 tracking-[0.4em]">
-          SCANNING_[{logos.length}]_NODES
+      </div>
+
+      {/* --- LOGO GRID --- */}
+      <motion.div 
+        variants={containerVars}
+        initial="initial"
+        whileInView="whileInView"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border-b border-white/10"
+      >
+        {logos.map((logo, idx) => (
+          <motion.div 
+            variants={itemVars}
+            key={idx} 
+            className="bg-[#080808] relative flex flex-col items-center justify-center aspect-square lg:aspect-auto lg:h-[320px] group hover:bg-white/[0.02] transition-colors duration-500 overflow-hidden"
+          >
+            {/* Background ID */}
+            <span className="absolute top-4 left-6 text-[10px] text-white/10 font-bold tracking-[0.2em] leading-none group-hover:text-[#FFC800]/20 transition-colors">
+              PART_{logo.id}
+            </span>
+
+            {/* Logo Container */}
+            <div className="relative p-8 w-full h-full flex items-center justify-center">
+              <div
+                role="img"
+                aria-label={logo.name}
+                className="w-full max-w-[85%] h-24 lg:h-40 bg-[#FFC800] opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
+                style={{
+                  WebkitMaskImage: `url(${logo.src})`,
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskPosition: 'center',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskImage: `url(${logo.src})`,
+                  maskSize: 'contain',
+                  maskPosition: 'center',
+                  maskRepeat: 'no-repeat',
+                }}
+              />
+            </div>
+
+            {/* Status Footer */}
+            <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <span className="text-[8px] text-[#FFC800] uppercase tracking-[0.3em]">
+                Verified
+              </span>
+            </div>
+
+            {/* Technical Corners (Hover) */}
+            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[#FFC800] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[#FFC800] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+        {/* --- TECHNICAL HEADER --- */}
+      <div className="px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 bg-white/[0.02]">
+        <div className="flex items-center gap-4">
+          <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
+          <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
+            Verified_Counterparties //
+          </span>
+        </div>
+        <div className="flex gap-8">
+          <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
+            Net_Status: Stable
+          </span>
+          <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
+            Active_Nodes: {logos.length}
+          </span>
         </div>
       </div>
 
     </section>
   );
 };
+
+
+
 
 export default LogoMarquee;

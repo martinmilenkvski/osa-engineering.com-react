@@ -12,19 +12,34 @@ const Success = () => {
     { id: "LOG-006", client: "OKTA", project: "Valve Actuator Coupling", status: "MONITORING", val: "High-Temp" },
   ];
 
+  // --- ANIMATION VARIANTS ---
+  const listContainerVars = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const rowVars = {
+    initial: { opacity: 0, x: -20 },
+    whileInView: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const getStatusColor = (status) => ["VERIFIED", "COMPLETED", "DELIVERED"].includes(status) ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]" : "bg-[#FFC800] shadow-[0_0_10px_rgba(255,200,0,0.4)]";
+
   return (
     <section id="success" className="w-full bg-[#080808] border-t border-white/10">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row-reverse">
         
-        {/* --- LEFT: LOCKED VIEWFINDER --- */}
-        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+        {/* --- RIGHT: LOCKED VIEWFINDER --- */}
+        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-l border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
           <div>
             <div className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [02]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
             </div>
             
-            <h2 className="text-5xl lg:text-7xl font-bold tracking-tighter uppercase leading-[0.9]">
+            <h2 className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
               TRACK<br />
               <span className="text-white/40">RECORD.</span>
             </h2>
@@ -36,19 +51,30 @@ const Success = () => {
 
           <div className="hidden lg:block">
             <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Metric Visualization</div>
-            <div className="grid grid-cols-4 gap-1 h-32 items-end">
+            <div className="flex items-end gap-1 h-32">
               {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
-                <div key={i} className="bg-[#FFC800]/20 w-full hover:bg-[#FFC800] transition-colors" style={{ height: `${h}%` }}></div>
+                <motion.div 
+                  key={i} 
+                  className="bg-[#FFC800]/30 w-full flex-1 origin-bottom" 
+                  animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
+                  transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
+                />
               ))}
             </div>
           </div>
         </div>
 
-        {/* --- RIGHT: DATA LOGS --- */}
-        <div className="w-full lg:w-[65%]">
-          <div className="grid grid-cols-1 divide-y divide-white/10">
+        {/* --- LEFT: DATA LOGS --- */}
+        <div className="w-full lg:w-[65%] pt-12 lg:pt-24">
+          <motion.div 
+            variants={listContainerVars}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col"
+          >
             {/* Header Row */}
-            <div className="hidden lg:grid lg:grid-cols-4 px-10 py-5 bg-white/5 font-mono text-[10px] tracking-widest text-white/30 uppercase">
+            <div className="hidden lg:grid lg:grid-cols-4 px-10 py-6 bg-white/[0.02] border-b border-white/10 font-mono text-[10px] tracking-widest text-white/30 uppercase">
               <div>System ID</div>
               <div>Counterparty</div>
               <div>Operation Project</div>
@@ -57,33 +83,41 @@ const Success = () => {
 
             {/* List Items */}
             {successData.map((item, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
-                className="grid grid-cols-2 lg:grid-cols-4 px-8 lg:px-10 py-8 lg:py-10 group hover:bg-white/5 transition-all duration-300 relative overflow-hidden"
+                variants={rowVars}
+                className="flex flex-col lg:grid lg:grid-cols-4 items-start lg:items-center gap-4 lg:gap-0 px-8 lg:px-10 py-8 group hover:bg-white/[0.02] transition-colors duration-500 relative border-b border-white/5 last:border-0"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
                 
-                <div className="font-mono text-sm text-[#FFC800] flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#FFC800] animate-pulse"></div>
+                <div className="font-mono text-xs text-white/50 group-hover:text-[#FFC800] transition-colors flex items-center gap-3 w-full lg:w-auto">
+                  <span className="lg:hidden text-[10px] tracking-widest uppercase text-white/30 w-24">SYS_ID</span>
+                  <span className="hidden lg:inline-block opacity-0 group-hover:opacity-100 transition-opacity text-[#FFC800] -ml-5 pr-2">{'>'}</span>
                   {item.id}
                 </div>
                 
-                <div className="font-bold text-white uppercase lg:block hidden">{item.client}</div>
+                <div className="font-bold text-white text-xl lg:text-2xl uppercase tracking-tighter w-full lg:w-auto flex items-center gap-3">
+                  <span className="lg:hidden text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">CLIENT</span>
+                  {item.client}
+                </div>
                 
-                <div className="flex flex-col">
-                  <span className="text-white font-medium lg:font-normal">{item.project}</span>
-                  <span className="text-[10px] font-mono text-white/30 uppercase lg:hidden mt-2">{item.client}</span>
+                <div className="text-sm text-white/60 font-light group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3">
+                  <span className="lg:hidden text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">PROJECT</span>
+                  {item.project}
                 </div>
 
-                <div className="text-right flex flex-col lg:items-end justify-center">
-                  <div className="text-lg lg:text-xl font-bold text-white tracking-tighter">{item.val}</div>
-                  <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mt-1">
-                    [ {item.status} ]
+                <div className="flex flex-row lg:flex-col justify-between lg:justify-center items-center lg:items-end w-full lg:w-auto mt-4 lg:mt-0 pt-4 lg:pt-0 border-t border-white/5 lg:border-0">
+                  <div className="text-xl font-light text-white tracking-tighter">{item.val}</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className={`w-1.5 h-1.5 rounded-full ${getStatusColor(item.status)}`}></div>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                      {item.status}
+                    </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Bottom Info Block: Technical Verification Seal */}
           <motion.div 
