@@ -1,11 +1,12 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 /**
  * Iteration 12: Card with Cinematic Text Animations.
  * Features staggered entrance reveals for all typography elements using framer-motion.
  */
-const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Value, stat2Label, stat2Value, index }) => {
+const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Label, stat1Value, stat2Label, stat2Value, index }) => {
   // Lock the card's center slightly above viewport center to align with heading
   // Stagger the stack slightly with 20px per card
   const stickyTop = `calc(50vh - 300px + ${index * 20}px)`;
@@ -43,9 +44,6 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
             </div>
           </div>
 
-          {/* Brand / Technical Stripe */}
-          <div className={`mx-8 lg:mx-12 h-[1px] ${theme.stripe}`}></div>
-
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col p-8 lg:p-12 pt-8">
             <div className="flex-1 flex flex-col justify-end">
@@ -75,20 +73,20 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
                   </div>
                 </div>
 
-                <div className={`flex flex-col gap-6 md:border-l ${theme.statsBorder} md:pl-8`}>
+                <div className="flex flex-col justify-center gap-6 p-6 lg:p-8 bg-[#FFC800]">
                   <div>
-                    <div className={`text-[10px] font-mono uppercase ${theme.muted} mb-1 tracking-widest flex items-center gap-2`}>
-                      <span className="w-1.5 h-1.5 bg-[#FFC800] rounded-full"></span>
+                    <div className="text-[10px] font-mono uppercase text-black/60 mb-1 tracking-widest flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
                       {stat1Label || "Precision"}
                     </div>
-                    <div className={`text-3xl lg:text-4xl font-light tracking-tighter ${theme.text}`}>{stat1Value}</div>
+                    <div className="text-3xl lg:text-4xl font-light tracking-tighter text-black">{stat1Value}</div>
                   </div>
                   <div>
-                    <div className={`text-[10px] font-mono uppercase ${theme.muted} mb-1 tracking-widest flex items-center gap-2`}>
-                      <span className="w-1.5 h-1.5 bg-white/20 rounded-full"></span>
+                    <div className="text-[10px] font-mono uppercase text-black/60 mb-1 tracking-widest flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-black/40 rounded-full"></span>
                       {stat2Label || "Tolerance"}
                     </div>
-                    <div className={`text-3xl lg:text-4xl font-light tracking-tighter ${theme.text}`}>{stat2Value}</div>
+                    <div className="text-3xl lg:text-4xl font-light tracking-tighter text-black">{stat2Value}</div>
                   </div>
                 </div>
               </div>
@@ -96,13 +94,21 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
           </div>
         </div>
 
-        {/* Lottie Animation Placeholder (Right Side) */}
-        <div className="hidden lg:flex flex-1 items-center justify-center p-8 relative bg-black/20 overflow-hidden">
-          <div className="w-full h-full border border-dashed border-white/10 flex flex-col items-center justify-center text-center relative">
+        {/* Lottie Animation (Right Side) */}
+        <div className="hidden lg:flex flex-1 items-center justify-center p-8 relative bg-[#050505] overflow-hidden">
+          <div className="w-full h-full border border-white/10 flex flex-col items-center justify-center relative group-hover:border-[#FFC800]/30 transition-colors duration-700">
             {/* Subtle dot grid background */}
             <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(currentColor 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }}></div>
-            <span className="font-mono text-xs text-[#FFC800] tracking-[0.2em] uppercase mb-2 relative z-10">LOTTIE_PLACEHOLDER</span>
-            <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase relative z-10">Mount Animation Here</span>
+            
+            <div className="absolute inset-0 p-8 flex items-center justify-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out z-10 pointer-events-none">
+              <Player
+                key={`lottie-${index}`}
+                autoplay
+                loop
+                src={lottieSrc || `${window.location.origin}/lottie/${index}.json`}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
           </div>
         </div>
 

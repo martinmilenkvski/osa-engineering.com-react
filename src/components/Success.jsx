@@ -13,6 +13,24 @@ const Success = () => {
   ];
 
   // --- ANIMATION VARIANTS ---
+  const ease = [0.16, 1, 0.3, 1];
+
+  const fadeUpVars = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
+    viewport: { once: true, margin: "-50px" }
+  };
+
+  const wordVars = {
+    initial: { y: "110%" },
+    whileInView: { y: 0, transition: { duration: 1.2, ease } }
+  };
+
+  const titleContainerVars = {
+    initial: {},
+    whileInView: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+  };
+
   const listContainerVars = {
     initial: {},
     whileInView: {
@@ -22,7 +40,7 @@ const Success = () => {
 
   const rowVars = {
     initial: { opacity: 0, x: -20 },
-    whileInView: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+    whileInView: { opacity: 1, x: 0, transition: { duration: 0.6, ease } }
   };
 
   const getStatusColor = (status) => ["VERIFIED", "COMPLETED", "DELIVERED"].includes(status) ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]" : "bg-[#FFC800] shadow-[0_0_10px_rgba(255,200,0,0.4)]";
@@ -33,21 +51,25 @@ const Success = () => {
         
         {/* --- RIGHT: LOCKED VIEWFINDER --- */}
         <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-l border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
-          <div>
-            <div className="flex items-center gap-3 mb-8">
+          <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true }}>
+            <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [02]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
-            </div>
+            </motion.div>
             
-            <h2 className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
-              TRACK<br />
-              <span className="text-white/40">RECORD.</span>
-            </h2>
+            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block">TRACK</motion.span>
+              </div>
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block text-white/40">RECORD.</motion.span>
+              </div>
+            </motion.h2>
             
-            <p className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
               Operational transparency. A live log of mission-critical engineering fulfillment across industrial verticals.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="hidden lg:block">
             <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Metric Visualization</div>
