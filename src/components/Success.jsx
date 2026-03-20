@@ -65,6 +65,11 @@ const Success = () => {
                 <motion.span variants={wordVars} className="block text-white/40">RECORD.</motion.span>
               </div>
             </motion.h2>
+
+            <motion.div variants={fadeUpVars} className="mt-12 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+              <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.4)]"></div>
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
+            </motion.div>
             
             <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-xs">
               Operational transparency. A live log of mission-critical engineering fulfillment across industrial verticals.
