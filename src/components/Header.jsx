@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { ArrowUpRight, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ScrambleText from "./ScrambleText";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+  
   // --- CINEMATIC ANIMATION VARIANTS ---
   
   // Custom premium easing
@@ -11,20 +14,20 @@ const Header = () => {
 
   // Sequencing:
   // 1. Lines start at 0s
-  // 2. Crosshairs at 0.8s
-  // 3. Navigation at 1.0s (staggered)
-  // 4. Title words at 1.4s (staggered)
-  // 5. Info blocks & CTA at 1.8s
+  // 2. Crosshairs at 1.2s
+  // 3. Navigation at 1.5s (staggered)
+  // 4. Title words at 2.0s (staggered)
+  // 5. Info blocks & CTA at 2.5s
 
   const navContainerVars = {
     animate: { 
-      transition: { staggerChildren: 0.1, delayChildren: 1.0 }
+      transition: { staggerChildren: 0.15, delayChildren: 1.5 }
     }
   };
 
   const titleContainerVars = {
     animate: { 
-      transition: { staggerChildren: 0.15, delayChildren: 1.4 }
+      transition: { staggerChildren: 0.2, delayChildren: 2.0 }
     }
   };
 
@@ -33,7 +36,7 @@ const Header = () => {
     animate: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 1.2, ease }
+      transition: { duration: 1.8, ease }
     }
   };
 
@@ -42,7 +45,7 @@ const Header = () => {
     animate: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 1, ease }
+      transition: { duration: 1.5, ease }
     }
   };
 
@@ -51,7 +54,7 @@ const Header = () => {
     animate: { 
       scaleX: 1, 
       scaleY: 1,
-      transition: { duration: 1.5, ease }
+      transition: { duration: 2.5, ease }
     }
   };
 
@@ -59,7 +62,7 @@ const Header = () => {
     initial: { y: "110%" },
     animate: { 
       y: 0,
-      transition: { duration: 1.2, ease }
+      transition: { duration: 1.8, ease }
     }
   };
 
@@ -69,7 +72,7 @@ const Header = () => {
       opacity: 1, 
       scale: 1, 
       rotate: 0,
-      transition: { duration: 0.8, delay: 0.8, ease }
+      transition: { duration: 1.2, delay: 1.2, ease }
     }
   };
 
@@ -77,7 +80,7 @@ const Header = () => {
     initial: { opacity: 0 },
     animate: { 
       opacity: 0.4,
-      transition: { duration: 2.5, delay: 0.5, ease: "linear" }
+      transition: { duration: 3.5, delay: 0.8, ease: "linear" }
     }
   };
 
@@ -292,6 +295,8 @@ const Header = () => {
         transition={{ delay: 1.8, duration: 1.2, ease }}
         href="#contact"
         className="relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] p-8 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
+        onMouseEnter={() => setIsCtaHovered(true)}
+        onMouseLeave={() => setIsCtaHovered(false)}
       >
         <div className="flex justify-between items-start">
           <span className="font-mono text-xs lg:text-[10px] font-bold tracking-[0.2em]">INITIATE //</span>
@@ -302,7 +307,8 @@ const Header = () => {
 
         <div className="flex justify-between items-end mt-4 lg:mt-0">
           <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-[0.9]">
-            Begin<br/>Transmission
+            <ScrambleText text="Begin" trigger={isCtaHovered} /><br/>
+            <ScrambleText text="Transmission" trigger={isCtaHovered} />
           </h3>
           <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />
         </div>

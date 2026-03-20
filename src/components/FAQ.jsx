@@ -111,19 +111,21 @@ const FAQ = () => {
             whileInView={{ opacity: 1 }} 
             transition={{ delay: 0.8, duration: 1 }} 
             viewport={{ once: true }} 
-            className="hidden lg:block p-6 border border-white/10 bg-white/5"
+            className="hidden lg:block mt-8 lg:mt-0"
           >
-             <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-4">Encryption Status</div>
-             <div className="flex items-end gap-1 h-12">
-                {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
-                   <motion.div 
-                     key={i} 
-                     className="bg-[#FFC800]/30 w-full flex-1 origin-bottom" 
-                     animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
-                     transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
-                   />
-                ))}
-                <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-4 mb-1">SECURE</span>
+             <div className="inline-block border border-white/10 px-4 py-3 bg-white/5">
+                <span className="text-[10px] font-mono text-white/40 tracking-[0.2em] uppercase">Encryption // Status</span>
+                <div className="flex items-end gap-1 mt-2 h-8">
+                  {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
+                    <motion.div 
+                      key={i} 
+                      className={`w-2 ${i >= 6 ? 'bg-white/10' : 'bg-[#FFC800]'}`}
+                      animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
+                      transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
+                    />
+                  ))}
+                  <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-2 mb-0.5">SECURE</span>
+                </div>
              </div>
           </motion.div>
         </div>

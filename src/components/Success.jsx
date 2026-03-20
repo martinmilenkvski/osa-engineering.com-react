@@ -76,19 +76,28 @@ const Success = () => {
             </motion.p>
           </motion.div>
 
-          <div className="hidden lg:block">
-            <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Metric Visualization</div>
-            <div className="flex items-end gap-1 h-32">
-              {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
-                <motion.div 
-                  key={i} 
-                  className="bg-[#FFC800]/30 w-full flex-1 origin-bottom" 
-                  animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
-                  transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
-                />
-              ))}
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            transition={{ delay: 0.8, duration: 1 }} 
+            viewport={{ once: true }} 
+            className="hidden lg:block mt-8"
+          >
+             <div className="inline-block border border-white/10 px-4 py-3 bg-white/5">
+                <span className="text-[10px] font-mono text-white/40 tracking-[0.2em] uppercase">Metric // Visualization</span>
+                <div className="flex items-end gap-1 mt-2 h-8">
+                  {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
+                    <motion.div 
+                      key={i} 
+                      className={`w-2 ${i >= 6 ? 'bg-white/10' : 'bg-[#FFC800]'}`}
+                      animate={{ height: [`${h}%`, `${Math.max(10, h - 40)}%`, `${h}%`] }}
+                      transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
+                    />
+                  ))}
+                  <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-2 mb-0.5">SYNCED</span>
+                </div>
+             </div>
+          </motion.div>
         </div>
 
         {/* --- LEFT: DATA LOGS --- */}

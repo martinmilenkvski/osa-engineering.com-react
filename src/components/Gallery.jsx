@@ -15,6 +15,8 @@ const Gallery = () => {
     return `calc(-${value * 100}% + (var(--scroll-offset, 100vw) * ${value}))`;
   });
 
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1.6, 1]);
+
   // --- TEXT ANIMATION VARIANTS ---
   const ease = [0.16, 1, 0.3, 1];
 
@@ -47,9 +49,9 @@ const Gallery = () => {
     { src: "/images/1.avif", id: "01", title: "Milling_Protocol_A", desc: "4-Axis Aluminum" },
     { src: "/images/2.avif", id: "02", title: "Lathe_Operation_B", desc: "High-Tensile Steel" },
     { src: "/images/3.avif", id: "03", title: "Structural_Frame_C", desc: "Tolerance ±0.005mm" },
-    { src: "/images/4.avif", id: "04", title: "Thermal_Coating_D", desc: "Industrial Finish" },
-    { src: "/images/5.avif", id: "05", title: "Quality_Assurance_E", desc: "Laser Measurement" },
-    { src: "/images/6.avif", id: "06", title: "Final_Assembly_F", desc: "Logistics Sync" },
+    { src: "/images/4.png", id: "04", title: "Thermal_Coating_D", desc: "Industrial Finish" },
+    { src: "/images/5.png", id: "05", title: "Quality_Assurance_E", desc: "Laser Measurement" },
+    { src: "/images/6.png", id: "06", title: "Final_Assembly_F", desc: "Logistics Sync" },
   ];
 
   return (
@@ -105,6 +107,7 @@ const Gallery = () => {
                    <motion.div animate={{ height: ["35%", "80%", "35%"] }} transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }} className="w-2 bg-[#FFC800]"></motion.div>
                    <motion.div animate={{ height: ["100%", "40%", "100%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} className="w-2 bg-[#FFC800]"></motion.div>
                    <motion.div animate={{ height: ["60%", "90%", "60%"] }} transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }} className="w-2 bg-white/10"></motion.div>
+                   <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-2 mb-0.5">ONLINE</span>
                 </div>
              </div>
           </motion.div>
@@ -121,7 +124,7 @@ const Gallery = () => {
             {images.map((img, idx) => (
               <div 
                 key={idx} 
-                className="w-[85vw] md:w-[50vw] lg:w-[35vw] shrink-0 p-8 lg:p-12 flex flex-col justify-center group hover:bg-white/[0.02] transition-colors border-r border-white/10"
+                className="w-[85vw] md:w-[50vw] lg:w-[45vw] shrink-0 p-8 lg:p-12 flex flex-col justify-center group hover:bg-white/[0.02] transition-colors border-r border-white/10"
               >
                 {/* Technical Card Header */}
                 <div className="flex justify-between items-center mb-6">
@@ -134,10 +137,11 @@ const Gallery = () => {
 
                 {/* Image Viewfinder */}
                 <div className="relative w-full aspect-[4/3] bg-[#050505] mb-6 overflow-hidden border border-white/5">
-                  <img 
+                  <motion.img 
+                    style={{ scale: imgScale }}
                     src={img.src} 
                     alt={img.title}
-                    className="w-full h-full object-cover filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
                   />
                   
                   {/* Targeting Brackets */}
