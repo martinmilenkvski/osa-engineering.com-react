@@ -1,8 +1,9 @@
-import React from "react";
-import { ArrowUpRight, Plus } from "lucide-react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { ArrowUpRight, Plus, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // --- CINEMATIC ANIMATION VARIANTS ---
   
   // Custom premium easing
@@ -80,11 +81,18 @@ const Header = () => {
     }
   };
 
+  const menuLinks = [
+    { label: "SERVICES", href: "#services" },
+    { label: "SUCCESS", href: "#success" },
+    { label: "GALLERY", href: "#gallery" },
+    { label: "CONTACT", href: "#contact" },
+  ];
+
   return (
     <motion.section 
       initial="initial"
       animate="animate"
-      className="h-screen w-full relative overflow-hidden bg-[#080808]"
+      className="min-h-[100svh] lg:h-screen w-full relative flex flex-col lg:block overflow-x-hidden lg:overflow-hidden bg-[#080808]"
     >
 
       {/* --- THE WIREFRAME: Editorial Grid Lines --- */}
@@ -127,37 +135,38 @@ const Header = () => {
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/90 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent lg:hidden"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent lg:hidden"></div>
 
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 2, duration: 1, ease }}
-          className="absolute top-8 right-8 flex items-center gap-2 z-10"
+          className="absolute top-8 right-6 lg:right-8 hidden lg:flex items-center gap-2 z-10"
         >
           <div className="w-1.5 h-1.5 bg-[#FFC800] rounded-full animate-pulse"></div>
-          <span className="text-[13px] font-mono tracking-widest text-white/50 uppercase">CNC_Active</span>
+          <span className="text-[10px] lg:text-[13px] font-mono tracking-widest text-white/50 uppercase">CNC_Active</span>
         </motion.div>
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="absolute top-0 w-full flex items-start p-6 lg:p-8 z-30">
+      <nav className="relative lg:absolute top-0 w-full flex items-start p-6 lg:p-8 z-30">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1, ease }}
-          className="w-full lg:w-[35%] flex items-center gap-3"
+          className="w-[70%] lg:w-[35%] flex items-center gap-3"
         >
           <img 
             src="/logos/Logo-y.svg" 
             alt="O.S.A Logo" 
             className="h-8 lg:h-10 w-auto object-contain"
           />
-          <span className="text-lg font-bold tracking-[3px] uppercase">
+          <span className="text-xl font-bold tracking-[3px] uppercase">
             O.S.A<span className="text-[#FFC800]">.</span>
           </span>
         </motion.div>
 
+        {/* Desktop Nav */}
         <motion.div 
           variants={navContainerVars}
           className="hidden lg:flex w-[35%] items-center gap-10 text-[13px] font-mono tracking-widest text-white/50 pl-8"
@@ -166,16 +175,88 @@ const Header = () => {
           <motion.a variants={navItemVars} href="#success" className="hover:text-white transition-colors">/ SUCCESS</motion.a>
           <motion.a variants={navItemVars} href="#gallery" className="hover:text-white transition-colors">/ GALLERY</motion.a>
         </motion.div>
+
+        {/* Mobile Menu Icon */}
+        <div className="lg:hidden flex-1 flex justify-end">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="flex flex-col gap-1.5 items-end group cursor-pointer"
+          >
+            <motion.div 
+              animate={isMenuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
+              className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
+            ></motion.div>
+            <motion.div 
+              animate={isMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
+              className="w-4 h-[1.5px] bg-white"
+            ></motion.div>
+            <motion.div 
+              animate={isMenuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
+              className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
+            ></motion.div>
+          </button>
+        </div>
       </nav>
 
+      {/* --- MOBILE OVERLAY --- */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.8, ease }}
+            className="fixed inset-0 z-[100] bg-[#050505] p-6 pt-32 flex flex-col gap-12 lg:hidden"
+          >
+             {/* Large Nav Links */}
+             <div className="flex flex-col gap-6">
+               {menuLinks.map((link, idx) => (
+                 <motion.a
+                   key={idx}
+                   href={link.href}
+                   onClick={() => setIsMenuOpen(false)}
+                   initial={{ opacity: 0, x: -30 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
+                   className="text-5xl font-bold tracking-tighter uppercase text-white/40 hover:text-[#FFC800] transition-colors"
+                 >
+                   {link.label}<span className="text-[#FFC800]">.</span>
+                 </motion.a>
+               ))}
+             </div>
+
+             {/* Footer Info in Menu */}
+             <motion.div 
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ delay: 0.6 }}
+               className="mt-auto border-t border-white/10 pt-8"
+             >
+                <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
+                <div className="space-y-4">
+                   <p className="text-[10px] text-white/50 tracking-widest uppercase">LAT 41.9981 // LNG 21.4254</p>
+                   <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
+                </div>
+             </motion.div>
+
+             {/* Close Button UI Support */}
+             <div className="absolute top-6 right-6">
+                <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
+                  <X size={32} />
+                </button>
+             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* --- MAIN CONTENT --- */}
-      <main className="relative z-10 w-full h-full flex flex-col pointer-events-none pt-[40vh] lg:pt-0">
+      <main className="relative z-10 flex-1 flex flex-col justify-center w-full px-6 py-20 lg:p-0 pointer-events-none lg:static lg:h-full lg:w-full">
 
         {/* Cinematic Title Reveal */}
-        <div className="absolute lg:bottom-[35%] lg:left-8 mb-8 lg:mb-12 px-6 lg:px-0">
+        <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
           <motion.h1 
             variants={titleContainerVars}
-            className="text-[12vw] lg:text-[7.5vw] font-bold leading-[0.9] tracking-tighter uppercase text-white"
+            className="text-[14vw] sm:text-[12vw] lg:text-[7.5vw] font-bold leading-[0.85] lg:leading-[0.9] tracking-tighter uppercase text-white"
           >
             <div className="overflow-hidden">
               <motion.span variants={wordVars} className="block">Precision</motion.span>
@@ -185,24 +266,24 @@ const Header = () => {
             </div>
           </motion.h1>
         </div>
-
-        {/* Info Blocks - Slower Fade In */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 1.2, ease }}
-          className="absolute top-[65%] left-0 w-full lg:w-[35%] h-[35%] p-6 lg:p-10 flex flex-col justify-between pointer-events-auto"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
-            <span className="text-[#FFC800] text-[10px] font-mono">01</span>
-            <span className="text-[10px] font-bold tracking-widest uppercase text-white/70">Industrial</span>
-          </div>
-
-          <p className="text-sm text-white/50 leading-relaxed font-light max-w-sm mt-8 lg:mt-0">
-            Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
-          </p>
-        </motion.div>
       </main>
+
+      {/* Info Blocks - Slower Fade In */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1.2, ease }}
+        className="relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] p-8 lg:p-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
+      >
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
+          <span className="text-[#FFC800] text-xs lg:text-[10px] font-mono">01</span>
+          <span className="text-xs lg:text-[10px] font-bold tracking-widest uppercase text-white/70">Industrial</span>
+        </div>
+
+        <p className="text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-sm">
+          Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
+        </p>
+      </motion.div>
 
       {/* --- CTA BLOCK --- */}
       <motion.a
@@ -210,11 +291,11 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ delay: 1.8, duration: 1.2, ease }}
         href="#contact"
-        className="absolute top-auto bottom-0 lg:bottom-auto lg:top-[65%] left-0 lg:left-[35%] w-full lg:w-[35%] h-[200px] lg:h-[35%] bg-[#FFC800] text-[#050505] p-6 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
+        className="relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] p-8 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
       >
         <div className="flex justify-between items-start">
-          <span className="font-mono text-[10px] font-bold tracking-[0.2em]">INITIATE //</span>
-          <div className="font-mono text-[10px] tracking-widest text-black/50 text-right">
+          <span className="font-mono text-xs lg:text-[10px] font-bold tracking-[0.2em]">INITIATE //</span>
+          <div className="font-mono text-xs lg:text-[10px] tracking-widest text-black/50 text-right">
             LAT 41.9981<br/>LNG 21.4254
           </div>
         </div>

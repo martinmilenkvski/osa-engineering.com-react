@@ -2,7 +2,7 @@
 const cardData = [
   {
     id: 1,
-    imageSrc: "/images/precision_design.png",
+    imageSrc: "/images/1.jpg",
     imageAlt: "Design and Prototyping",
     title: "Design and Prototyping",
     subtitle: "Transforming concepts into precision-engineered solutions.",
@@ -15,9 +15,9 @@ const cardData = [
   },
   {
     id: 2,
-    imageSrc: "/images/advanced_engineering.png",
-    imageAlt: "Advanced Manufacturing",
-    title: "Advanced Manufacturing",
+    imageSrc: "/images/2.jpg",
+    imageAlt: "Advanced Manufacture",
+    title: "Advanced Manufacture",
     subtitle: "State-of-the-art production capabilities.",
     stat1Value: "99.8%",
     stat1Label: "Quality Assurance Rate",
@@ -28,7 +28,7 @@ const cardData = [
   },
   {
     id: 3,
-    imageSrc: "/images/seamless_integration.png",
+    imageSrc: "/images/3.png",
     imageAlt: "Testing and Validation",
     title: "Testing and Validation",
     subtitle: "Ensuring reliability and performance.",
@@ -41,7 +41,7 @@ const cardData = [
   },
   {
     id: 4,
-    imageSrc: "/images/lifecycle_support.png",
+    imageSrc: "/images/4.png",
     imageAlt: "Life-cycle Support",
     title: "Life-cycle Support",
     subtitle: "Continuous optimization and maintenance.",

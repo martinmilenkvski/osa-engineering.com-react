@@ -1,12 +1,11 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { Player } from "@lottiefiles/react-lottie-player";
 
 /**
  * Iteration 12: Card with Cinematic Text Animations.
  * Features staggered entrance reveals for all typography elements using framer-motion.
  */
-const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Label, stat1Value, stat2Label, stat2Value, index }) => {
+const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Value, stat2Label, stat2Value, index }) => {
   // Lock the card's center slightly above viewport center to align with heading
   // Stagger the stack slightly with 20px per card
   const stickyTop = `calc(50vh - 300px + ${index * 20}px)`;
@@ -26,14 +25,14 @@ const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Labe
   };
 
   return (
-    <div className="sticky w-full z-10" style={{ top: stickyTop }}>
-      <div className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-[600px] flex flex-row relative ${theme.bg}`}>
+    <div className="sticky lg:sticky w-full z-10 top-20 lg:top-auto" style={{ top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? stickyTop : undefined }}>
+      <div className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-auto lg:h-[600px] flex flex-col lg:flex-row relative ${theme.bg}`}>
         
         {/* Content Layer (Left Side) */}
-        <div className="relative z-10 flex flex-col w-full lg:w-[60%] lg:border-r border-white/5">
+        <div className="relative z-10 flex flex-col w-full lg:w-1/2 lg:border-r border-white/5">
           
           {/* Technical Header */}
-          <div className="flex justify-between items-start p-8 lg:p-12">
+          <div className="flex justify-between items-start p-8 lg:p-12 pb-2 lg:pb-12">
             <div className="flex flex-col">
               <span className={`text-[10px] font-mono font-bold ${theme.accent} tracking-[0.2em] uppercase mb-1`}>
                 INITIATE //
@@ -45,16 +44,16 @@ const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Labe
           </div>
 
           {/* Main Content Area */}
-          <div className="flex-1 flex flex-col p-8 lg:p-12 pt-8">
+          <div className="flex-1 flex flex-col p-8 lg:p-12 pt-4 lg:pt-8 w-full">
             <div className="flex-1 flex flex-col justify-end">
-              <h3 className={`text-5xl lg:text-6xl ${theme.titleWeight} tracking-tighter uppercase mb-6 ${theme.text} leading-[0.9] max-w-md`}>
+              <h3 className={`text-4xl lg:text-6xl ${theme.titleWeight} tracking-tighter uppercase mb-6 ${theme.text} leading-[0.9] max-w-sm lg:max-w-md`}>
                 {title}
               </h3>
 
               {/* Technical Stats & Description */}
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 border-t ${theme.statsBorder} pt-6 mt-4`}>
-                <div className="flex flex-col justify-between gap-6">
-                  <p className={`text-sm ${theme.description} leading-relaxed font-light`}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 border-t ${theme.statsBorder} pt-8 mt-4`}>
+                <div className="flex flex-col justify-between gap-8 md:gap-6 pr-4">
+                  <p className={`text-base lg:text-sm ${theme.description} leading-relaxed font-light`}>
                     {description}
                   </p>
 
@@ -73,16 +72,17 @@ const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Labe
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-center gap-6 p-6 lg:p-8 bg-[#FFC800]">
+                <div className="flex flex-col justify-center gap-6 p-8 lg:p-8 bg-[#FFC800] -mx-8 md:mx-0 md:h-full">
                   <div>
-                    <div className="text-[10px] font-mono uppercase text-black/60 mb-1 tracking-widest flex items-center gap-2">
+                    <div className="text-[10px] font-mono uppercase text-black/60 mb-2 tracking-widest flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
                       {stat1Label || "Precision"}
                     </div>
                     <div className="text-3xl lg:text-4xl font-light tracking-tighter text-black">{stat1Value}</div>
                   </div>
+                  <div className="mt-2 text-black/20 w-full h-px"></div>
                   <div>
-                    <div className="text-[10px] font-mono uppercase text-black/60 mb-1 tracking-widest flex items-center gap-2">
+                    <div className="text-[10px] font-mono uppercase text-black/60 mb-2 tracking-widest flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-black/40 rounded-full"></span>
                       {stat2Label || "Tolerance"}
                     </div>
@@ -94,21 +94,19 @@ const Card = ({ id, imageSrc, lottieSrc, title, subtitle, description, stat1Labe
           </div>
         </div>
 
-        {/* Lottie Animation (Right Side) */}
-        <div className="hidden lg:flex flex-1 items-center justify-center p-8 relative bg-[#050505] overflow-hidden">
-          <div className="w-full h-full border border-white/10 flex flex-col items-center justify-center relative group-hover:border-[#FFC800]/30 transition-colors duration-700">
-            {/* Subtle dot grid background */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(currentColor 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }}></div>
-            
-            <div className="absolute inset-0 p-8 flex items-center justify-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out z-10 pointer-events-none">
-              <Player
-                key={`lottie-${index}`}
-                autoplay
-                loop
-                src={lottieSrc || `${window.location.origin}/lottie/${index}.json`}
-                style={{ width: '100%', height: '100%' }}
-              />
-            </div>
+        {/* Image - Show only on larger screens */}
+        <div className="hidden lg:flex w-full lg:w-1/2 relative bg-[#050505] overflow-hidden">
+          {/* Subtle dot grid background overlay */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none z-10" style={{ backgroundImage: 'radial-gradient(currentColor 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }}></div>
+          
+          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out z-0 pointer-events-none">
+            {imageSrc ? (
+              <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-white/5 flex items-center justify-center">
+                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase text-center px-4">IMAGE_PLACEHOLDER // {id || index}</span>
+              </div>
+            )}
           </div>
         </div>
 

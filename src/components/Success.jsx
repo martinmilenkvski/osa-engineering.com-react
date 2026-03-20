@@ -66,7 +66,7 @@ const Success = () => {
               </div>
             </motion.h2>
             
-            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-xs">
               Operational transparency. A live log of mission-critical engineering fulfillment across industrial verticals.
             </motion.p>
           </motion.div>
@@ -112,27 +112,27 @@ const Success = () => {
               >
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
                 
-                <div className="font-mono text-xs text-white/50 group-hover:text-[#FFC800] transition-colors flex items-center gap-3 w-full lg:w-auto">
-                  <span className="lg:hidden text-[10px] tracking-widest uppercase text-white/30 w-24">SYS_ID</span>
+                <div className="font-mono text-sm lg:text-xs text-white/50 group-hover:text-[#FFC800] transition-colors flex items-center gap-3 w-full lg:w-auto">
+                  <span className="lg:hidden text-xs lg:text-[10px] tracking-widest uppercase text-white/30 w-24">SYS_ID</span>
                   <span className="hidden lg:inline-block opacity-0 group-hover:opacity-100 transition-opacity text-[#FFC800] -ml-5 pr-2">{'>'}</span>
                   {item.id}
                 </div>
                 
-                <div className="font-bold text-white text-xl lg:text-2xl uppercase tracking-tighter w-full lg:w-auto flex items-center gap-3">
-                  <span className="lg:hidden text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">CLIENT</span>
+                <div className="font-bold text-white text-xl lg:text-2xl uppercase tracking-tighter w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
+                  <span className="lg:hidden text-xs lg:text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">CLIENT</span>
                   {item.client}
                 </div>
                 
-                <div className="text-sm text-white/60 font-light group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3">
-                  <span className="lg:hidden text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">PROJECT</span>
+                <div className="text-base lg:text-sm text-white/60 font-light group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
+                  <span className="lg:hidden text-xs lg:text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">PROJECT</span>
                   {item.project}
                 </div>
 
-                <div className="flex flex-row lg:flex-col justify-between lg:justify-center items-center lg:items-end w-full lg:w-auto mt-4 lg:mt-0 pt-4 lg:pt-0 border-t border-white/5 lg:border-0">
-                  <div className="text-xl font-light text-white tracking-tighter">{item.val}</div>
+                <div className="flex flex-row lg:flex-col justify-between lg:justify-center items-center lg:items-end w-full lg:w-auto mt-6 lg:mt-0 pt-6 lg:pt-0 border-t border-white/5 lg:border-0">
+                  <div className="text-xl lg:text-xl font-light text-white tracking-tighter">{item.val}</div>
                   <div className="flex items-center gap-2 mt-1">
                     <div className={`w-1.5 h-1.5 rounded-full ${getStatusColor(item.status)}`}></div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                    <span className="text-xs lg:text-[10px] font-mono text-white/40 uppercase tracking-widest">
                       {item.status}
                     </span>
                   </div>
@@ -146,16 +146,23 @@ const Success = () => {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
-            className="p-12 lg:p-24 text-center border-t border-white/10 relative overflow-hidden bg-white/[0.01]"
+            className="py-24 lg:py-40 px-12 text-center border-t border-white/10 relative overflow-hidden bg-[#050505] min-h-[50vh] flex flex-col items-center justify-center group"
           >
+            {/* Background Image - Balanced Contrast */}
+            <div className="absolute inset-0 z-0">
+              <img src="/images/3.avif" alt="Engineering Background" className="w-full h-full object-cover opacity-50 filter grayscale group-hover:scale-105 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-[#080808]/60"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]"></div>
+            </div>
+
             {/* Technical Background Accents */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-[#FFC800]/20 to-transparent"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-[#FFC800]/30 to-transparent z-10"></div>
             
             {/* Corner Brackets */}
-            <div className="absolute top-8 left-8 w-4 h-4 border-t border-l border-white/20"></div>
-            <div className="absolute top-8 right-8 w-4 h-4 border-t border-r border-white/20"></div>
-            <div className="absolute bottom-8 left-8 w-4 h-4 border-b border-l border-white/20"></div>
-            <div className="absolute bottom-8 right-8 w-4 h-4 border-b border-r border-white/20"></div>
+            <div className="absolute top-12 left-12 w-4 h-4 border-t border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
+            <div className="absolute top-12 right-12 w-4 h-4 border-t border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
+            <div className="absolute bottom-12 left-12 w-4 h-4 border-b border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
+            <div className="absolute bottom-12 right-12 w-4 h-4 border-b border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
 
             <div className="relative z-10 flex flex-col items-center">
               <motion.div 
@@ -163,18 +170,18 @@ const Success = () => {
                   initial: { opacity: 0, scale: 0.8 },
                   animate: { opacity: 1, scale: 1 }
                 }}
-                className="flex items-center gap-4 mb-10"
+                className="flex items-center gap-6 mb-12"
               >
-                <div className="h-px w-12 bg-white/10"></div>
-                <Plus size={20} className="text-[#FFC800]/50 animate-spin-slow" />
-                <div className="h-px w-12 bg-white/10"></div>
+                <div className="h-px w-12 lg:w-20 bg-white/20"></div>
+                <Plus size={20} className="text-[#FFC800]/80 animate-spin-slow" />
+                <div className="h-px w-12 lg:w-20 bg-white/20"></div>
               </motion.div>
 
-              <div className="overflow-hidden mb-6">
+              <div className="overflow-hidden mb-12">
                 <motion.h3 
-                  className="text-3xl lg:text-6xl font-bold tracking-[0.15em] lg:tracking-[0.2em] uppercase text-white/40 flex flex-wrap justify-center gap-x-4 lg:gap-x-6"
+                  className="text-4xl lg:text-7xl font-bold tracking-[0.15em] lg:tracking-[0.25em] uppercase text-white flex flex-wrap justify-center gap-x-6 lg:gap-x-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
                 >
-                  {["ENGINEERING", "EXCELLENCE"].map((word, i) => (
+                  {["LET'S BUILD", "TOGETHER."].map((word, i) => (
                     <span key={i} className="relative block h-full">
                       <motion.span
                         variants={{
@@ -186,7 +193,7 @@ const Success = () => {
                           ease: [0.16, 1, 0.3, 1],
                           delay: 0.2 + (i * 0.1)
                         }}
-                        className="block"
+                        className={`block ${i === 1 ? 'text-[#FFC800]' : ''}`}
                       >
                         {word}
                       </motion.span>
@@ -201,33 +208,18 @@ const Success = () => {
                   animate: { opacity: 1, y: 0 }
                 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col items-center gap-6"
+              className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6"
               >
-                <div className="flex items-center gap-6">
-                  <span className="text-[10px] font-mono text-white/20 tracking-[0.4em] uppercase">Status // Verified</span>
-                  <div className="px-6 py-2 border border-[#FFC800]/30 bg-[#FFC800]/5 relative group overflow-hidden">
-                    <div className="absolute inset-0 bg-[#FFC800]/10 animate-pulse"></div>
-                    <span className="text-sm lg:text-xl font-bold tracking-[0.5em] text-[#FFC800] relative z-10">
-                      EST_2004
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono text-white/20 tracking-[0.4em] uppercase">Reductive_Protocol</span>
-                </div>
-
-                <div className="flex gap-12 mt-4 opacity-30 grayscale pointer-events-none hidden lg:flex">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-16 h-1 bg-white/10 overflow-hidden relative">
-                      <div className="absolute inset-0 bg-white/40 w-1/2 animate-shimmer"></div>
-                    </div>
-                    <span className="text-[8px] font-mono tracking-widest uppercase">Audit_Lock</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-16 h-1 bg-white/10 overflow-hidden relative">
-                      <div className="absolute inset-0 bg-white/40 w-3/4 animate-shimmer"></div>
-                    </div>
-                    <span className="text-[8px] font-mono tracking-widest uppercase">System_Sync</span>
-                  </div>
-                </div>
+              <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase hidden lg:block">Status // Verified</span>
+              
+              <a href="#contact" className="px-8 py-3 border border-[#FFC800]/50 bg-[#FFC800]/10 backdrop-blur-sm relative overflow-hidden group-hover:bg-[#FFC800] transition-colors duration-500 cursor-pointer">
+                <div className="absolute inset-0 bg-[#FFC800]/10 animate-pulse"></div>
+                <span className="text-sm lg:text-base font-bold tracking-[0.4em] text-[#FFC800] group-hover:text-black transition-colors duration-500 uppercase relative z-10">
+                    START_PROJECT
+                  </span>
+                </a>
+              
+              <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase hidden lg:block">Reductive_Protocol</span>
               </motion.div>
             </div>
           </motion.div>

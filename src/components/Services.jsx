@@ -33,10 +33,10 @@ const Services = () => {
 
   return (
     <section id="services" className="w-full bg-[#080808] border-t border-white/10 relative z-10">
-      <div className="flex flex-col lg:flex-row min-h-screen pt-[20vh] lg:pt-0">
+      <div className="flex flex-col lg:flex-row min-h-screen pt-24 lg:pt-0">
         
         {/* --- LEFT: STICKY INFO BLOCK --- */}
-        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
+        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32">
           
           <motion.div 
             initial="initial"
@@ -50,7 +50,7 @@ const Services = () => {
             
             <motion.h2 
               variants={titleContainerVars}
-              className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]"
+              className="text-6xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]"
             >
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">CORE</motion.span>
@@ -62,7 +62,7 @@ const Services = () => {
 
             <motion.p 
               variants={fadeUpVars}
-              className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-sm"
+              className="mt-6 lg:mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-sm"
             >
               Systematic reductive machining solutions for high-tolerance applications. Mission-critical components realized through adaptive motion control systems.
             </motion.p>
@@ -73,7 +73,7 @@ const Services = () => {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
             viewport={{ once: true }}
-            className="mt-12 lg:mt-0"
+            className="mt-8 lg:mt-0"
           >
             <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-2">Operation Mode</div>
             <div className="flex items-center gap-2">
@@ -84,7 +84,7 @@ const Services = () => {
         </div>
 
         {/* --- RIGHT: SCROLLING CONTENT --- */}
-        <div className="w-full lg:w-[65%] p-4 lg:px-20 lg:py-[20vh] space-y-[20vh] lg:space-y-[40vh] pb-[50vh] lg:pb-[20vh]">
+        <div className="w-full lg:w-[65%] p-6 lg:px-20 lg:py-[20vh] space-y-16 lg:space-y-[40vh] pb-32 lg:pb-[20vh]">
           {cardData.map((data, index) => (
             <Card
               key={data.id}

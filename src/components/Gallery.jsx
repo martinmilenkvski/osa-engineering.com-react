@@ -53,8 +53,8 @@ const Gallery = () => {
   ];
 
   return (
-    <section ref={targetRef} id="gallery" className="relative h-[300vh] w-full bg-[#080808] border-t border-white/10">
-      <div className="sticky top-0 flex flex-col lg:flex-row-reverse h-screen overflow-hidden bg-[#080808]">
+    <section ref={targetRef} id="gallery" className="relative h-auto lg:h-[300vh] w-full bg-[#080808] border-t border-white/10">
+      <div className="lg:sticky lg:top-0 flex flex-col lg:flex-row-reverse lg:h-screen overflow-hidden bg-[#080808]">
         
         {/* --- RIGHT: STICKY INFO BLOCK --- */}
         <div className="w-full lg:w-[35%] h-auto lg:h-full p-8 lg:p-12 border-b lg:border-b-0 lg:border-l border-white/10 flex flex-col justify-center gap-12 lg:gap-32 relative z-10 shrink-0 bg-[#080808]">
@@ -111,10 +111,12 @@ const Gallery = () => {
         </div>
 
         {/* --- LEFT: HORIZONTAL SCROLL FEED --- */}
-        <div className="w-full lg:w-[65%] flex-1 flex overflow-hidden bg-[#050505]">
+        <div className="w-full lg:w-[65%] flex-1 flex overflow-hidden lg:bg-[#050505] py-12 lg:py-0">
+          
+          {/* Desktop Motion Scroll */}
           <motion.div 
             style={{ x }}
-            className="flex w-max items-stretch h-full [--scroll-offset:100vw] lg:[--scroll-offset:65vw]"
+            className="hidden lg:flex w-max items-stretch h-full lg:[--scroll-offset:65vw]"
           >
             {images.map((img, idx) => (
               <div 
@@ -166,6 +168,49 @@ const Gallery = () => {
               </span>
             </div>
           </motion.div>
+
+          {/* Mobile Native Scroll */}
+          <div className="flex lg:hidden w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 px-6">
+            {images.map((img, idx) => (
+              <div 
+                key={idx} 
+                className="w-[85vw] shrink-0 p-6 flex flex-col justify-center snap-center bg-[#050505] border border-white/5 relative group"
+              >
+                {/* Technical Card Header */}
+                <div className="flex justify-between items-center mb-6">
+                  <span className="font-mono text-[10px] tracking-widest text-[#FFC800]">IMG_{img.id}</span>
+                </div>
+
+                {/* Image Viewfinder */}
+                <div className="relative w-full aspect-[4/3] bg-black mb-6 overflow-hidden border border-white/10">
+                  <img 
+                    src={img.src} 
+                    alt={img.title}
+                    className="w-full h-full object-cover filter grayscale opacity-60"
+                  />
+                  
+                  {/* Center Crosshair */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-100 pointer-events-none">
+                     <Plus size={24} className="text-[#FFC800]/50" strokeWidth={1.5} />
+                  </div>
+                </div>
+
+                {/* Card Footer */}
+                <div className="flex flex-col gap-2 mt-4">
+                  <h3 className="text-white font-bold tracking-widest uppercase text-base">{img.title}</h3>
+                  <span className="font-mono text-xs text-white/40 uppercase tracking-[0.2em]">{img.desc}</span>
+                </div>
+              </div>
+            ))}
+            
+            {/* Mobile Load More Area */}
+            <div className="w-[85vw] shrink-0 p-8 flex items-center justify-center snap-center bg-[#FFC800] text-[#050505] transition-colors duration-500">
+              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase flex flex-col items-center gap-4">
+                <Plus size={24} className="text-[#050505]" strokeWidth={2} />
+                Load_Extended_Archive //
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
