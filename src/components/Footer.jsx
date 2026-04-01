@@ -37,9 +37,9 @@ const Footer = () => {
     <motion.footer 
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={containerVars}
-      className="w-full bg-[#080808] text-[#f4f4f4] relative selection:bg-[#FFC800] selection:text-black"
+      className="w-full bg-[#080808] text-[#f4f4f4] sticky bottom-0 z-0 selection:bg-[#FFC800] selection:text-black"
     >
       {/* Main Top Border */}
       <motion.div variants={lineXVars} className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left" />

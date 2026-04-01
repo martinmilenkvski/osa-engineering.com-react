@@ -9,20 +9,26 @@ import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
+import VideoReveal from "./components/VideoReveal";
 
 function App() {
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothTouch: false }}>
-      <div className="w-full bg-[#080808] text-[#f4f4f4] font-sans selection:bg-[#FFC800] selection:text-black relative">
-        <CustomCursor />
-        <Header />
-        <Services />
-        
-        <Gallery />
-        <LogoMarquee />
-        <Success />  
-        <FAQ />
-        <Contact />
+      <div className="w-full bg-[#080808] text-[#f4f4f4] font-sans selection:bg-[#FFC800] selection:text-black">
+        {/* Main content — z-10 so it covers the sticky footer below */}
+        <div className="relative z-10 bg-[#080808]">
+          <CustomCursor />
+          <Header />
+          <Services />
+          
+          <Gallery />
+          <LogoMarquee />
+          <VideoReveal />
+          <Success />  
+          <FAQ />
+          <Contact />
+        </div>
+        {/* Footer is sticky bottom-0 z-0 — revealed as content above scrolls away */}
         <Footer />
       </div>
     </ReactLenis>

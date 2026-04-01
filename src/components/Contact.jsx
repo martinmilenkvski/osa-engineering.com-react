@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full bg-[#080808] border-t border-white/10">
+    <section id="contact" className="w-full bg-[#080808] border-t border-white/10 relative z-10">
       <div className="flex flex-col lg:flex-row">
         
         {/* --- LEFT: LOCKED VIEWFINDER --- */}
