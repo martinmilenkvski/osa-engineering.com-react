@@ -57,7 +57,9 @@ const Footer = () => {
             <motion.span variants={textRevealVars} className="block">Engineering</motion.span>
           </div>
           <div className="overflow-hidden pb-2 lg:pb-4">
-            <motion.span variants={textRevealVars} className="block text-[#FFC800]">Integrity.</motion.span>
+            <motion.span variants={textRevealVars} className="block text-[#FFC800]">
+              Integrity<motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}>.</motion.span>
+            </motion.span>
           </div>
         </h2>
 

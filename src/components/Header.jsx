@@ -152,7 +152,7 @@ const Header = () => {
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="relative lg:absolute top-0 w-full flex items-start p-6 lg:p-8 z-30">
+      <nav className="relative lg:absolute top-0 w-full flex items-start p-6 lg:p-8 z-30 hero-element">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -253,7 +253,7 @@ const Header = () => {
       </AnimatePresence>
 
       {/* --- MAIN CONTENT --- */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center w-full px-6 py-20 lg:p-0 pointer-events-none lg:static lg:h-full lg:w-full">
+      <main className="hero-element relative z-10 flex-1 flex flex-col justify-center w-full px-6 py-20 lg:p-0 pointer-events-none lg:static lg:h-full lg:w-full">
 
         {/* Cinematic Title Reveal */}
         <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
@@ -273,10 +273,8 @@ const Header = () => {
 
       {/* Info Blocks - Slower Fade In */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1.2, ease }}
-        className="relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] p-8 lg:p-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
+        variants={itemFadeUpVars}
+        className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] p-8 lg:p-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
       >
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
           <span className="text-[#FFC800] text-xs lg:text-[10px] font-mono">01</span>
@@ -290,11 +288,9 @@ const Header = () => {
 
       {/* --- CTA BLOCK --- */}
       <motion.a
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        transition={{ delay: 1.8, duration: 1.2, ease }}
+        variants={itemFadeUpVars}
         href="#contact"
-        className="relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] p-8 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
+        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] p-8 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
         onMouseEnter={() => setIsCtaHovered(true)}
         onMouseLeave={() => setIsCtaHovered(false)}
       >

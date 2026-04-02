@@ -16,6 +16,11 @@ const VideoReveal = () => {
   const borderRadius = useTransform(scrollYProgress, [0, 0.5], ["20px", "0px"]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.6, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  
+  // Parallax: shift the video vertically as we scroll
+  const videoY = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]);
+  // Slightly oversized video to prevent edges showing while it shifts
+  const videoScale = 1.4; 
 
   return (
     <section
@@ -37,7 +42,7 @@ const VideoReveal = () => {
           </span>
           <div className="h-px w-8 bg-[#FFC800]" />
         </div>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase text-white leading-[0.95] text-center max-w-xl">
+        <h2 className="text-3xl md:text-7xl font-bold tracking-tighter uppercase text-white leading-[0.95] text-center max-w-xl">
           Precision <br />
           <span className="text-white/30">In Motion.</span>
         </h2>
@@ -51,12 +56,13 @@ const VideoReveal = () => {
       >
         {/* Aspect ratio wrapper */}
         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-          <video
+          <motion.video
             src="/Cnc_hero.mp4"
             autoPlay
             muted
             loop
             playsInline
+            style={{ y: videoY, scale: videoScale }}
             className="absolute inset-0 w-full h-full object-cover"
           />
 

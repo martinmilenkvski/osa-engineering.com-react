@@ -1,14 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
+import CncPrototypingIcon from "./CncPrototypingIcon";
+import AdvancedMfgIcon from "./AdvancedMfgIcon";
+import TestingValidationIcon from "./TestingValidationIcon";
+import LifecycleSupportIcon from "./LifecycleSupportIcon";
 
 /**
- * Animated stat counter capable of parsing prefixes, suffixes, decimals, and commas.
+ * AnimatedStat Component:
+ * Custom counter that handles technical strings (e.g., "99.8%", "15+ Years", "2,223").
+ * It uses Regex to separate prefixes/suffixes from the numeric core and animates 
+ * the count sequentially within the UI.
  */
 const AnimatedStat = ({ value }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
   
-  // Regex to extract [full, prefix, numberStr, suffix] e.g. "99.8%", "15+ Years", "2,223"
+  // Triggers the animation only when the stat itself is visible (10% threshold)
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  
+  // Regex: 1. Optional Prefix ($) | 2. Number (int/float/comma) | 3. Optional Suffix (%)
   const match = String(value).match(/^([^0-9\.\-]*)?([0-9\.\-,]+)(.*)?$/);
   
   const [displayValue, setDisplayValue] = useState(value);
@@ -21,6 +30,7 @@ const AnimatedStat = ({ value }) => {
     hasComma: false 
   });
 
+  // Effect: Parse the value on mount or value change
   useEffect(() => {
     if (match) {
       const prefix = match[1] || "";
@@ -34,11 +44,13 @@ const AnimatedStat = ({ value }) => {
       
       if (!isNaN(target)) {
         setParsed({ isValid: true, prefix, target, suffix, isFloat, hasComma });
+        // Start counter at zero formatted correctly
         setDisplayValue(`${prefix}${isFloat ? "0.0" : "0"}${suffix}`);
       }
     }
   }, [value]);
 
+  // Effect: Run the Framer Motion animation when scrolled into view
   useEffect(() => {
     if (isInView && parsed.isValid) {
       const controls = animate(0, parsed.target, {
@@ -47,13 +59,13 @@ const AnimatedStat = ({ value }) => {
         onUpdate: (val) => {
           let formatted;
           if (parsed.isFloat) {
-            formatted = val.toFixed(1);
+            formatted = val.toFixed(1); // Keeps decimal precision e.g., 99.8
           } else {
             formatted = Math.round(val).toString();
           }
           
           if (parsed.hasComma) {
-            formatted = parseInt(formatted).toLocaleString('en-US');
+            formatted = parseInt(formatted).toLocaleString('en-US'); // Adds commas back e.g., 2,223
           }
           
           setDisplayValue(`${parsed.prefix}${formatted}${parsed.suffix}`);
@@ -66,13 +78,24 @@ const AnimatedStat = ({ value }) => {
   return <span ref={ref}>{displayValue}</span>;
 };
 
+/**
+ * Card Component:
+ * The primary container for service details. It utilizes a sticky layering effect 
+ * on desktop, where cards stack on top of each other slightly offset.
+ * 
+ * It also dynamically swaps static images for bespoke technical SVG icons based 
+ * on the card's ID.
+ */
 const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Value, stat2Label, stat2Value, index }) => {
+  
+  // Distance calculation for the sticky stacking effect
   const stickyTop = `calc(50vh - 300px + ${index * 20}px)`;
 
+  // Design tokens to maintain a consistent high-end tech aesthetic
   const theme = {
     bg: "bg-[#080808]",
     border: "border-white/10",
-    text: "text-white",
+    text: "text-white/90",
     muted: "text-white/30",
     accent: "text-[#FFC800]",
     description: "text-white/50",
@@ -82,77 +105,61 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
     titleWeight: "antialiased font-bold"
   };
 
-  const fadeUpVars = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0, transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] } },
-    viewport: { once: true, margin: "-50px" }
-  };
-
-  const staggerVars = {
-    initial: {},
-    whileInView: { transition: { staggerChildren: 0.12, delayChildren: 0.25 } },
-    viewport: { once: true, margin: "-100px" }
-  };
-
-  const imgVars = {
-    initial: { scale: 1.1, opacity: 0 },
-    whileInView: { scale: 1, opacity: 1, transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] } },
-    viewport: { once: true, margin: "-100px" }
-  };
-
-  const titleMaskVars = {
-    initial: { y: "110%" },
-    whileInView: { y: 0, transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] } }
-  };
-
   return (
-    <div className="sticky lg:sticky w-full z-10 top-20 lg:top-auto" style={{ top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? stickyTop : undefined }}>
-      <div className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-auto lg:h-[600px] flex flex-col lg:flex-row relative ${theme.bg}`}>
+    <div 
+      className="sticky lg:sticky w-full z-10 top-20 lg:top-auto" 
+      style={{ top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? stickyTop : undefined }}
+    >
+      <div 
+        className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-auto lg:h-[600px] flex flex-col lg:flex-row relative ${theme.bg}`}
+      >
         
-        <motion.div 
-          variants={staggerVars} 
-          initial="initial" 
-          whileInView="whileInView"
-          viewport={{ once: true, margin: "-100px" }}
-          className="relative z-10 flex flex-col w-full lg:w-1/2 lg:border-r border-white/5"
-        >
+        {/* --- LEFT SIDE: CONTENT & STATS --- */}
+        <div className="relative z-10 flex flex-col w-full lg:w-1/2 lg:border-r border-white/5">
           
+          {/* Header Metadata */}
           <div className="flex justify-between items-start p-8 lg:p-12 pb-2 lg:pb-12">
-            <motion.div variants={fadeUpVars} className="flex flex-col">
+            <div className="flex flex-col">
               <span className={`text-[10px] font-mono font-bold ${theme.accent} tracking-[0.2em] uppercase mb-1`}>
                 INITIATE //
               </span>
               <span className={`text-[10px] font-mono ${theme.muted} uppercase tracking-[0.2em] leading-none`}>
                 {subtitle || "SYSTEM_ACTIVE"}
               </span>
-            </motion.div>
+            </div>
           </div>
 
+          {/* Main Info Block */}
           <div className="flex-1 flex flex-col p-8 lg:p-12 pt-4 lg:pt-8 w-full">
             <div className="flex-1 flex flex-col justify-end">
-              <div className="overflow-hidden mb-6 pt-1 pb-1">
-                <motion.h3 
-                  variants={titleMaskVars} 
-                  className={`text-4xl lg:text-6xl ${theme.titleWeight} tracking-tighter uppercase ${theme.text} leading-[0.9] max-w-sm lg:max-w-md`}
-                >
-                  {title}
-                </motion.h3>
+              <div className="mb-6 pt-1 pb-1">
+                <h3 className={`text-3xl lg:text-5xl tracking-tighter uppercase leading-[0.9] max-w-sm lg:max-w-md antialiased`}>
+                  <span className="font-bold text-white">
+                    {title.split(" ")[0]}
+                  </span>
+                  {" "}
+                  <span className="font-light text-white/30">
+                    {title.split(" ").slice(1).join(" ")}
+                  </span>
+                </h3>
               </div>
 
+              {/* Description & Performance Data Grid */}
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 border-t ${theme.statsBorder} pt-8 mt-4`}>
-                <motion.div variants={fadeUpVars} className="flex flex-col justify-between gap-8 md:gap-6 pr-4">
+                <div className="flex flex-col justify-between gap-8 md:gap-6 pr-4">
                   <p className={`text-base lg:text-sm ${theme.description} leading-relaxed font-light`}>
                     {description}
                   </p>
-                </motion.div>
+                </div>
 
-                <motion.div variants={fadeUpVars} className="flex flex-col justify-center gap-6 p-8 lg:p-8 bg-[#FFC800] -mx-8 md:mx-0 md:h-full">
+                {/* Primary Stats (Yellow Technical Panel) */}
+                <div className="flex flex-col justify-center gap-6 p-8 lg:p-8 bg-[#FFC800] -mx-8 md:mx-0 md:h-full">
                   <div>
                     <div className="text-[10px] font-mono uppercase text-black/60 mb-2 tracking-widest flex items-center gap-2">
                        <span className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></span>
                       {stat1Label || "Precision"}
                     </div>
-                    <div className="text-3xl lg:text-4xl font-light tracking-tighter text-black w-full tabular-nums">
+                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-tighter text-black w-full tabular-nums">
                        <AnimatedStat value={stat1Value} />
                     </div>
                   </div>
@@ -162,36 +169,45 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
                       <span className="w-1.5 h-1.5 bg-black/40 rounded-full animate-pulse"></span>
                       {stat2Label || "Tolerance"}
                     </div>
-                    <div className="text-3xl lg:text-4xl font-light tracking-tighter text-black w-full tabular-nums">
+                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-tighter text-black w-full tabular-nums">
                        <AnimatedStat value={stat2Value} />
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
+        {/* --- RIGHT SIDE: VISUAL VIEWFINDER --- */}
         <div className="hidden lg:flex w-full lg:w-1/2 relative bg-[#050505] overflow-hidden">
+          {/* Subtle Grid Backdrop Overlay */}
           <div className="absolute inset-0 opacity-10 pointer-events-none z-10" style={{ backgroundImage: 'radial-gradient(currentColor 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }}></div>
           
-          <motion.div 
-            variants={imgVars} 
-            initial="initial" 
-            whileInView="whileInView"
-            viewport={{ once: true, margin: "-100px" }}
-            className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out z-0 pointer-events-none"
-          >
-            {imageSrc ? (
+          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out z-0 pointer-events-none flex items-center justify-center">
+            {/* 
+              TECHNICAL ICON SWITCHER:
+              Swaps standard images for interactive/animated SVGs for specific service IDs.
+            */}
+            {id === 1 ? (
+              <CncPrototypingIcon />
+            ) : id === 2 ? (
+              <AdvancedMfgIcon />
+            ) : id === 3 ? (
+              <TestingValidationIcon />
+            ) : id === 4 ? (
+              <LifecycleSupportIcon />
+            ) : imageSrc ? (
               <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full bg-white/5 flex items-center justify-center">
                 <span className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase text-center px-4">IMAGE_PLACEHOLDER // {id || index}</span>
               </div>
             )}
-          </motion.div>
+          </div>
         </div>
 
+        {/* --- MECHANICAL DECORATIONS (Corner Brackets) --- */}
         <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none">
           <div className={`absolute top-0 right-0 w-[1px] h-4 ${theme.bracket}`}></div>
           <div className={`absolute top-0 right-0 h-[1px] w-4 ${theme.bracket}`}></div>

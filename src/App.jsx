@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactLenis } from '@studio-freight/react-lenis';
+import Preloader from "./components/Preloader";
 import Header from "./components/Header";
 import Services from "./components/Services";
 import LogoMarquee from "./components/LogoMarquee";
@@ -12,9 +13,20 @@ import CustomCursor from "./components/CustomCursor";
 import VideoReveal from "./components/VideoReveal";
 
 function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  // Memoize the callback to prevent the preloader from restarting on re-render
+  const handleLoadingComplete = React.useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothTouch: false }}>
-      <div className="w-full bg-[#080808] text-[#f4f4f4] font-sans selection:bg-[#FFC800] selection:text-black">
+      <div className={`w-full bg-[#080808] text-[#f4f4f4] font-sans selection:bg-[#FFC800] selection:text-black ${isLoading ? 'h-screen overflow-hidden' : ''}`}>
+        
+        {/* --- THE SWISS CUT PRELOADER --- */}
+        {isLoading && <Preloader onComplete={handleLoadingComplete} />}
+
         {/* Main content — z-10 so it covers the sticky footer below */}
         <div className="relative z-10 bg-[#080808]">
           <CustomCursor />

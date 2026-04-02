@@ -55,7 +55,7 @@ const Gallery = () => {
   ];
 
   return (
-    <section ref={targetRef} id="gallery" className="relative h-auto lg:h-[300vh] w-full bg-[#080808] border-t border-white/10">
+    <section ref={targetRef} id="gallery" className="relative h-auto lg:h-[600vh] w-full bg-[#080808] border-t border-white/10">
       <div className="lg:sticky lg:top-0 flex flex-col lg:flex-row-reverse lg:h-screen overflow-hidden bg-[#080808]">
         
         {/* --- RIGHT: STICKY INFO BLOCK --- */}
@@ -141,7 +141,7 @@ const Gallery = () => {
                     style={{ scale: imgScale }}
                     src={img.src} 
                     alt={img.title}
-                    className="w-full h-full object-cover filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover transition-all duration-700 ease-out"
                   />
                   
                   {/* Targeting Brackets */}
@@ -190,7 +190,7 @@ const Gallery = () => {
                   <img 
                     src={img.src} 
                     alt={img.title}
-                    className="w-full h-full object-cover filter grayscale opacity-60"
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Center Crosshair */}
