@@ -12,11 +12,28 @@ const LogoMarquee = () => {
   };
 
   const itemVars = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 40 },
     whileInView: {
       opacity: 1,
       y: 0,
       transition: { duration: 0.8, ease }
+    }
+  };
+
+  const headerVars = {
+    initial: { opacity: 0, x: -20 },
+    whileInView: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1, ease }
+    }
+  };
+
+  const lineExpandVars = {
+    initial: { scaleX: 0 },
+    whileInView: {
+      scaleX: 1,
+      transition: { duration: 1.2, ease }
     }
   };
 
@@ -36,22 +53,29 @@ const LogoMarquee = () => {
     <section className="w-full bg-[#080808] border-t border-white/10 font-mono py-16 lg:py-32">
       
       {/* --- TECHNICAL HEADER --- */}
-      <div className="px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 bg-white/[0.02]">
-        <div className="flex items-center gap-4">
+      <motion.div 
+        initial="initial"
+        whileInView="whileInView"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
+      >
+        <motion.div variants={lineExpandVars} className="absolute inset-0 bg-white/[0.02] origin-left z-0" />
+        
+        <motion.div variants={headerVars} className="flex items-center gap-4 relative z-10">
           <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
           <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
             Verified_Counterparties //
           </span>
-        </div>
-        <div className="flex gap-8">
+        </motion.div>
+        <motion.div variants={headerVars} className="flex gap-8 relative z-10">
           <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
             Net_Status: Stable
           </span>
           <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
             Active_Nodes: {logos.length}
           </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* --- LOGO GRID --- */}
       <motion.div 
@@ -106,22 +130,29 @@ const LogoMarquee = () => {
       </motion.div>
 
         {/* --- TECHNICAL HEADER --- */}
-      <div className="px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 bg-white/[0.02]">
-        <div className="flex items-center gap-4">
+      <motion.div 
+        initial="initial"
+        whileInView="whileInView"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
+      >
+        <motion.div variants={lineExpandVars} className="absolute inset-0 bg-white/[0.02] origin-left z-0" />
+
+        <motion.div variants={headerVars} className="flex items-center gap-4 relative z-10">
           <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
           <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
             Verified_Counterparties //
           </span>
-        </div>
-        <div className="flex gap-8">
+        </motion.div>
+        <motion.div variants={headerVars} className="flex gap-8 relative z-10">
           <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
             Net_Status: Stable
           </span>
           <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
             Active_Nodes: {logos.length}
           </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
     </section>
   );

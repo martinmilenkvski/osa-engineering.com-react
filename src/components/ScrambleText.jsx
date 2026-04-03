@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const CHARS = '!<>-_\\/[]{}—=+*^?#_';
 
-const ScrambleText = ({ text, trigger }) => {
+const ScrambleText = ({ text, trigger, speed = 0.5 }) => {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef(null);
   
@@ -40,7 +40,7 @@ const ScrambleText = ({ text, trigger }) => {
       }
       
       // Controls speed of reveal
-      iteration += 1 / 2; 
+      iteration += speed; 
     }, 30);
   };
 

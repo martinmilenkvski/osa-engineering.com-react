@@ -48,7 +48,7 @@ const cardData = [
 const Services = () => {
   return (
     <div className="container mx-auto py-12 px-4 space-y-12">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-normal">
         Our Services
       </h1>
       {/* Map over the data and render a Card for each item */}

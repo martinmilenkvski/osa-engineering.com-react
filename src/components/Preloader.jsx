@@ -141,7 +141,7 @@ const Preloader = ({ onComplete }) => {
       <div className="preloader-ui absolute bottom-12 right-12 flex items-baseline z-10 select-none">
         <div 
           style={{ height: `${rowH}em` }} 
-          className="text-[12vw] md:text-[9vw] text-white flex overflow-hidden tracking-tighter leading-none font-mono"
+          className="text-[12vw] md:text-[9vw] text-white flex overflow-hidden tracking-normal leading-none font-mono"
         >
           {/* Hundreds Column */}
           <div ref={hundRef} className="flex flex-col text-center shrink-0">

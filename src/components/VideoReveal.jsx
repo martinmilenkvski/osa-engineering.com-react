@@ -42,7 +42,7 @@ const VideoReveal = () => {
           </span>
           <div className="h-px w-8 bg-[#FFC800]" />
         </div>
-        <h2 className="text-3xl md:text-7xl font-bold tracking-tighter uppercase text-white leading-[0.95] text-center max-w-xl">
+        <h2 className="text-6xl md:text-8xl font-bold tracking-normal uppercase text-white leading-[0.95] text-center max-w-xl">
           Precision <br />
           <span className="text-white/30">In Motion.</span>
         </h2>
@@ -76,20 +76,38 @@ const VideoReveal = () => {
           />
 
           {/* Corner brackets (top-left) */}
-          <div className="absolute top-4 left-4 w-6 h-6 pointer-events-none">
+          <motion.div 
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-4 left-4 w-6 h-6 pointer-events-none"
+          >
             <div className="absolute top-0 left-0 w-px h-4 bg-white/40" />
             <div className="absolute top-0 left-0 h-px w-4 bg-white/40" />
-          </div>
+          </motion.div>
           {/* Corner brackets (bottom-right) */}
-          <div className="absolute bottom-4 right-4 w-6 h-6 pointer-events-none">
+          <motion.div 
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-4 right-4 w-6 h-6 pointer-events-none"
+          >
             <div className="absolute bottom-0 right-0 w-px h-4 bg-white/40" />
             <div className="absolute bottom-0 right-0 h-px w-4 bg-white/40" />
-          </div>
+          </motion.div>
 
           {/* HUD overlay label */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-[0.3em] text-white/40 uppercase">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-[0.3em] text-white/40 uppercase"
+          >
             Live_Feed // CNC_OPS
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 

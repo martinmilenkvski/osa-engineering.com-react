@@ -104,21 +104,50 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
     bracket: "bg-white/20",
     titleWeight: "antialiased font-bold"
   };
+  
+  const containerVars = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const itemFadeVars = {
+    initial: { opacity: 0, y: 40 },
+    whileInView: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
+  const bracketVars = {
+    initial: { scale: 0, opacity: 0 },
+    whileInView: { 
+      scale: 1, 
+      opacity: 1, 
+      transition: { duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
 
   return (
     <div 
       className="sticky lg:sticky w-full z-10 top-20 lg:top-auto" 
       style={{ top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? stickyTop : undefined }}
     >
-      <div 
-        className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-auto lg:h-[600px] flex flex-col lg:flex-row relative ${theme.bg}`}
-      >
+        <motion.div 
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVars}
+          className={`border ${theme.border} overflow-hidden group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 h-auto lg:h-[600px] flex flex-col lg:flex-row relative ${theme.bg}`}
+        >
         
         {/* --- LEFT SIDE: CONTENT & STATS --- */}
         <div className="relative z-10 flex flex-col w-full lg:w-1/2 lg:border-r border-white/5">
           
           {/* Header Metadata */}
-          <div className="flex justify-between items-start p-8 lg:p-12 pb-2 lg:pb-12">
+          <motion.div variants={itemFadeVars} className="flex justify-between items-start p-8 lg:p-12 pb-2 lg:pb-12">
             <div className="flex flex-col">
               <span className={`text-[10px] font-mono font-bold ${theme.accent} tracking-[0.2em] uppercase mb-1`}>
                 INITIATE //
@@ -127,13 +156,13 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
                 {subtitle || "SYSTEM_ACTIVE"}
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Main Info Block */}
           <div className="flex-1 flex flex-col p-8 lg:p-12 pt-4 lg:pt-8 w-full">
             <div className="flex-1 flex flex-col justify-end">
-              <div className="mb-6 pt-1 pb-1">
-                <h3 className={`text-3xl lg:text-5xl tracking-tighter uppercase leading-[0.9] max-w-sm lg:max-w-md antialiased`}>
+              <motion.div variants={itemFadeVars} className="mb-6 pt-1 pb-1">
+                <h3 className={`text-3xl lg:text-5xl tracking-normal uppercase leading-[0.9] max-w-sm lg:max-w-md antialiased`}>
                   <span className="font-bold text-white">
                     {title.split(" ")[0]}
                   </span>
@@ -142,24 +171,24 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
                     {title.split(" ").slice(1).join(" ")}
                   </span>
                 </h3>
-              </div>
+              </motion.div>
 
               {/* Description & Performance Data Grid */}
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 border-t ${theme.statsBorder} pt-8 mt-4`}>
                 <div className="flex flex-col justify-between gap-8 md:gap-6 pr-4">
-                  <p className={`text-base lg:text-sm ${theme.description} leading-relaxed font-light`}>
+                  <p className={`text-base lg:text-sm ${theme.description} leading-relaxed font-mono tracking-tight`}>
                     {description}
                   </p>
                 </div>
 
                 {/* Primary Stats (Yellow Technical Panel) */}
-                <div className="flex flex-col justify-center gap-6 p-8 lg:p-8 bg-[#FFC800] -mx-8 md:mx-0 md:h-full">
+                <motion.div variants={itemFadeVars} className="flex flex-col justify-center gap-6 p-8 lg:p-8 bg-[#FFC800] -mx-8 md:mx-0 md:h-full">
                   <div>
                     <div className="text-[10px] font-mono uppercase text-black/60 mb-2 tracking-widest flex items-center gap-2">
                        <span className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></span>
                       {stat1Label || "Precision"}
                     </div>
-                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-tighter text-black w-full tabular-nums">
+                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-normal text-black w-full tabular-nums">
                        <AnimatedStat value={stat1Value} />
                     </div>
                   </div>
@@ -169,11 +198,11 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
                       <span className="w-1.5 h-1.5 bg-black/40 rounded-full animate-pulse"></span>
                       {stat2Label || "Tolerance"}
                     </div>
-                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-tighter text-black w-full tabular-nums">
+                    <div className="text-3xl lg:text-4xl font-mono font-bold tracking-normal text-black w-full tabular-nums">
                        <AnimatedStat value={stat2Value} />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -208,15 +237,15 @@ const Card = ({ id, imageSrc, title, subtitle, description, stat1Label, stat1Val
         </div>
 
         {/* --- MECHANICAL DECORATIONS (Corner Brackets) --- */}
-        <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none">
+        <motion.div variants={bracketVars} className="absolute top-0 right-0 w-8 h-8 pointer-events-none">
           <div className={`absolute top-0 right-0 w-[1px] h-4 ${theme.bracket}`}></div>
           <div className={`absolute top-0 right-0 h-[1px] w-4 ${theme.bracket}`}></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-8 h-8 pointer-events-none">
+        </motion.div>
+        <motion.div variants={bracketVars} className="absolute bottom-0 left-0 w-8 h-8 pointer-events-none">
           <div className={`absolute bottom-0 left-0 w-[1px] h-4 ${theme.bracket}`}></div>
           <div className={`absolute bottom-0 left-0 h-[1px] w-4 ${theme.bracket}`}></div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

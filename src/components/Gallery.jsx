@@ -72,7 +72,7 @@ const Gallery = () => {
             
             <motion.h2 
               variants={titleContainerVars}
-              className="text-6xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]"
+              className="text-6xl lg:text-8xl font-bold tracking-normal uppercase leading-[0.9]"
             >
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">VISUAL</motion.span>
@@ -131,17 +131,24 @@ const Gallery = () => {
                   <span className="font-mono text-[10px] tracking-widest text-[#FFC800]">IMG_{img.id}</span>
                   <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <span className="text-[8px] font-mono text-[#FFC800] uppercase tracking-widest">Focus_Active</span>
-                    <div className="w-1.5 h-1.5 bg-[#FFC800] animate-pulse"></div>
+                    <motion.div 
+                      animate={{ opacity: [1, 0.4, 1] }} 
+                      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                      className="w-1.5 h-1.5 bg-[#FFC800] rounded-full"
+                    ></motion.div>
                   </div>
                 </div>
 
                 {/* Image Viewfinder */}
-                <div className="relative w-full aspect-[4/3] bg-[#050505] mb-6 overflow-hidden border border-white/5">
+                <div 
+                  data-cursor="delivered"
+                  className="relative w-full aspect-[4/3] bg-[#050505] mb-6 overflow-hidden border border-white/5"
+                >
                   <motion.img 
                     style={{ scale: imgScale }}
                     src={img.src} 
                     alt={img.title}
-                    className="w-full h-full object-cover transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover transition-all duration-700 ease-out grayscale contrast-[1.1] brightness-[0.9]"
                   />
                   
                   {/* Targeting Brackets */}
@@ -158,7 +165,7 @@ const Gallery = () => {
 
                 {/* Card Footer */}
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-white font-bold tracking-widest uppercase text-sm">{img.title}</h3>
+                  <h3 className="text-white font-bold tracking-normal uppercase text-sm">{img.title}</h3>
                   <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">{img.desc}</span>
                 </div>
               </div>
@@ -190,7 +197,7 @@ const Gallery = () => {
                   <img 
                     src={img.src} 
                     alt={img.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale contrast-[1.1] brightness-[0.9]"
                   />
                   
                   {/* Center Crosshair */}
@@ -201,7 +208,7 @@ const Gallery = () => {
 
                 {/* Card Footer */}
                 <div className="flex flex-col gap-2 mt-4">
-                  <h3 className="text-white font-bold tracking-widest uppercase text-base">{img.title}</h3>
+                  <h3 className="text-white font-bold tracking-normal uppercase text-base">{img.title}</h3>
                   <span className="font-mono text-xs text-white/40 uppercase tracking-[0.2em]">{img.desc}</span>
                 </div>
               </div>

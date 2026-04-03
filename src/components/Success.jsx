@@ -16,9 +16,8 @@ const Success = () => {
   const ease = [0.16, 1, 0.3, 1];
 
   const fadeUpVars = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
-    viewport: { once: true, margin: "-50px" }
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0, transition: { duration: 1.2, ease } }
   };
 
   const wordVars = {
@@ -43,6 +42,16 @@ const Success = () => {
     whileInView: { opacity: 1, x: 0, transition: { duration: 0.6, ease } }
   };
 
+  const lineVars = {
+    initial: { scaleX: 0, opacity: 0 },
+    whileInView: { scaleX: 1, opacity: 1, transition: { duration: 1, ease } }
+  };
+
+  const bracketVars = {
+    initial: { scale: 0, opacity: 0 },
+    whileInView: { scale: 1, opacity: 1, transition: { duration: 0.8, ease, delay: 0.4 } }
+  };
+
   const getStatusColor = (status) => ["VERIFIED", "COMPLETED", "DELIVERED"].includes(status) ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]" : "bg-[#FFC800] shadow-[0_0_10px_rgba(255,200,0,0.4)]";
 
   return (
@@ -51,13 +60,13 @@ const Success = () => {
         
         {/* --- RIGHT: LOCKED VIEWFINDER --- */}
         <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-l border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
-          <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true }}>
+          <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true, amount: 0.2 }}>
             <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [02]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
             </motion.div>
             
-            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
+            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-8xl font-bold tracking-normal uppercase leading-[0.9]">
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">TRACK</motion.span>
               </div>
@@ -71,7 +80,7 @@ const Success = () => {
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
             </motion.div>
             
-            <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-xs">
               Operational transparency. A live log of mission-critical engineering fulfillment across industrial verticals.
             </motion.p>
           </motion.div>
@@ -94,7 +103,7 @@ const Success = () => {
                       transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
                     />
                   ))}
-                  <span className="text-[10px] font-mono text-[#FFC800] tracking-tighter ml-2 mb-0.5">SYNCED</span>
+                  <span className="text-[10px] font-mono text-[#FFC800] tracking-normal ml-2 mb-0.5">SYNCED</span>
                 </div>
              </div>
           </motion.div>
@@ -106,16 +115,19 @@ const Success = () => {
             variants={listContainerVars}
             initial="initial"
             whileInView="whileInView"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col"
           >
             {/* Header Row */}
-            <div className="hidden lg:grid lg:grid-cols-4 px-10 py-6 bg-white/[0.02] border-b border-white/10 font-mono text-[10px] tracking-widest text-white/30 uppercase">
+            <motion.div 
+              variants={rowVars}
+              className="hidden lg:grid lg:grid-cols-4 px-10 py-6 bg-white/[0.02] border-b border-white/10 font-mono text-[10px] tracking-widest text-white/30 uppercase"
+            >
               <div>System ID</div>
               <div>Counterparty</div>
               <div>Operation Project</div>
               <div className="text-right">Metrics / Status</div>
-            </div>
+            </motion.div>
 
             {/* List Items */}
             {successData.map((item, idx) => (
@@ -132,18 +144,18 @@ const Success = () => {
                   {item.id}
                 </div>
                 
-                <div className="font-bold text-white text-xl lg:text-2xl uppercase tracking-tighter w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
+                <div className="font-bold text-white text-xl lg:text-2xl uppercase tracking-normal w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
                   <span className="lg:hidden text-xs lg:text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">CLIENT</span>
                   {item.client}
                 </div>
                 
-                <div className="text-base lg:text-sm text-white/60 font-light group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
+                <div className="text-base lg:text-sm text-white/60 font-mono tracking-tight group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
                   <span className="lg:hidden text-xs lg:text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">PROJECT</span>
                   {item.project}
                 </div>
 
                 <div className="flex flex-row lg:flex-col justify-between lg:justify-center items-center lg:items-end w-full lg:w-auto mt-6 lg:mt-0 pt-6 lg:pt-0 border-t border-white/5 lg:border-0">
-                  <div className="text-xl lg:text-xl font-light text-white tracking-tighter">{item.val}</div>
+                  <div className="text-xl lg:text-xl font-light text-white tracking-normal">{item.val}</div>
                   <div className="flex items-center gap-2 mt-1">
                     <div className={`w-1.5 h-1.5 rounded-full ${getStatusColor(item.status)}`}></div>
                     <span className="text-xs lg:text-[10px] font-mono text-white/40 uppercase tracking-widest">
@@ -170,13 +182,13 @@ const Success = () => {
             </div>
 
             {/* Technical Background Accents */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-[#FFC800]/30 to-transparent z-10"></div>
+            <motion.div variants={lineVars} className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-[#FFC800]/30 to-transparent z-10"></motion.div>
             
             {/* Corner Brackets */}
-            <div className="absolute top-12 left-12 w-4 h-4 border-t border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
-            <div className="absolute top-12 right-12 w-4 h-4 border-t border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
-            <div className="absolute bottom-12 left-12 w-4 h-4 border-b border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
-            <div className="absolute bottom-12 right-12 w-4 h-4 border-b border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></div>
+            <motion.div variants={bracketVars} className="absolute top-12 left-12 w-4 h-4 border-t border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></motion.div>
+            <motion.div variants={bracketVars} className="absolute top-12 right-12 w-4 h-4 border-t border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></motion.div>
+            <motion.div variants={bracketVars} className="absolute bottom-12 left-12 w-4 h-4 border-b border-l border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></motion.div>
+            <motion.div variants={bracketVars} className="absolute bottom-12 right-12 w-4 h-4 border-b border-r border-[#FFC800]/50 z-10 group-hover:border-[#FFC800] group-hover:w-8 group-hover:h-8 transition-all duration-500 hidden lg:block"></motion.div>
 
             <div className="relative z-10 flex flex-col items-center">
               <motion.div 

@@ -8,13 +8,12 @@ const Services = () => {
   const ease = [0.16, 1, 0.3, 1];
 
   const fadeUpVars = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 40 },
     whileInView: { 
       opacity: 1, 
       y: 0,
       transition: { duration: 1.2, ease }
-    },
-    viewport: { once: true, margin: "-50px" }
+    }
   };
 
   const wordVars = {
@@ -41,7 +40,7 @@ const Services = () => {
           <motion.div 
             initial="initial"
             whileInView="whileInView"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [01]</span>
@@ -50,7 +49,7 @@ const Services = () => {
             
             <motion.h2 
               variants={titleContainerVars}
-              className="text-6xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]"
+              className="text-6xl lg:text-8xl font-bold tracking-normal uppercase leading-[0.9]"
             >
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">CORE</motion.span>
@@ -67,22 +66,26 @@ const Services = () => {
 
             <motion.p 
               variants={fadeUpVars}
-              className="mt-6 lg:mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-sm"
+              className="mt-6 lg:mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-sm"
             >
               Systematic reductive machining solutions for high-tolerance applications. Mission-critical components realized through adaptive motion control systems.
             </motion.p>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
+            variants={fadeUpVars}
+            initial="initial"
+            whileInView="whileInView"
             viewport={{ once: true }}
             className="mt-8 lg:mt-0"
           >
             <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-2">Operation Mode</div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#FFC800] rounded-full animate-pulse"></div>
+              <motion.div 
+                animate={{ opacity: [1, 0.4, 1] }} 
+                transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                className="w-2 h-2 bg-[#FFC800] rounded-full"
+              ></motion.div>
               <span className="text-[10px] font-bold tracking-widest text-[#FFC800] uppercase">Full Automation // Active</span>
             </div>
           </motion.div>

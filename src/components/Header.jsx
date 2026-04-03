@@ -143,10 +143,14 @@ const Header = () => {
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2, duration: 1, ease }}
+          transition={{ delay: 2.2, duration: 1, ease }}
           className="absolute top-8 right-6 lg:right-8 hidden lg:flex items-center gap-2 z-10"
         >
-          <div className="w-1.5 h-1.5 bg-[#FFC800] rounded-full animate-pulse"></div>
+          <motion.div 
+            animate={{ opacity: [1, 0.4, 1] }} 
+            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            className="w-1.5 h-1.5 bg-[#FFC800] rounded-full"
+          ></motion.div>
           <span className="text-[10px] lg:text-[13px] font-mono tracking-widest text-white/50 uppercase">CNC_Active</span>
         </motion.div>
       </div>
@@ -164,9 +168,14 @@ const Header = () => {
             alt="O.S.A Logo" 
             className="h-8 lg:h-10 w-auto object-contain"
           />
-          <span className="text-xl font-bold tracking-[3px] uppercase">
-            O.S.A<span className="text-[#FFC800]">.</span>
-          </span>
+          <div className="flex flex-col">
+            <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
+              O.S.A.<span className="text-[#FFC800]"></span>
+            </span>
+            <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.2em] text-[#FFC800] uppercase mt-1">
+              Engineering M.K
+            </span>
+          </div>
         </motion.div>
 
         {/* Desktop Nav */}
@@ -221,7 +230,7 @@ const Header = () => {
                    initial={{ opacity: 0, x: -30 }}
                    animate={{ opacity: 1, x: 0 }}
                    transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
-                   className="text-5xl font-bold tracking-tighter uppercase text-white/40 hover:text-[#FFC800] transition-colors"
+                   className="text-5xl font-bold tracking-normal uppercase text-white/40 hover:text-[#FFC800] transition-colors"
                  >
                    {link.label}<span className="text-[#FFC800]">.</span>
                  </motion.a>
@@ -259,7 +268,7 @@ const Header = () => {
         <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
           <motion.h1 
             variants={titleContainerVars}
-            className="text-[14vw] sm:text-[12vw] lg:text-[7.5vw] font-bold leading-[0.85] lg:leading-[0.9] tracking-tighter uppercase text-white"
+            className="text-[14vw] sm:text-[12vw] lg:text-[7.5vw] font-bold leading-[0.85] lg:leading-[0.9] tracking-normal uppercase text-white"
           >
             <div className="overflow-hidden">
               <motion.span variants={wordVars} className="block">Precision</motion.span>
@@ -276,12 +285,15 @@ const Header = () => {
         variants={itemFadeUpVars}
         className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] p-8 lg:p-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
+        <motion.div 
+          variants={itemFadeUpVars}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
+        >
           <span className="text-[#FFC800] text-xs lg:text-[10px] font-mono">01</span>
           <span className="text-xs lg:text-[10px] font-bold tracking-widest uppercase text-white/70">Industrial</span>
-        </div>
+        </motion.div>
 
-        <p className="text-base lg:text-sm text-white/50 leading-relaxed font-light max-w-sm">
+        <p className="text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-sm">
           Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
         </p>
       </motion.div>
@@ -295,14 +307,22 @@ const Header = () => {
         onMouseLeave={() => setIsCtaHovered(false)}
       >
         <div className="flex justify-between items-start">
-          <span className="font-mono text-xs lg:text-[10px] font-bold tracking-[0.2em]">INITIATE //</span>
-          <div className="font-mono text-xs lg:text-[10px] tracking-widest text-black/50 text-right">
+          <motion.span 
+            variants={itemFadeUpVars}
+            className="font-mono text-xs lg:text-[10px] font-bold tracking-[0.2em]"
+          >
+            INITIATE //
+          </motion.span>
+          <motion.div 
+            variants={itemFadeUpVars}
+            className="font-mono text-xs lg:text-[10px] tracking-widest text-black/50 text-right"
+          >
             LAT 41.9981<br/>LNG 21.4254
-          </div>
+          </motion.div>
         </div>
 
         <div className="flex justify-between items-end mt-4 lg:mt-0">
-          <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-[0.9]">
+          <h3 className="text-4xl lg:text-5xl font-bold tracking-normal uppercase leading-[0.9]">
             <ScrambleText text="Begin" trigger={isCtaHovered} /><br/>
             <ScrambleText text="Transmission" trigger={isCtaHovered} />
           </h3>
