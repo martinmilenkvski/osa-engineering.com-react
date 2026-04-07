@@ -1,16 +1,31 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
 const Success = () => {
   const successData = [
-    { id: "LOG-001", client: "ALKALOID", project: "Chemical Reactor Frame", status: "VERIFIED", val: "±0.005mm" },
-    { id: "LOG-002", client: "TITAN", project: "Kiln Support Roller", status: "ACTIVE", val: "10.5 Tons" },
-    { id: "LOG-003", client: "MAKSTIL", project: "Conveyor Roller Shaft", status: "COMPLETED", val: "4-Axis" },
-    { id: "LOG-004", client: "LEK", project: "Stainless Bio-Probe", status: "STABLE", val: "Polished" },
-    { id: "LOG-005", client: "ACIBADEM", project: "MRI Table Component", status: "DELIVERED", val: "Non-Mag" },
-    { id: "LOG-006", client: "OKTA", project: "Valve Actuator Coupling", status: "MONITORING", val: "High-Temp" },
+    { id: "LOG-001", client: "ALKALOID", project: "Chemical Reactor Frame", status: "VERIFIED", val: "±0.005mm", img: "/galleryimg/Gemini_Generated_Image_16kedt16kedt16ke.png" },
+    { id: "LOG-002", client: "TITAN", project: "Kiln Support Roller", status: "ACTIVE", val: "10.5 Tons", img: "/galleryimg/Gemini_Generated_Image_2aiysc2aiysc2aiy.png" },
+    { id: "LOG-003", client: "MAKSTIL", project: "Conveyor Roller Shaft", status: "COMPLETED", val: "4-Axis", img: "/galleryimg/Gemini_Generated_Image_9gdot09gdot09gdo.png" },
+    { id: "LOG-004", client: "LEK", project: "Stainless Bio-Probe", status: "STABLE", val: "Polished", img: "/galleryimg/Gemini_Generated_Image_ct9xuct9xuct9xuc.png" },
+    { id: "LOG-005", client: "ACIBADEM", project: "MRI Table Component", status: "DELIVERED", val: "Non-Mag", img: "/galleryimg/Gemini_Generated_Image_godnqggodnqggodn.png" },
+    { id: "LOG-006", client: "OKTA", project: "Valve Actuator Coupling", status: "MONITORING", val: "High-Temp", img: "/galleryimg/Gemini_Generated_Image_hlpk4whlpk4whlpk.png" },
   ];
+
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+  
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  const smoothX = useSpring(cursorX, springConfig);
+  const smoothY = useSpring(cursorY, springConfig);
+
+  const handleMouseMove = (e) => {
+    // Center the 300x200 box on the cursor
+    cursorX.set(e.clientX - 150);
+    cursorY.set(e.clientY - 100);
+  };
 
   // --- ANIMATION VARIANTS ---
   const ease = [0.16, 1, 0.3, 1];
@@ -80,7 +95,7 @@ const Success = () => {
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
             </motion.div>
             
-            <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-base lg:text-sm text-white/50 uppercase leading-normal font-normal tracking-tight max-w-xs">
               Operational transparency. A live log of mission-critical engineering fulfillment across industrial verticals.
             </motion.p>
           </motion.div>
@@ -135,6 +150,9 @@ const Success = () => {
                 key={idx}
                 variants={rowVars}
                 className="flex flex-col lg:grid lg:grid-cols-4 items-start lg:items-center gap-4 lg:gap-0 px-8 lg:px-10 py-8 group hover:bg-white/[0.02] transition-colors duration-500 relative border-b border-white/5 last:border-0"
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                onMouseMove={handleMouseMove}
               >
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
                 
@@ -149,8 +167,8 @@ const Success = () => {
                   {item.client}
                 </div>
                 
-                <div className="text-base lg:text-sm text-white/60 font-mono tracking-tight group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
-                  <span className="lg:hidden text-xs lg:text-[10px] font-mono tracking-widest uppercase text-white/30 w-24">PROJECT</span>
+                <div className="text-base lg:text-sm text-white/60 uppercase leading-normal font-normal tracking-tight group-hover:text-white transition-colors w-full lg:w-auto flex items-center gap-3 mt-2 lg:mt-0">
+                  <span className="lg:hidden text-xs lg:text-[10px] uppercase font-mono tracking-widest text-white/30 w-24">PROJECT</span>
                   {item.project}
                 </div>
 
@@ -251,6 +269,33 @@ const Success = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* Floating Image Reveal (Desktop Only) */}
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 z-[100] overflow-hidden w-[300px] h-[200px] shadow-2xl invisible lg:visible border border-white/10"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          opacity: hoveredIdx !== null ? 1 : 0,
+          scale: hoveredIdx !== null ? 1 : 0.8,
+        }}
+        transition={{ opacity: { duration: 0.3 }, scale: { duration: 0.3 } }}
+      >
+        <AnimatePresence>
+          {hoveredIdx !== null && successData[hoveredIdx]?.img && (
+            <motion.img
+              key={hoveredIdx}
+              src={successData[hoveredIdx].img}
+              alt="Project Reference"
+              className="absolute top-0 left-0 w-full h-full object-cover grayscale contrast-[1.1] brightness-[0.9]"
+              initial={{ clipPath: "inset(0% 0% 100% 0%)", zIndex: 10 }}
+              animate={{ clipPath: "inset(0% 0% 0% 0%)", zIndex: 10 }}
+              exit={{ opacity: 0.99, zIndex: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 };

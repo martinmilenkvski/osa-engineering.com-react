@@ -35,7 +35,7 @@ const Services = () => {
       <div className="flex flex-col lg:flex-row min-h-screen pt-24 lg:pt-0">
         
         {/* --- LEFT: STICKY INFO BLOCK --- */}
-        <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32">
+        <div className="w-full lg:w-[35%] lg:h-[100svh] lg:sticky lg:top-0 px-6 md:px-8 lg:px-12 py-12 lg:py-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32">
           
           <motion.div 
             initial="initial"
@@ -49,7 +49,7 @@ const Services = () => {
             
             <motion.h2 
               variants={titleContainerVars}
-              className="text-6xl lg:text-8xl font-bold tracking-normal uppercase leading-[0.9]"
+              className="text-fluid-h2 font-bold tracking-normal uppercase leading-[0.9]"
             >
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">CORE</motion.span>
@@ -66,7 +66,7 @@ const Services = () => {
 
             <motion.p 
               variants={fadeUpVars}
-              className="mt-6 lg:mt-8 text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-sm"
+              className="mt-6 lg:mt-8 text-base lg:text-sm text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm"
             >
               Systematic reductive machining solutions for high-tolerance applications. Mission-critical components realized through adaptive motion control systems.
             </motion.p>
@@ -92,7 +92,7 @@ const Services = () => {
         </div>
 
         {/* --- RIGHT: SCROLLING CONTENT --- */}
-        <div className="w-full lg:w-[65%] p-6 lg:px-20 lg:py-[20vh] space-y-16 lg:space-y-[40vh] pb-32 lg:pb-[20vh]">
+        <div className="w-full lg:w-[65%] px-6 md:px-8 lg:px-12 lg:py-[20vh] py-12 space-y-16 lg:space-y-[40vh] pb-32 lg:pb-[20vh]">
           {cardData.map((data, index) => (
             <Card
               key={data.id}

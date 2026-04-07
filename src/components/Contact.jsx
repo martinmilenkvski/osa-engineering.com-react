@@ -40,14 +40,14 @@ const Contact = () => {
       <div className="flex flex-col lg:flex-row">
         
         {/* --- LEFT: LOCKED VIEWFINDER --- */}
-        <div className="w-full lg:w-[35%] lg:h-[80vh] lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+        <div className="w-full lg:w-[35%] lg:h-[100svh] lg:sticky lg:top-0 px-6 md:px-8 lg:px-12 py-12 lg:py-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
           <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true, amount: 0.2 }}>
             <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [05]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
             </motion.div>
             
-            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-7xl font-bold tracking-normal uppercase leading-[0.9]">
+            <motion.h2 variants={titleContainerVars} className="text-fluid-h2 font-bold tracking-normal uppercase leading-[0.9]">
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">SECURE</motion.span>
               </div>
@@ -61,7 +61,7 @@ const Contact = () => {
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
             </motion.div>
             
-            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-xs">
               Establish a direct communication channel. Upload technical blueprints or project specifications to initiate reductive protocol analysis.
             </motion.p>
           </motion.div>
@@ -83,7 +83,7 @@ const Contact = () => {
         </div>
 
         {/* --- RIGHT: TERMINAL FORM --- */}
-        <div className="w-full lg:w-[65%] min-h-[80vh] flex items-center p-8 lg:p-20">
+        <div className="w-full lg:w-[65%] min-h-[80vh] flex items-center px-6 md:px-8 lg:px-12 py-12 lg:py-20">
           <motion.form 
             variants={formContainerVars}
             initial="initial"
@@ -132,7 +132,7 @@ const Contact = () => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               variants={formElementVars} 
-              className="group flex items-center justify-between w-full bg-[#FFC800] p-8 lg:p-12 hover:bg-white transition-colors duration-500 overflow-hidden relative"
+              className="group flex items-center justify-between w-full bg-[#FFC800] px-6 md:px-8 lg:px-12 py-8 lg:py-12 hover:bg-white transition-colors duration-500 overflow-hidden relative"
             >
                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
                   <span className="text-[10px] font-mono text-black font-bold">MODE: TRANSMIT</span>

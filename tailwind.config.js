@@ -6,6 +6,13 @@ export default {
       fontFamily: {
         sans: ['"Helvetica Neue Light"', '"Helvetica Light"', "Helvetica", "sans-serif"],
       },
+      fontSize: {
+        'fluid-h1': 'clamp(3rem, 10vw, 8rem)',
+        'fluid-h2': 'clamp(2.5rem, 6vw, 5rem)',
+        'fluid-h3': 'clamp(1.5rem, 4vw, 3rem)',
+        'fluid-body': 'clamp(0.875rem, 1vw, 1rem)',
+        'tech-label': ['12px', { letterSpacing: '0.2em' }],
+      },
       colors: {
         surface: {
           DEFAULT: "#080808",

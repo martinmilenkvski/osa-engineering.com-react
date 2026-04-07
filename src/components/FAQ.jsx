@@ -79,14 +79,14 @@ const FAQ = () => {
       <div className="flex flex-col lg:flex-row min-h-[60vh]">
         
         {/* --- LEFT: LOCKED VIEWFINDER --- */}
-        <div className="w-full lg:w-[35%] h-auto lg:h-screen lg:sticky lg:top-0 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32 relative z-10 shrink-0 bg-[#080808]">
+        <div className="w-full lg:w-[35%] h-auto lg:h-[100svh] lg:sticky lg:top-0 px-6 md:px-8 lg:px-12 py-12 lg:py-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32 relative z-10 shrink-0 bg-[#080808]">
           <motion.div initial="initial" whileInView="whileInView" viewport={{ once: true, amount: 0.2 }}>
             <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-8">
               <span className="text-[#FFC800] font-mono text-xs">INDEX [04]</span>
               <div className="h-px w-8 bg-[#FFC800]"></div>
             </motion.div>
             
-            <motion.h2 variants={titleContainerVars} className="text-5xl lg:text-7xl font-bold tracking-normal uppercase leading-[0.9]">
+            <motion.h2 variants={titleContainerVars} className="text-fluid-h2 font-bold tracking-normal uppercase leading-[0.9]">
               <div className="overflow-hidden">
                 <motion.span variants={wordVars} className="block">QUERY</motion.span>
               </div>
@@ -100,7 +100,7 @@ const FAQ = () => {
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
             </motion.div>
             
-            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-xs">
               Technical documentation and operational standards. Review our baseline protocols for precision engineering and fulfillment.
             </motion.p>
           </motion.div>
@@ -144,7 +144,7 @@ const FAQ = () => {
               return (
                 <motion.div key={idx} variants={rowVars} className="group outline-none hover:bg-white/[0.02] transition-colors duration-500 relative">
                   <div className="absolute left-0 top-0 bottom-0 w-px bg-[#FFC800] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top"></div>
-                  <div onClick={() => toggleFaq(idx)} className="flex items-center justify-between p-8 lg:p-12 cursor-pointer select-none">
+                  <div onClick={() => toggleFaq(idx)} className="flex items-center justify-between px-6 md:px-8 lg:px-12 py-8 lg:py-12 cursor-pointer select-none">
                     <div className="flex items-center gap-6 lg:gap-10 w-full lg:w-auto">
                        <span className={`font-mono text-[10px] tracking-widest transition-colors ${isOpen ? 'text-[#FFC800]' : 'text-white/30 group-hover:text-[#FFC800]'}`}>0{idx + 1}</span>
                        <h3 className={`text-lg lg:text-2xl font-bold tracking-normal uppercase transition-colors pr-4 ${isOpen ? 'text-[#FFC800]' : 'text-white'}`}>
@@ -165,8 +165,8 @@ const FAQ = () => {
                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-8 lg:px-[6.5rem] pb-12 lg:pb-20">
-                          <p className="text-sm lg:text-base text-white/60 leading-relaxed font-mono tracking-tight max-w-2xl">
+                        <div className="px-6 md:px-8 lg:px-[6.5rem] pb-12 lg:pb-20">
+                          <p className="text-sm lg:text-base text-white/60 uppercase leading-normal font-normal font-mono tracking-tight max-w-2xl">
                             {faq.a}
                           </p>
                           <div className="mt-10 flex items-center gap-4">
@@ -187,12 +187,12 @@ const FAQ = () => {
             whileInView="whileInView"
             viewport={{ once: true, margin: "-50px" }}
             variants={titleContainerVars}
-            className="p-12 lg:p-24 bg-white/[0.01] flex flex-col items-center justify-center text-center relative overflow-hidden mt-auto"
+            className="px-6 md:px-8 lg:px-24 py-12 lg:py-24 bg-white/[0.01] flex flex-col items-center justify-center text-center relative overflow-hidden mt-auto"
           >
              <motion.div variants={fadeUpVars}>
                 <Plus size={32} className="text-[#FFC800]/50 mb-6 animate-spin-slow" />
              </motion.div>
-             <motion.p variants={fadeUpVars} className="text-sm text-white/40 font-mono tracking-tight max-w-sm mb-8">
+             <motion.p variants={fadeUpVars} className="text-sm text-white/40 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm mb-8">
                Still require technical clarification? Our engineering lead is available for direct consultation.
              </motion.p>
              <motion.a 

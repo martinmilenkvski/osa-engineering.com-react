@@ -1,17 +1,26 @@
-import React, { useRef } from "react";
-import { Plus } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { Plus, X } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const Gallery = () => {
   const targetRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"]
   });
 
+  // Handle Escape key to close Lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const x = useTransform(scrollYProgress, (value) => {
-    // Slides the track leftwards by its full width, while simultaneously offsetting it by the viewport width
-    // so the final image always stops perfectly at the right edge of the screen.
     return `calc(-${value * 100}% + (var(--scroll-offset, 100vw) * ${value}))`;
   });
 
@@ -46,12 +55,12 @@ const Gallery = () => {
   };
 
   const images = [
-    { src: "/images/1.avif", id: "01", title: "Milling_Protocol_A", desc: "4-Axis Aluminum" },
-    { src: "/images/2.avif", id: "02", title: "Lathe_Operation_B", desc: "High-Tensile Steel" },
-    { src: "/images/3.avif", id: "03", title: "Structural_Frame_C", desc: "Tolerance ±0.005mm" },
-    { src: "/images/4.png", id: "04", title: "Thermal_Coating_D", desc: "Industrial Finish" },
-    { src: "/images/5.png", id: "05", title: "Quality_Assurance_E", desc: "Laser Measurement" },
-    { src: "/images/6.png", id: "06", title: "Final_Assembly_F", desc: "Logistics Sync" },
+    { src: "/galleryimg/Gemini_Generated_Image_16kedt16kedt16ke.png", id: "01", title: "Milling_Protocol_A", desc: "4-Axis Aluminum" },
+    { src: "/galleryimg/Gemini_Generated_Image_2aiysc2aiysc2aiy.png", id: "02", title: "Lathe_Operation_B", desc: "High-Tensile Steel" },
+    { src: "/galleryimg/Gemini_Generated_Image_9gdot09gdot09gdo.png", id: "03", title: "Structural_Frame_C", desc: "Tolerance ±0.005mm" },
+    { src: "/galleryimg/Gemini_Generated_Image_ct9xuct9xuct9xuc.png", id: "04", title: "Thermal_Coating_D", desc: "Industrial Finish" },
+    { src: "/galleryimg/Gemini_Generated_Image_godnqggodnqggodn.png", id: "05", title: "Quality_Assurance_E", desc: "Laser Measurement" },
+    { src: "/galleryimg/Gemini_Generated_Image_hlpk4whlpk4whlpk.png", id: "06", title: "Final_Assembly_F", desc: "Logistics Sync" },
   ];
 
   return (
@@ -87,7 +96,7 @@ const Gallery = () => {
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white/90">STATUS: ACTIVE</span>
             </motion.div>
 
-            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 leading-relaxed font-light max-w-xs">
+            <motion.p variants={fadeUpVars} className="mt-8 text-sm text-white/50 uppercase leading-normal font-normal max-w-xs">
               Direct observation of structural manufacturing. High-resolution captures of multi-axis machining and finished industrial assemblies.
             </motion.p>
           </motion.div>
@@ -142,7 +151,8 @@ const Gallery = () => {
                 {/* Image Viewfinder */}
                 <div 
                   data-cursor="delivered"
-                  className="relative w-full aspect-[4/3] bg-[#050505] mb-6 overflow-hidden border border-white/5"
+                  onClick={() => setSelectedImage(img)}
+                  className="relative w-full aspect-[4/3] bg-[#050505] mb-6 overflow-hidden border border-white/5 cursor-pointer"
                 >
                   <motion.img 
                     style={{ scale: imgScale }}
@@ -166,7 +176,7 @@ const Gallery = () => {
                 {/* Card Footer */}
                 <div className="flex flex-col gap-1">
                   <h3 className="text-white font-bold tracking-normal uppercase text-sm">{img.title}</h3>
-                  <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">{img.desc}</span>
+                  <span className="font-mono text-[10px] text-white/40 uppercase leading-normal font-normal tracking-[0.2em]">{img.desc}</span>
                 </div>
               </div>
             ))}
@@ -185,7 +195,8 @@ const Gallery = () => {
             {images.map((img, idx) => (
               <div 
                 key={idx} 
-                className="w-[85vw] shrink-0 p-6 flex flex-col justify-center snap-center bg-[#050505] border border-white/5 relative group"
+                onClick={() => setSelectedImage(img)}
+                className="w-[85vw] shrink-0 p-6 flex flex-col justify-center snap-center bg-[#050505] border border-white/5 relative group cursor-pointer"
               >
                 {/* Technical Card Header */}
                 <div className="flex justify-between items-center mb-6">
@@ -209,7 +220,7 @@ const Gallery = () => {
                 {/* Card Footer */}
                 <div className="flex flex-col gap-2 mt-4">
                   <h3 className="text-white font-bold tracking-normal uppercase text-base">{img.title}</h3>
-                  <span className="font-mono text-xs text-white/40 uppercase tracking-[0.2em]">{img.desc}</span>
+                  <span className="font-mono text-xs text-white/40 uppercase leading-normal font-normal tracking-[0.2em]">{img.desc}</span>
                 </div>
               </div>
             ))}
@@ -224,6 +235,101 @@ const Gallery = () => {
           </div>
         </div>
       </div>
+
+      {/* --- LIGHTBOX OVERLAY --- */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] bg-[#050505]/95 backdrop-blur-xl p-6 lg:p-12 flex flex-col"
+          >
+            {/* HUD: Top Bar */}
+            <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-6 w-full max-w-[1920px] mx-auto">
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[10px] tracking-[0.3em] text-[#FFC800] uppercase">Audit // Target</span>
+                <h3 className="text-white font-bold text-xl lg:text-2xl tracking-normal uppercase leading-tight">{selectedImage.title}</h3>
+              </div>
+              <button 
+                onClick={() => setSelectedImage(null)}
+                className="group flex flex-col items-center gap-2 hover:opacity-70 transition-opacity"
+              >
+                 <div className="p-3 bg-white/5 border border-white/10 rounded-full group-hover:border-[#FFC800] group-hover:bg-[#FFC800]/10 transition-colors">
+                    <X size={24} className="text-white group-hover:text-[#FFC800] transition-colors" />
+                 </div>
+                 <span className="font-mono text-[8px] text-white/30 uppercase tracking-[0.3em]">Close_Audit [ESC]</span>
+              </button>
+            </div>
+
+            {/* Main Stage: High-Resolution Display */}
+            <div className="flex-1 relative flex items-center justify-center w-full max-w-[1920px] mx-auto group">
+                <motion.div 
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-fit h-fit mx-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img 
+                    src={selectedImage.src} 
+                    alt={selectedImage.title}
+                    className="max-w-[85vw] lg:max-w-[65vw] max-h-[55vh] lg:max-h-[60vh] object-contain filter contrast-[1.05] brightness-[0.95]"
+                  />
+                  
+                  {/* Subtle Technical Frame Corners */}
+                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#FFC800]/30 pointer-events-none"></div>
+                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#FFC800]/30 pointer-events-none"></div>
+                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#FFC800]/30 pointer-events-none"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#FFC800]/30 pointer-events-none"></div>
+                </motion.div>
+
+                {/* Vertical Gauge Overlay (Pure Aesthetic) */}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-1/2 w-px bg-white/5 hidden lg:block">
+                   <motion.div 
+                     animate={{ top: ["0%", "100%", "0%"] }}
+                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                     className="absolute w-4 h-1 bg-[#FFC800] -left-2"
+                   />
+                </div>
+            </div>
+
+            {/* HUD: Footer Bar */}
+            <div className="mt-8 border-t border-white/10 pt-8 w-full max-w-[1920px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+               <div className="flex gap-12">
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest">Asset_Identifier //</span>
+                    <span className="font-mono text-xs text-white tracking-[0.25em]">IMG_{selectedImage.id}</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest">Specifications //</span>
+                    <span className="font-mono text-xs text-white uppercase leading-normal font-normal tracking-[0.25em]">{selectedImage.desc}</span>
+                  </div>
+                  <div className="flex flex-col gap-2 hidden sm:flex">
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest">Audit_Status //</span>
+                    <span className="font-mono text-xs text-emerald-500 tracking-[0.25em]">VERIFIED_OK</span>
+                  </div>
+               </div>
+
+               <div className="flex items-center gap-4">
+                  <div className="px-4 py-2 bg-white/5 border border-white/10">
+                     <span className="font-mono text-[10px] text-white/50 tracking-widest uppercase">Resolution: 3840px_Native</span>
+                  </div>
+                  <div className="px-4 py-2 bg-[#FFC800] text-black">
+                     <span className="font-mono text-[10px] font-bold tracking-widest uppercase">AUDIT_LOG_EXPORT_AVAILABLE</span>
+                  </div>
+               </div>
+            </div>
+
+            {/* Backdrop Close Click area */}
+            <div 
+              className="absolute inset-0 z-[-1] cursor-zoom-out" 
+              onClick={() => setSelectedImage(null)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -1,9 +1,13 @@
 import React, { useRef } from "react";
 import { Plus } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 
-const Footer = React.forwardRef(({ isUncovered }, ref) => {
+const Footer = React.forwardRef((props, ref) => {
+  const localRef = useRef(null);
+  // Trigger animation when at least 80% of the footer is visible on screen
+  const isUncovered = useInView(localRef, { once: true, amount: 0.5 });
+
   // --- ANIMATION VARIANTS ---
   const ease = [0.16, 1, 0.3, 1];
 
@@ -36,7 +40,11 @@ const Footer = React.forwardRef(({ isUncovered }, ref) => {
 
   return (
     <motion.footer 
-      ref={ref}
+      ref={(node) => {
+        localRef.current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) ref.current = node;
+      }}
       initial="hidden"
       animate={isUncovered ? "visible" : "hidden"}
       variants={containerVars}
@@ -75,10 +83,6 @@ const Footer = React.forwardRef(({ isUncovered }, ref) => {
 
       {/* Technical Grid Readout */}
       <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        animate={isUncovered ? "visible" : "hidden"}
         variants={containerVars}
         className="relative flex flex-col lg:flex-row border-t border-white/5 lg:border-none"
       >
@@ -121,7 +125,7 @@ const Footer = React.forwardRef(({ isUncovered }, ref) => {
 
           <motion.div variants={fadeUpVars}>
             <div className="font-mono text-xs lg:text-[10px] tracking-[0.3em] text-white/30 uppercase mb-6">Base // Logistics</div>
-            <div className="text-base lg:text-sm text-white/60 leading-relaxed font-mono tracking-tight space-y-2 lg:space-y-1">
+            <div className="text-base lg:text-sm text-white/60 uppercase leading-normal font-normal tracking-tight space-y-2 lg:space-y-1">
               <p>11-ti Oktomvri No. 41/2-7</p>
               <p>Skopje, 1000</p>
               <p>Republic of Macedonia</p>
@@ -188,14 +192,12 @@ const Footer = React.forwardRef(({ isUncovered }, ref) => {
 
       {/* System Status Bar */}
       <motion.div 
-        initial="hidden"
-        animate={isUncovered ? "visible" : "hidden"}
         variants={containerVars}
         className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#080808]"
       >
         <motion.div variants={lineXVars} className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left" />
         
-        <motion.div variants={fadeUpVars} className="font-mono text-xs lg:text-[10px] text-white/30 tracking-[0.3em] uppercase text-center md:text-left">
+        <motion.div variants={fadeUpVars} className="text-xs lg:text-[10px] text-white/30 uppercase leading-normal font-normal tracking-[0.3em] text-center md:text-left">
           © {new Date().getFullYear()} O.S.A Engineering // Reductive Protocols Verified
         </motion.div>
         <motion.div variants={fadeUpVars} className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 mt-4 lg:mt-0">

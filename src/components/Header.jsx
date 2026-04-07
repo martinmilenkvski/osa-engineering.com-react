@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowUpRight, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 
-const Header = () => {
+const Header = ({ isLoading }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCtaHovered, setIsCtaHovered] = useState(false);
   
@@ -36,7 +36,16 @@ const Header = () => {
     animate: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 1.8, ease }
+      transition: { duration: 1.8, delay: 2.5, ease }
+    }
+  };
+
+  const ctaFadeInVars = {
+    initial: { opacity: 0, y: 30 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 1.8, delay: 3.0, ease }
     }
   };
 
@@ -79,10 +88,37 @@ const Header = () => {
   const videoFadeVars = {
     initial: { opacity: 0 },
     animate: { 
-      opacity: 0.4,
+      opacity: 0.6,
       transition: { duration: 3.5, delay: 0.8, ease: "linear" }
     }
   };
+
+  const cncActiveVars = {
+    initial: { opacity: 0, x: 20 },
+    animate: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { delay: 2.2, duration: 1, ease } 
+    }
+  };
+
+  const logoVars = {
+    initial: { opacity: 0, y: -20 },
+    animate: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { delay: 1, duration: 1, ease }
+    }
+  };
+
+  const videoRef = useRef(null);
+
+  // Play video only after preloader finishes
+  useEffect(() => {
+    if (!isLoading && videoRef.current) {
+      videoRef.current.play();
+    }
+  }, [isLoading]);
 
   const menuLinks = [
     { label: "SERVICES", href: "#services" },
@@ -94,7 +130,7 @@ const Header = () => {
   return (
     <motion.section 
       initial="initial"
-      animate="animate"
+      animate={isLoading ? "initial" : "animate"}
       className="min-h-[100svh] lg:h-screen w-full relative flex flex-col lg:block overflow-x-hidden lg:overflow-hidden bg-[#080808]"
     >
 
@@ -129,7 +165,7 @@ const Header = () => {
           className="w-full h-full"
         >
           <video
-            autoPlay
+            ref={videoRef}
             loop
             muted
             playsInline
@@ -137,13 +173,11 @@ const Header = () => {
             src="/Cnc_hero.mp4"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/90 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent lg:hidden"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent lg:hidden"></div>
 
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2.2, duration: 1, ease }}
+          variants={cncActiveVars}
           className="absolute top-8 right-6 lg:right-8 hidden lg:flex items-center gap-2 z-10"
         >
           <motion.div 
@@ -156,11 +190,9 @@ const Header = () => {
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="relative lg:absolute top-0 w-full flex items-start p-6 lg:p-8 z-30 hero-element">
+      <nav className="relative lg:absolute top-0 w-full flex items-start px-6 md:px-8 lg:px-12 py-6 lg:py-8 z-30 hero-element">
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 1, ease }}
+          variants={logoVars}
           className="w-[70%] lg:w-[35%] flex items-center gap-3"
         >
           <img 
@@ -172,8 +204,8 @@ const Header = () => {
             <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
               O.S.A.<span className="text-[#FFC800]"></span>
             </span>
-            <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.2em] text-[#FFC800] uppercase mt-1">
-              Engineering M.K
+            <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.5em] text-[#FFC800] uppercase mt-1">
+              Engineering
             </span>
           </div>
         </motion.div>
@@ -246,7 +278,7 @@ const Header = () => {
              >
                 <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
                 <div className="space-y-4">
-                   <p className="text-[10px] text-white/50 tracking-widest uppercase">LAT 41.9981 // LNG 21.4254</p>
+                   <p className="text-[10px] text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">LAT 41.9981 // LNG 21.4254</p>
                    <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
                 </div>
              </motion.div>
@@ -254,7 +286,7 @@ const Header = () => {
              {/* Close Button UI Support */}
              <div className="absolute top-6 right-6">
                 <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
-                  <X size={32} />
+                   <X size={32} />
                 </button>
              </div>
           </motion.div>
@@ -268,7 +300,7 @@ const Header = () => {
         <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
           <motion.h1 
             variants={titleContainerVars}
-            className="text-[14vw] sm:text-[12vw] lg:text-[7.5vw] font-bold leading-[0.85] lg:leading-[0.9] tracking-normal uppercase text-white"
+            className="text-fluid-h1 font-bold leading-[0.85] lg:leading-[0.9] tracking-normal uppercase text-white"
           >
             <div className="overflow-hidden">
               <motion.span variants={wordVars} className="block">Precision</motion.span>
@@ -283,7 +315,7 @@ const Header = () => {
       {/* Info Blocks - Slower Fade In */}
       <motion.div 
         variants={itemFadeUpVars}
-        className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] p-8 lg:p-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
+        className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] px-6 md:px-8 lg:px-12 py-8 lg:py-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
       >
         <motion.div 
           variants={itemFadeUpVars}
@@ -293,7 +325,7 @@ const Header = () => {
           <span className="text-xs lg:text-[10px] font-bold tracking-widest uppercase text-white/70">Industrial</span>
         </motion.div>
 
-        <p className="text-base lg:text-sm text-white/50 leading-relaxed font-mono tracking-tight max-w-sm">
+        <p className="text-base lg:text-sm text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">
           Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
         </p>
       </motion.div>
@@ -302,7 +334,7 @@ const Header = () => {
       <motion.a
         variants={itemFadeUpVars}
         href="#contact"
-        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] p-8 lg:p-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
+        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] px-6 md:px-8 lg:px-12 py-8 lg:py-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
         onMouseEnter={() => setIsCtaHovered(true)}
         onMouseLeave={() => setIsCtaHovered(false)}
       >
@@ -322,10 +354,13 @@ const Header = () => {
         </div>
 
         <div className="flex justify-between items-end mt-4 lg:mt-0">
-          <h3 className="text-4xl lg:text-5xl font-bold tracking-normal uppercase leading-[0.9]">
+          <motion.h3 
+            variants={ctaFadeInVars}
+            className="text-4xl lg:text-5xl font-bold tracking-normal uppercase leading-[0.9]"
+          >
             <ScrambleText text="Begin" trigger={isCtaHovered} /><br/>
             <ScrambleText text="Transmission" trigger={isCtaHovered} />
-          </h3>
+          </motion.h3>
           <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />
         </div>
       </motion.a>
