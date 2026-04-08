@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { ReactLenis } from '@studio-freight/react-lenis';
 import Preloader from "./components/Preloader";
 import Header from "./components/Header";
+import MechanicalPart from "./components/MechanicalPart";
 import About from "./components/About";
 import Specs from "./components/Specs";
 import Services from "./components/Services";
@@ -54,9 +55,11 @@ function App() {
         >
           <CustomCursor />
           <Header isLoading={isLoading} />
-          <About />
-          <Specs />
           <Services />
+          <About />
+          <MechanicalPart />
+          <Specs />
+          
           <VideoReveal />
           {/* <Gallery /> */}
           <LogoMarquee />

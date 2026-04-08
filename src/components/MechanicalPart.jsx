@@ -1,0 +1,241 @@
+import React, { useEffect, useRef } from 'react';
+
+const MechanicalPart = () => {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    // Load Three.js and GSAP via CDN
+    const loadScripts = async () => {
+      // Check if already loaded to avoid duplicates
+      if (window.THREE && window.gsap && window.gsap.plugins.ScrollTrigger) {
+        initScene();
+        return;
+      }
+
+      const scripts = [
+        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'
+      ];
+
+      for (const src of scripts) {
+        await new Promise((resolve) => {
+          if (document.querySelector(`script[src="${src}"]`)) {
+            resolve();
+            return;
+          }
+          const script = document.createElement('script');
+          script.src = src;
+          script.onload = resolve;
+          document.head.appendChild(script);
+        });
+      }
+      initScene();
+    };
+
+    const initScene = () => {
+      const THREE = window.THREE;
+      const gsap = window.gsap;
+      
+      // Safety check
+      if (!THREE || !gsap || !window.ScrollTrigger) return;
+      
+      gsap.registerPlugin(window.ScrollTrigger);
+
+      // Scene setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ 
+        canvas: canvasRef.current, 
+        antialias: true, 
+        alpha: true 
+      });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Mechanical Part Group
+      const partGroup = new THREE.Group();
+
+      // Materials - Updated to match the industrial palette
+      const wireMaterialWhite = new THREE.MeshBasicMaterial({ 
+        color: 0xffffff, 
+        wireframe: true,
+        transparent: true,
+        opacity: 0.6
+      });
+
+      const wireMaterialYellow = new THREE.MeshBasicMaterial({ 
+        color: 0xFFC800, // Industrial Yellow from the reference
+        wireframe: true,
+        transparent: true,
+        opacity: 0.9
+      });
+
+      // 1. The Main Flange
+      const flangeGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.3, 32);
+      const flange = new THREE.Mesh(flangeGeo, wireMaterialWhite);
+      flange.rotation.z = Math.PI / 2;
+      flange.position.x = -1.5;
+      partGroup.add(flange);
+
+      // 2. The Main Body
+      const bodyGeo = new THREE.CylinderGeometry(0.8, 0.8, 2.5, 32);
+      const body = new THREE.Mesh(bodyGeo, wireMaterialWhite);
+      body.rotation.z = Math.PI / 2;
+      body.position.x = -0.1;
+      partGroup.add(body);
+
+      // 3. The Slot (Keyway) - Highlighted in Yellow
+      const slotGeo = new THREE.BoxGeometry(1.2, 0.15, 0.2);
+      const slot = new THREE.Mesh(slotGeo, wireMaterialYellow);
+      slot.position.set(0.4, 0.8, 0); 
+      body.add(slot);
+
+      // 4. Inner Bore - Highlighted in Yellow
+      const boreGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.2, 32);
+      const bore = new THREE.Mesh(boreGeo, wireMaterialYellow);
+      bore.rotation.z = Math.PI / 2;
+      bore.position.x = 1.15;
+      partGroup.add(bore);
+
+      scene.add(partGroup);
+      camera.position.z = 7;
+
+      // 4 PERSPECTIVE ANIMATION SEQUENCE
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5,
+        }
+      });
+
+      // Perspective 1: Side Profile
+      tl.to(partGroup.rotation, { y: 0, x: 0, duration: 1 })
+      // Perspective 2: Front / Cross-section View
+      .to(partGroup.rotation, { y: Math.PI / 2, x: 0, duration: 2 }, "+=1")
+      // Perspective 3: Dynamic ISO (Top-Down Angled)
+      .to(partGroup.rotation, { y: Math.PI * 0.75, x: Math.PI * 0.25, duration: 2 }, "+=1")
+      // Perspective 4: Rear / Structural View
+      .to(partGroup.rotation, { y: Math.PI * 1.5, x: Math.PI * 0.1, duration: 2 }, "+=1")
+      // Full Rotation Finale
+      .to(partGroup.rotation, { y: Math.PI * 2, x: 0, duration: 2 }, "+=1");
+
+      // Background Line Animation
+      gsap.to(".bg-grid-three", {
+        opacity: 0.15,
+        duration: 1,
+        repeat: -1,
+        yoyo: true
+      });
+
+      // Render Loop
+      let animationId;
+      const animate = () => {
+        animationId = requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      };
+
+      animate();
+
+      // Handle Resize
+      const handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        cancelAnimationFrame(animationId);
+        tl.kill();
+        const ScrollTrigger = window.ScrollTrigger;
+        if (ScrollTrigger) {
+          ScrollTrigger.getAll().forEach(t => t.kill());
+        }
+      };
+    };
+
+    loadScripts();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative bg-[#080808] min-h-[500vh] text-white font-sans selection:bg-[#FFC800] selection:text-[#080808] z-10">
+      {/* Swiss Technical Grid */}
+      <div className="bg-grid-three fixed inset-0 opacity-5 pointer-events-none z-10" 
+           style={{ 
+             backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', 
+             backgroundSize: '80px 80px' 
+           }}>
+      </div>
+
+      {/* Main Drawing Area */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        <canvas ref={canvasRef} className="z-20 w-full h-full cursor-crosshair" />
+      </div>
+
+      {/* Perspective Info Sections (The text that moves up and down) */}
+      <div className="relative z-30 pointer-events-none">
+          <section className="h-screen flex items-center p-6 md:p-20">
+              <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
+                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
+                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 01 //</span>
+                      <div className="text-[8px] font-mono text-right uppercase opacity-60">Status: Nominal</div>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">Profile<br/>View</h2>
+                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                      Initial orientation showcasing longitudinal axis and primary flange depth.
+                  </p>
+              </div>
+          </section>
+          
+          <section className="h-screen flex items-center justify-end p-6 md:p-20">
+              <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl text-right">
+                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
+                      <div className="text-[8px] font-mono text-left uppercase opacity-60">Status: Nominal</div>
+                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 02 //</span>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">Radial<br/>Core</h2>
+                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                      90° rotation. Visualization of the concentric bore and keyway alignment.
+                  </p>
+              </div>
+          </section>
+
+          <section className="h-screen flex items-center p-6 md:p-20">
+              <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
+                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
+                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 03 //</span>
+                      <div className="text-[8px] font-mono text-right uppercase opacity-60">Status: Nominal</div>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">ISO<br/>Dynamic</h2>
+                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                      Isometric offset highlighting the intersection of horizontal and vertical planes.
+                  </p>
+              </div>
+          </section>
+
+          <section className="h-screen flex items-center justify-center p-6 md:p-20">
+              <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
+                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
+                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Initiate //</span>
+                      <div className="text-[8px] font-mono text-right uppercase">
+                          Lat 42.00 N<br/>Lng 21.43 E
+                      </div>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none">Begin<br/>Transmission</h2>
+                  <div className="mt-8 flex justify-end">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </div>
+  );
+};
+
+export default MechanicalPart;
