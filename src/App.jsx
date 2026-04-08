@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { ReactLenis } from '@studio-freight/react-lenis';
 import Preloader from "./components/Preloader";
 import Header from "./components/Header";
+import About from "./components/About";
+import Specs from "./components/Specs";
 import Services from "./components/Services";
 import LogoMarquee from "./components/LogoMarquee";
 import Success from "./components/Success";
@@ -41,7 +43,7 @@ function App() {
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothTouch: false }}>
       <div className={`w-full max-w-[1920px] mx-auto bg-[#080808] text-[#f4f4f4] font-sans selection:bg-[#FFC800] selection:text-black ${isLoading ? 'h-screen overflow-hidden' : ''}`}>
-        
+
         {/* --- THE SWISS CUT PRELOADER --- */}
         {isLoading && <Preloader onComplete={handleLoadingComplete} />}
 
@@ -52,12 +54,14 @@ function App() {
         >
           <CustomCursor />
           <Header isLoading={isLoading} />
+          <About />
+          <Specs />
           <Services />
-          
+          <VideoReveal />
           {/* <Gallery /> */}
           <LogoMarquee />
-          <VideoReveal />
-          <Success />  
+
+          <Success />
           <FAQ />
           <Contact />
         </div>
