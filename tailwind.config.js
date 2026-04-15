@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Helvetica Neue Light"', '"Helvetica Light"', "Helvetica", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+        display: ["Outfit", "sans-serif"],
       },
       fontSize: {
         'fluid-h1': 'clamp(3rem, 10vw, 8rem)',

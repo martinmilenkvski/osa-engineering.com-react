@@ -94,15 +94,15 @@ const Footer = React.forwardRef((props, ref) => {
           
           <motion.div variants={fadeUpVars}>
             <div className="flex items-center gap-3 mb-10">
-              <img src="/logos/Logo-y.svg" alt="O.S.A Logo" className="h-5 w-auto object-contain" />
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-[0.3em] uppercase leading-none">
-                  O.S.A<span className="text-[#FFC800]">.</span>
-                </span>
-                <span className="text-[7px] font-mono tracking-[0.2em] text-[#FFC800] uppercase mt-1">
-                  Engineering M.K
-                </span>
-              </div>
+              <img src="/logos/Logo-y.svg" alt="O.S.A Logo" className="h-8 lg:h-10 w-auto object-contain" />
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
+                O.S.A.<span className="text-[#FFC800]"></span>
+              </span>
+              <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.5em] text-[#FFC800] uppercase mt-1">
+                Engineering
+              </span>
+            </div>
             </div>
           </motion.div>
           
