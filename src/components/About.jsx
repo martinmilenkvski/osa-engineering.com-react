@@ -90,7 +90,7 @@ const About = () => {
 
               {/* Main Headline - Cinematic Mask Reveal with Overlap (No Clamping) */}
               <motion.h2 
-                className="text-6xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold uppercase leading-[0.85] tracking-tight text-white mb-10 relative z-30 pointer-events-none"
+                className="text-3xl md:text-4xl lg:text-5xl xl:text-[5rem] font-bold uppercase leading-[0.85] tracking-tight text-white mb-10 relative z-30 pointer-events-none"
               >
                 <div className="overflow-hidden w-[150%]">
                   <motion.span variants={maskVars} className="block whitespace-nowrap">Precision</motion.span>

@@ -8,7 +8,7 @@ import Specs from "./components/Specs";
 import Services from "./components/Services";
 import LogoMarquee from "./components/LogoMarquee";
 import Success from "./components/Success";
-import Gallery from "./components/Gallery";
+
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -61,7 +61,7 @@ function App() {
           <Specs />
           
           <VideoReveal />
-          {/* <Gallery /> */}
+
           <LogoMarquee />
 
           <Success />
