@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import TechGrid from './TechGrid';
 
 const MechanicalPart = () => {
   const containerRef = useRef(null);
@@ -124,13 +125,7 @@ const MechanicalPart = () => {
       // Full Rotation Finale
       .to(partGroup.rotation, { y: Math.PI * 2, x: 0, duration: 2 }, "+=1");
 
-      // Background Line Animation
-      gsap.to(".bg-grid-three", {
-        opacity: 0.15,
-        duration: 1,
-        repeat: -1,
-        yoyo: true
-      });
+      // Background Line Animation - Removed Pulsing
 
       // Render Loop
       let animationId;
@@ -165,13 +160,7 @@ const MechanicalPart = () => {
 
   return (
     <div ref={containerRef} className="relative bg-[#080808] min-h-[500vh] text-white font-sans selection:bg-[#FFC800] selection:text-[#080808] z-10">
-      {/* Swiss Technical Grid */}
-      <div className="bg-grid-three fixed inset-0 opacity-5 pointer-events-none z-10" 
-           style={{ 
-             backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', 
-             backgroundSize: '80px 80px' 
-           }}>
-      </div>
+      <TechGrid opacity="opacity-80" maskPosition="center center" />
 
       {/* Main Drawing Area */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -179,55 +168,55 @@ const MechanicalPart = () => {
       </div>
 
       {/* Perspective Info Sections (The text that moves up and down) */}
-      <div className="relative z-30 pointer-events-none">
-          <section className="h-screen flex items-center p-6 md:p-20">
+      <div className="relative z-30 pointer-events-none max-w-[1700px] mx-auto w-full">
+          <section className="h-screen flex items-center p-6 md:p-8 lg:p-12">
               <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
                   <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
-                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 01 //</span>
-                      <div className="text-[8px] font-mono text-right uppercase opacity-60">Status: Nominal</div>
+                      <span className="text-tech-label font-mono font-bold">Perspective 01 //</span>
+                      <div className="text-[9px] font-mono text-right opacity-60 tracking-blueprint">Status: Nominal</div>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">Profile<br/>View</h2>
-                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                  <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none mb-4">Profile<br/>View</h2>
+                  <p className="text-[#1a1a1a] font-mono text-fluid-body tracking-tight">
                       Initial orientation showcasing longitudinal axis and primary flange depth.
                   </p>
               </div>
           </section>
           
-          <section className="h-screen flex items-center justify-end p-6 md:p-20">
+          <section className="h-screen flex items-center justify-end p-6 md:p-8 lg:p-12">
               <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl text-right">
                   <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
-                      <div className="text-[8px] font-mono text-left uppercase opacity-60">Status: Nominal</div>
-                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 02 //</span>
+                      <div className="text-[9px] font-mono text-left opacity-60 tracking-blueprint">Status: Nominal</div>
+                      <span className="text-tech-label font-mono font-bold">Perspective 02 //</span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">Radial<br/>Core</h2>
-                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                  <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none mb-4">Radial<br/>Core</h2>
+                  <p className="text-[#1a1a1a] font-mono text-fluid-body tracking-tight">
                       90° rotation. Visualization of the concentric bore and keyway alignment.
                   </p>
               </div>
           </section>
 
-          <section className="h-screen flex items-center p-6 md:p-20">
+          <section className="h-screen flex items-center p-6 md:p-8 lg:p-12">
               <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
                   <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
-                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Perspective 03 //</span>
-                      <div className="text-[8px] font-mono text-right uppercase opacity-60">Status: Nominal</div>
+                      <span className="text-tech-label font-mono font-bold">Perspective 03 //</span>
+                      <div className="text-[9px] font-mono text-right opacity-60 tracking-blueprint">Status: Nominal</div>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none mb-4">ISO<br/>Dynamic</h2>
-                  <p className="text-[#1a1a1a] font-mono uppercase text-[10px] tracking-widest leading-relaxed">
+                  <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none mb-4">ISO<br/>Dynamic</h2>
+                  <p className="text-[#1a1a1a] font-mono text-fluid-body tracking-tight">
                       Isometric offset highlighting the intersection of horizontal and vertical planes.
                   </p>
               </div>
           </section>
 
-          <section className="h-screen flex items-center justify-center p-6 md:p-20">
+          <section className="h-screen flex items-center justify-center p-6 md:p-8 lg:p-12">
               <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
                   <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
-                      <span className="text-xs font-mono font-bold uppercase tracking-widest">Initiate //</span>
-                      <div className="text-[8px] font-mono text-right uppercase">
+                      <span className="text-tech-label font-mono font-bold">Initiate //</span>
+                      <div className="text-[9px] font-mono text-right tracking-blueprint">
                           Lat 42.00 N<br/>Lng 21.43 E
                       </div>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none">Begin<br/>Transmission</h2>
+                  <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none">Begin<br/>Transmission</h2>
                   <div className="mt-8 flex justify-end">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                   </div>

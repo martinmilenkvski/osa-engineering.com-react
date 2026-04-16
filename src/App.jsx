@@ -55,16 +55,19 @@ function App() {
         >
           <CustomCursor />
           <Header isLoading={isLoading} />
-          <Services />
+          <Specs />
+          <Success />
+          <LogoMarquee />
           <About />
           <MechanicalPart />
-          <Specs />
+          <Services />
+          
           
           <VideoReveal />
 
-          <LogoMarquee />
+          
 
-          <Success />
+          
           <FAQ />
           <Contact />
         </div>

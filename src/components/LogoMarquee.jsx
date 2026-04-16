@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import TechGrid from "./TechGrid";
 
 const LogoMarquee = () => {
   const ease = [0.16, 1, 0.3, 1];
@@ -50,31 +51,34 @@ const LogoMarquee = () => {
   ];
 
   return (
-    <section className="w-full bg-[#080808] border-t border-white/10 font-mono py-16 lg:py-32">
+    <section className="w-full bg-[#080808] border-t border-white/10 font-mono py-16 lg:py-32 relative overflow-hidden">
+      <TechGrid opacity="opacity-60" maskPosition="center center" />
       
       {/* --- TECHNICAL HEADER --- */}
       <motion.div 
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true, amount: 0.2 }}
-        className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
+        className="relative px-6 md:px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
       >
         <motion.div variants={lineExpandVars} className="absolute inset-0 bg-white/[0.02] origin-left z-0" />
         
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 w-full max-w-[1700px] mx-auto relative z-10">
         <motion.div variants={headerVars} className="flex items-center gap-4 relative z-10">
           <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
-          <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
+          <span className="text-tech-label font-bold text-white/80">
             Verified_Counterparties //
           </span>
         </motion.div>
         <motion.div variants={headerVars} className="flex gap-8 relative z-10">
-          <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
+          <span className="text-[11px] text-white/30 tracking-blueprint uppercase">
             Net_Status: Stable
           </span>
-          <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
+          <span className="text-[11px] text-[#FFC800]/50 tracking-blueprint uppercase hidden md:inline">
             Active_Nodes: {logos.length}
           </span>
         </motion.div>
+        </div>
       </motion.div>
 
       {/* --- LOGO GRID --- */}
@@ -92,7 +96,7 @@ const LogoMarquee = () => {
             className="bg-[#080808] relative flex flex-col items-center justify-center aspect-square lg:aspect-auto lg:h-[320px] group hover:bg-white/[0.02] transition-colors duration-500 overflow-hidden"
           >
             {/* Background ID */}
-            <span className="absolute top-4 left-6 text-[10px] text-white/10 font-bold tracking-[0.2em] leading-none group-hover:text-[#FFC800]/20 transition-colors">
+            <span className="absolute top-4 left-6 text-tech-label text-white/10 font-bold leading-none group-hover:text-[#FFC800]/20 transition-colors">
               PART_{logo.id}
             </span>
 
@@ -117,7 +121,7 @@ const LogoMarquee = () => {
 
             {/* Status Footer */}
             <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <span className="text-[8px] text-[#FFC800] uppercase tracking-[0.3em]">
+              <span className="text-[9px] text-[#FFC800] uppercase tracking-blueprint">
                 Verified
               </span>
             </div>
@@ -134,24 +138,26 @@ const LogoMarquee = () => {
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true, amount: 0.2 }}
-        className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
+        className="relative px-6 md:px-8 lg:px-12 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-y border-white/10 overflow-hidden"
       >
         <motion.div variants={lineExpandVars} className="absolute inset-0 bg-white/[0.02] origin-left z-0" />
 
-        <motion.div variants={headerVars} className="flex items-center gap-4 relative z-10">
-          <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
-          <span className="text-xs font-bold text-white/80 uppercase tracking-[0.2em]">
-            Verified_Counterparties //
-          </span>
-        </motion.div>
-        <motion.div variants={headerVars} className="flex gap-8 relative z-10">
-          <span className="text-[10px] text-white/30 tracking-[0.3em] uppercase">
-            Net_Status: Stable
-          </span>
-          <span className="text-[10px] text-[#FFC800]/50 tracking-[0.3em] uppercase hidden md:inline">
-            Active_Nodes: {logos.length}
-          </span>
-        </motion.div>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 w-full max-w-[1700px] mx-auto relative z-10">
+          <motion.div variants={headerVars} className="flex items-center gap-4 relative z-10">
+            <div className="w-2 h-2 bg-[#FFC800] animate-pulse"></div>
+            <span className="text-tech-label font-bold text-white/80">
+              Verified_Counterparties //
+            </span>
+          </motion.div>
+          <motion.div variants={headerVars} className="flex gap-8 relative z-10">
+            <span className="text-[11px] text-white/30 tracking-blueprint uppercase">
+              Net_Status: Stable
+            </span>
+            <span className="text-[11px] text-[#FFC800]/50 tracking-blueprint uppercase hidden md:inline">
+              Active_Nodes: {logos.length}
+            </span>
+          </motion.div>
+        </div>
       </motion.div>
 
     </section>

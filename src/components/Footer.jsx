@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Plus } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import ScrambleText from "./ScrambleText";
+import TechGrid from "./TechGrid";
 
 const Footer = React.forwardRef((props, ref) => {
   const localRef = useRef(null);
@@ -54,37 +55,40 @@ const Footer = React.forwardRef((props, ref) => {
       <motion.div variants={lineXVars} className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left" />
       
       {/* Massive CTA */}
-      <div className="px-8 lg:px-12 pt-20 pb-20 lg:pt-32 lg:pb-40 relative overflow-hidden">
-        <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-12">
-          <span className="text-[#FFC800] font-mono text-xs">INDEX [99]</span>
-          <div className="h-px w-8 bg-[#FFC800]"></div>
-          <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">End_Of_Line</span>
-        </motion.div>
-        
-      <h2 className="text-[14vw] sm:text-[12vw] lg:text-[14vw] font-bold leading-[0.85] tracking-normal uppercase text-white/10 cursor-default">
-          <div className="overflow-hidden pb-2 lg:pb-4">
-            <motion.span variants={textRevealVars} className="block">
-              <ScrambleText text="Engineering" trigger={isUncovered} speed={0.2} />
-            </motion.span>
-          </div>
-          <div className="overflow-hidden pb-2 lg:pb-4">
-            <motion.span variants={textRevealVars} className="block text-[#FFC800]">
-              <ScrambleText text="Integrity" trigger={isUncovered} speed={0.2} /><motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}>.</motion.span>
-            </motion.span>
-          </div>
-        </h2>
+      <div className="px-6 md:px-8 lg:px-12 pt-20 pb-20 lg:pt-32 lg:pb-40 relative overflow-hidden">
+        <div className="w-full max-w-[1700px] mx-auto relative">
+          <TechGrid opacity="opacity-60" maskPosition="center top" />
+          <motion.div variants={fadeUpVars} className="flex items-center gap-3 mb-12">
+            <span className="text-[#FFC800] font-mono text-tech-label">INDEX [99]</span>
+            <div className="h-px w-8 bg-[#FFC800]"></div>
+            <span className="text-tech-label font-mono text-white/30">End_Of_Line //</span>
+          </motion.div>
+          
+          <h2 className="text-[14vw] sm:text-[12vw] lg:text-[14vw] font-bold leading-none tracking-tightest uppercase text-white/10 cursor-default">
+            <div className="overflow-hidden pb-2 lg:pb-4">
+              <motion.span variants={textRevealVars} className="block">
+                <ScrambleText text="Engineering" trigger={isUncovered} speed={0.2} />
+              </motion.span>
+            </div>
+            <div className="overflow-hidden pb-2 lg:pb-4">
+              <motion.span variants={textRevealVars} className="block text-[#FFC800]">
+                <ScrambleText text="Integrity" trigger={isUncovered} speed={0.2} /><motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}>.</motion.span>
+              </motion.span>
+            </div>
+          </h2>
 
-        {/* Technical Corner Brackets */}
-        <motion.div variants={fadeUpVars} className="absolute top-12 right-12 w-8 h-8 pointer-events-none hidden lg:block">
-          <div className="absolute top-0 right-0 w-[1px] h-4 bg-white/20"></div>
-          <div className="absolute top-0 right-0 h-[1px] w-4 bg-white/20"></div>
-        </motion.div>
+          {/* Technical Corner Brackets */}
+          <motion.div variants={fadeUpVars} className="absolute top-12 right-12 w-8 h-8 pointer-events-none hidden lg:block">
+            <div className="absolute top-0 right-0 w-[1px] h-4 bg-white/20"></div>
+            <div className="absolute top-0 right-0 h-[1px] w-4 bg-white/20"></div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Technical Grid Readout */}
       <motion.div 
         variants={containerVars}
-        className="relative flex flex-col lg:flex-row border-t border-white/5 lg:border-none"
+        className="relative flex flex-col lg:flex-row border-t border-white/5 lg:border-none max-w-[1700px] mx-auto"
       >
         <motion.div variants={lineXVars} className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left z-10 hidden lg:block" />
 
@@ -99,7 +103,7 @@ const Footer = React.forwardRef((props, ref) => {
               <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
                 O.S.A.<span className="text-[#FFC800]"></span>
               </span>
-              <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.5em] text-[#FFC800] uppercase mt-1">
+              <span className="text-tech-label font-mono tracking-blueprint text-[#FFC800] uppercase mt-1">
                 Engineering
               </span>
             </div>
@@ -107,12 +111,12 @@ const Footer = React.forwardRef((props, ref) => {
           </motion.div>
           
           <motion.div variants={fadeUpVars}>
-             <div className="font-mono text-xs lg:text-[10px] tracking-[0.3em] text-white/30 uppercase mb-6">Net_Links //</div>
+             <div className="font-mono text-tech-label font-bold text-white/30 uppercase mb-6">Net_Links //</div>
              <div className="flex flex-col gap-6 lg:gap-4">
-                <a href="#" className="text-sm lg:text-xs font-mono tracking-widest text-white/60 hover:text-[#FFC800] transition-colors flex items-center gap-3">
+                <a href="#" className="text-fluid-body font-mono tracking-tight text-white/60 hover:text-[#FFC800] transition-colors flex items-center gap-3">
                   <Plus size={12} className="text-[#FFC800]/50" /> [ INSTAGRAM ]
                 </a>
-                <a href="#" className="text-sm lg:text-xs font-mono tracking-widest text-white/60 hover:text-[#FFC800] transition-colors flex items-center gap-3">
+                <a href="#" className="text-fluid-body font-mono tracking-tight text-white/60 hover:text-[#FFC800] transition-colors flex items-center gap-3">
                   <Plus size={12} className="text-[#FFC800]/50" /> [ LINKEDIN ]
                 </a>
              </div>
@@ -124,8 +128,8 @@ const Footer = React.forwardRef((props, ref) => {
           <motion.div variants={lineYVars} className="hidden lg:block absolute top-0 bottom-0 right-0 w-px bg-white/10 origin-top" />
 
           <motion.div variants={fadeUpVars}>
-            <div className="font-mono text-xs lg:text-[10px] tracking-[0.3em] text-white/30 uppercase mb-6">Base // Logistics</div>
-            <div className="text-base lg:text-sm text-white/60 uppercase leading-normal font-normal tracking-tight space-y-2 lg:space-y-1">
+            <div className="font-mono text-tech-label font-bold text-white/30 uppercase mb-6">Base // Logistics</div>
+            <div className="text-fluid-body text-white/60 font-mono tracking-tight space-y-2 lg:space-y-1">
               <p>11-ti Oktomvri No. 41/2-7</p>
               <p>Skopje, 1000</p>
               <p>Republic of Macedonia</p>
@@ -138,9 +142,9 @@ const Footer = React.forwardRef((props, ref) => {
                  transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
                  className="w-1.5 h-1.5 bg-[#FFC800] rounded-full"
                ></motion.div>
-               <span className="font-mono text-[10px] lg:text-[8px] text-white/60 tracking-widest uppercase">HQ_Online</span>
+               <span className="font-mono text-tech-label text-white/60 uppercase">HQ_Online</span>
             </div>
-            <div className="font-mono text-xs lg:text-[10px] text-[#FFC800]/50 tracking-widest uppercase block">VAT: 4080016551877</div>
+            <div className="font-mono text-tech-label text-[#FFC800]/50 uppercase block">VAT: 4080016551877</div>
           </motion.div>
         </div>
 
@@ -149,23 +153,23 @@ const Footer = React.forwardRef((props, ref) => {
           <motion.div variants={lineYVars} className="hidden lg:block absolute top-0 bottom-0 right-0 w-px bg-white/10 origin-top" />
           
           <motion.div variants={fadeUpVars}>
-            <div className="font-mono text-xs lg:text-[10px] tracking-[0.3em] text-white/30 uppercase mb-6">Direct // Uplink</div>
+            <div className="font-mono text-tech-label font-bold text-white/30 uppercase mb-6">Direct // Uplink</div>
             <div className="space-y-8 lg:space-y-6">
               <div>
-                <p className="text-xs lg:text-[10px] font-mono text-white/20 uppercase mb-2 tracking-widest">Primary_Terminal</p>
-                <a href="tel:+38975488726" className="text-xl lg:text-lg font-light tracking-normal text-white hover:text-[#FFC800] transition-colors flex items-center gap-2">
+                <p className="text-tech-label font-mono text-white/20 mb-2">Primary_Terminal</p>
+                <a href="tel:+38975488726" className="text-fluid-h3 font-bold tracking-tightest text-white hover:text-[#FFC800] transition-colors flex items-center gap-2">
                    <span className="text-[#FFC800] text-sm lg:text-xs opacity-50">{'>'}</span> +389 75 488 726
                 </a>
               </div>
               <div>
-                <p className="text-xs lg:text-[10px] font-mono text-white/20 uppercase mb-2 tracking-widest">Backup_Terminal</p>
-                <a href="tel:+38970268809" className="text-xl lg:text-lg font-light tracking-normal text-white hover:text-[#FFC800] transition-colors flex items-center gap-2">
+                <p className="text-tech-label font-mono text-white/20 mb-2">Backup_Terminal</p>
+                <a href="tel:+38970268809" className="text-fluid-h3 font-bold tracking-tightest text-white hover:text-[#FFC800] transition-colors flex items-center gap-2">
                    <span className="text-[#FFC800] text-sm lg:text-xs opacity-50">{'>'}</span> +389 70 268 809
                 </a>
               </div>
               <div>
-                <p className="text-xs lg:text-[10px] font-mono text-white/20 uppercase mb-2 tracking-widest">Secure_Data</p>
-                <a href="mailto:contact@osa-engineering.com" className="text-base lg:text-sm font-light tracking-normal text-white hover:text-[#FFC800] transition-colors border-b border-white/20 hover:border-[#FFC800] pb-1">
+                <p className="text-tech-label font-mono text-white/20 mb-2">Secure_Data</p>
+                <a href="mailto:contact@osa-engineering.com" className="text-fluid-body font-bold tracking-tightest text-white hover:text-[#FFC800] transition-colors border-b border-white/20 hover:border-[#FFC800] pb-1">
                   contact@osa-engineering.com
                 </a>
               </div>
@@ -177,10 +181,10 @@ const Footer = React.forwardRef((props, ref) => {
         {/* Technical Navigation */}
         <div className="w-full lg:w-1/4 p-8 lg:p-12 flex flex-col justify-between gap-12">
           <motion.div variants={fadeUpVars}>
-            <div className="font-mono text-xs lg:text-[10px] tracking-[0.3em] text-white/30 uppercase mb-6">Architecture // Nav</div>
+            <div className="font-mono text-tech-label font-bold text-white/30 uppercase mb-6">Architecture // Nav</div>
             <div className="flex flex-col gap-6 lg:gap-4">
               {['SERVICES', 'SUCCESS', 'GALLERY', 'FAQ'].map((link) => (
-                <a key={link} href={`#${link.toLowerCase()}`} className="text-base lg:text-sm font-bold tracking-[0.2em] text-white/40 hover:text-[#FFC800] transition-colors flex items-center gap-3 group w-fit">
+                <a key={link} href={`#${link.toLowerCase()}`} className="text-fluid-body font-bold tracking-tightest text-white/40 hover:text-[#FFC800] transition-colors flex items-center gap-3 group w-fit">
                   <div className="w-4 h-px bg-white/20 group-hover:bg-[#FFC800] transition-colors"></div>
                   {link === 'FAQ' ? 'QUERY_LOGS' : link}
                 </a>
@@ -193,11 +197,12 @@ const Footer = React.forwardRef((props, ref) => {
       {/* System Status Bar */}
       <motion.div 
         variants={containerVars}
-        className="relative px-8 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#080808]"
+        className="relative px-6 md:px-8 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#080808]"
       >
+        <div className="w-full max-w-[1700px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <motion.div variants={lineXVars} className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left" />
         
-        <motion.div variants={fadeUpVars} className="text-xs lg:text-[10px] text-white/30 uppercase leading-normal font-normal tracking-[0.3em] text-center md:text-left">
+        <motion.div variants={fadeUpVars} className="text-tech-label text-white/30 uppercase leading-none text-center md:text-left">
           © {new Date().getFullYear()} O.S.A Engineering // Reductive Protocols Verified
         </motion.div>
         <motion.div variants={fadeUpVars} className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 mt-4 lg:mt-0">
@@ -207,11 +212,12 @@ const Footer = React.forwardRef((props, ref) => {
                 transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
                 className="w-1.5 h-1.5 rounded-full bg-[#FFC800]"
               ></motion.div>
-              <span className="font-mono text-xs lg:text-[10px] text-white/50 uppercase tracking-widest">Core_Active</span>
+              <span className="font-mono text-tech-label text-white/50 uppercase">Core_Active</span>
            </div>
            <Plus size={12} className="text-white/20 hidden lg:block" />
-           <div className="font-mono text-xs lg:text-[10px] text-white/30 uppercase tracking-widest">V.2.4.1_SYS</div>
+           <div className="font-mono text-tech-label text-white/30 uppercase">V.2.4.1_SYS</div>
         </motion.div>
+        </div>
       </motion.div>
     </motion.footer>
   );

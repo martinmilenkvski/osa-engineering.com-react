@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ScrambleText from "./ScrambleText";
+import TechGrid from "./TechGrid";
 
 const About = () => {
   const ease = [0.16, 1, 0.3, 1];
@@ -61,6 +62,7 @@ const About = () => {
 
   return (
     <section id="about" className="relative w-full bg-[#080808] overflow-hidden z-20 border-t border-white/5">
+      <TechGrid opacity="opacity-65" maskPosition="center center" />
 
       <div className="relative w-full max-w-[1700px] mx-auto px-6 md:px-8 lg:px-12 py-32 lg:py-48">
 
@@ -83,14 +85,14 @@ const About = () => {
                   transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
                   className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)]"
                 ></motion.div>
-                <span className="font-mono text-[10px] tracking-[0.3em] text-[#FFC800] uppercase">
+                <span className="font-mono text-tech-label text-[#FFC800]">
                   <ScrambleText text="System_Status: Operational" trigger={isSectionInView} speed={0.3} />
                 </span>
               </motion.div>
 
               {/* Main Headline - Cinematic Mask Reveal with Overlap (No Clamping) */}
               <motion.h2 
-                className="text-3xl md:text-4xl lg:text-5xl xl:text-[5rem] font-bold uppercase leading-[0.85] tracking-tight text-white mb-10 relative z-30 pointer-events-none"
+                className="text-fluid-h2 font-bold uppercase leading-none tracking-tightest text-white mb-10 relative z-30 pointer-events-none"
               >
                 <div className="overflow-hidden w-[150%]">
                   <motion.span variants={maskVars} className="block whitespace-nowrap">Precision</motion.span>
@@ -104,7 +106,7 @@ const About = () => {
               <motion.p 
                 variants={highDetailFade}
                 transition={{ duration: 1.8, delay: 0.6, ease }}
-                className="text-sm md:text-base text-white/60 uppercase leading-[1.8] font-mono tracking-tight max-w-lg mb-12"
+                className="text-fluid-body text-white/60 uppercase font-mono tracking-tight max-w-lg mb-12"
               >
                 We do not simply manufacture; we architect the microscopic. Our process begins where others find their limits. By utilizing ultra-high-speed CNC machining and EDM wire technology, we maintain tolerances that define the industry standard for aerospace and clinical applications.
               </motion.p>
@@ -113,15 +115,15 @@ const About = () => {
               <motion.div variants={highDetailFade} className="flex items-center gap-4">
                 <div className="w-2 h-2 bg-[#FFC800] rounded-full"></div>
                 <div className="h-px w-12 bg-white/20"></div>
-                <span className="font-mono text-[10px] tracking-[0.25em] text-white/30 uppercase">
+                <span className="font-mono text-tech-label text-white/30">
                   Sub_Index [001] // SKP_Operations
                 </span>
               </motion.div>
 
               {/* Coordinates */}
               <motion.div variants={highDetailFade} className="mt-6 flex gap-8 mb-16">
-                <span className="font-mono text-[9px] tracking-widest text-white/20 uppercase">Coord_X: 41.9981° N</span>
-                <span className="font-mono text-[9px] tracking-widest text-white/20 uppercase">Coord_Y: 21.4254° E</span>
+                <span className="font-mono text-[9px] tracking-blueprint text-white/20 uppercase">Coord_X: 41.9981° N</span>
+                <span className="font-mono text-[9px] tracking-blueprint text-white/20 uppercase">Coord_Y: 21.4254° E</span>
               </motion.div>
             </motion.div>
 
@@ -156,10 +158,10 @@ const About = () => {
               variants={highDetailFade}
               className="mt-8 max-w-md"
             >
-              <h4 className="font-mono text-[10px] tracking-[0.3em] text-[#FFC800] uppercase mb-4">
+              <h4 className="font-mono text-tech-label font-bold text-[#FFC800] mb-4">
                 <ScrambleText text="Production // Infrastructure" trigger={isSectionInView} speed={0.3} />
               </h4>
-              <p className="text-xs md:text-sm text-white/40 uppercase font-mono tracking-tight leading-relaxed">
+              <p className="text-fluid-body text-white/40 uppercase font-mono tracking-tight">
                 Utilizing high-speed CNC centers and EDM wire technology, our production line maintains a constant environment for material stability and micrometer-level calibration.
               </p>
             </motion.div>
@@ -188,13 +190,13 @@ const About = () => {
 
               {/* Technical Data Overlay — Top Right */}
               <div className="absolute top-6 right-6 text-right space-y-1">
-                <div className="font-mono text-[9px] tracking-widest text-white/70 uppercase">
+                <div className="font-mono text-[9px] tracking-blueprint text-white/70">
                   Tolerance: <span className="text-[#FFC800]">±0.005MM</span>
                 </div>
-                <div className="font-mono text-[9px] tracking-widest text-white/70 uppercase">
+                <div className="font-mono text-[9px] tracking-blueprint text-white/70">
                   Material: <span className="text-white/50">Ti-6Al-4V</span>
                 </div>
-                <div className="font-mono text-[9px] tracking-widest text-white/70 uppercase">
+                <div className="font-mono text-[9px] tracking-blueprint text-white/70">
                   Finish: <span className="text-white/50">RA 0.4</span>
                 </div>
               </div>
@@ -211,8 +213,8 @@ const About = () => {
 
               {/* Bottom Coordinates */}
               <div className="absolute bottom-6 left-6 flex flex-col gap-1">
-                <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase">Coord_X: 41.9981° N</span>
-                <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase">Coord_Y: 21.4254° E</span>
+                <span className="font-mono text-[8px] tracking-blueprint text-white/40 uppercase">Coord_X: 41.9981° N</span>
+                <span className="font-mono text-[8px] tracking-blueprint text-white/40 uppercase">Coord_Y: 21.4254° E</span>
               </div>
             </motion.div>
           </div>

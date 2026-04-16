@@ -47,7 +47,7 @@ const cardData = [
     subtitle: "Continuous optimization and maintenance.",
     stat1Value: "24/7",
     stat1Label: "Support",
-    stat2Value: "30 min",
+    stat2Value: "30 m",
     stat2Label: "Response Time",
     description:
       "Commitment to excellence beyond the production line with comprehensive support and predictive maintenance systems.",

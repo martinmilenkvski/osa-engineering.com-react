@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import TechGrid from "./TechGrid";
 
 const Specs = () => {
   const containerRef = useRef(null);
@@ -22,9 +23,9 @@ const Specs = () => {
 
   // Dot matrix decorative element
   const DotMatrixSquare = () => (
-    <div className="grid grid-cols-3 gap-[2px] opacity-80">
+    <div className="grid grid-cols-3 gap-1">
        {[...Array(9)].map((_, i) => (
-         <div key={i} className="w-1.5 h-1.5 bg-current rounded-full" />
+         <div key={i} className="w-[3px] h-[3px] bg-current rounded-full" />
        ))}
     </div>
   );
@@ -35,7 +36,7 @@ const Specs = () => {
       ref={containerRef}
       className="relative w-full bg-[#080808] z-20 py-24 lg:py-48 overflow-hidden"
     >
-      <div className="w-full max-w-[1500px] mx-auto px-4 md:px-8 lg:px-12">
+      <div className="w-full max-w-[1700px] mx-auto px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 lg:h-[850px]">
           
           {/* Card 01: MILLING (Left Column) */}
@@ -43,16 +44,15 @@ const Specs = () => {
             style={{ x: x1 }}
             className="bg-[#FFC800] rounded-none p-8 flex flex-col justify-between h-full relative overflow-hidden shadow-2xl shadow-black/10 group"
           >
-             {/* Dotted sphere effect fake at middle/bottom */}
-             <div className="absolute inset-0 pointer-events-none opacity-[0.8]" style={{ background: "radial-gradient(circle at 50% 120%, rgba(0,0,0,0.03) 0%, transparent 50%)", backgroundImage: "radial-gradient(rgba(0,0,0,0.05) 1.5px, transparent 1px)", backgroundSize: "14px 14px" }} />
+             <TechGrid dotColor="rgba(0,0,0,0.25)" opacity="opacity-60" maskPosition="center center" />
              
              <div className="relative z-10">
                 <div className="flex justify-between items-start">
                    <div className="flex flex-col">
-                      <span className="text-[10px] font-mono font-bold text-black tracking-[0.2em] uppercase mb-1">
+                      <span className="text-tech-label font-mono font-bold text-black mb-1">
                         INITIATE //
                       </span>
-                      <h2 className="text-7xl font-mono tracking-tighter text-black font-bold leading-none">
+                      <h2 className="text-fluid-h2 font-mono tracking-tightest text-black font-bold leading-none">
                          01
                       </h2>
                    </div>
@@ -60,7 +60,7 @@ const Specs = () => {
                      <ArrowRight size={20} />
                    </div>
                 </div>
-                <p className="mt-10 text-black/80 font-mono text-base lg:text-sm leading-normal uppercase tracking-tight max-w-[300px]">
+                <p className="mt-10 text-black/80 font-mono text-fluid-body tracking-tight max-w-[340px]">
                    TURNING TODAY'S AMBITIONS INTO TOMORROW'S REALITIES THROUGH HYPER-SPEED 5-AXIS CNC MANUFACTURING.
                 </p>
              </div>
@@ -68,7 +68,7 @@ const Specs = () => {
              {/* Bottom nested blocks */}
              <div className="relative z-10 flex flex-col gap-4 mt-16 lg:mt-auto">
                 <div className="bg-black/5 rounded-none p-6 flex justify-between items-center group/btn hover:bg-black/10 transition-colors border border-black/5">
-                   <span className="text-black font-mono font-bold text-[11px] tracking-[0.1em] leading-tight uppercase">TOMORROW DOESN'T WAIT. NEITHER DO WE.</span>
+                   <span className="text-black font-mono font-bold text-tech-label leading-tight">TOMORROW DOESN'T WAIT. NEITHER DO WE.</span>
                    <div className="w-8 h-8 rounded-none bg-black text-[#FFC800] flex items-center justify-center">
                       <span className="text-xs font-bold">W</span>
                    </div>
@@ -78,7 +78,7 @@ const Specs = () => {
                       <p className="font-mono text-[10px] uppercase text-black/60 tracking-tight leading-relaxed">
                          MILLING IS WHERE AMBITION MEETS PRECISION. WITH A VISION BUILT ON EXACTNESS, WE CREATE SOLUTIONS THAT REDEFINE CAPABILITY.
                       </p>
-                      <h3 className="font-mono text-xl font-bold text-black mt-2">SYS_01</h3>
+                      <h3 className="font-mono text-fluid-h3 font-bold text-black mt-2">SYS_01</h3>
                    </div>
                    <div className="col-span-2 bg-black/5 rounded-none p-6 flex items-end justify-start h-36 border border-black/5">
                       <h3 className="font-mono text-xl font-bold text-black uppercase">V_01</h3>
@@ -92,25 +92,19 @@ const Specs = () => {
             style={{ y: y2 }}
             className="bg-[#111111] border border-white/10 rounded-none p-8 lg:p-10 flex flex-col justify-between h-full relative overflow-hidden shadow-2xl shadow-black/80 group"
           >
-             {/* Dotted dark sphere effect */}
-             <div className="absolute inset-0 pointer-events-none opacity-50" style={{ 
-               backgroundImage: "radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px)", 
-               backgroundSize: "12px 12px", 
-               maskImage: "radial-gradient(ellipse at center bottom, rgba(0,0,0,1) 10%, transparent 60%)", 
-               WebkitMaskImage: "radial-gradient(ellipse at center bottom, rgba(0,0,0,1) 10%, transparent 60%)" 
-             }} />
+             <TechGrid dotColor="rgba(255,255,255,0.15)" opacity="opacity-50" maskPosition="center bottom" />
              
              <div className="relative z-10 space-y-8 max-w-[340px]">
                 <div className="flex flex-col">
-                   <span className="text-[10px] font-mono font-bold text-[#FFC800] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                   <span className="text-tech-label font-mono font-bold text-[#FFC800] mb-4 flex items-center gap-2">
                      <span className="w-1.5 h-1.5 bg-[#FFC800] rounded-full animate-pulse"></span>
                      LIVE_CALIBRATION //
                    </span>
-                   <p className="text-white font-mono text-base lg:text-lg leading-snug uppercase tracking-tight">
+                   <p className="text-white font-mono text-fluid-h3 leading-tight tracking-tightest">
                       AT OSA, WE BELIEVE PRECISION TURNING IS NOT SOMETHING WE WAIT FOR—IT'S SOMETHING WE CALIBRATE.
                    </p>
                 </div>
-                <p className="text-white/50 font-mono text-xs lg:text-sm leading-relaxed uppercase tracking-tight">
+                <p className="text-white/50 font-mono text-fluid-body tracking-tight">
                    WE ARE DRIVEN BY TOLERANCE VERIFIED SYSTEMS, GUIDED BY VISION, AND POWERED BY PRECISION ENGINEERING.
                 </p>
                 <p className="text-white/30 font-mono text-[10px] lg:text-[11px] leading-relaxed uppercase tracking-wider">
@@ -118,12 +112,12 @@ const Specs = () => {
                 </p>
              </div>
 
-             <div className="relative z-10 flex items-end gap-3 mt-16 lg:mt-auto">
-                <div className="text-white/80 pb-1">
+             <div className="relative z-10 flex items-center gap-4 mt-16 lg:mt-auto">
+                <div className="text-white">
                    <DotMatrixSquare />
                 </div>
-                <h2 className="text-6xl font-mono tracking-tighter text-white font-bold leading-none">
-                  / 02
+                <h2 className="text-fluid-h2 font-mono tracking-tightest text-white font-bold leading-none">
+                  A / 02
                 </h2>
              </div>
           </motion.div>
@@ -160,15 +154,16 @@ const Specs = () => {
              </div>
 
              {/* Section 3: INQUIRY */}
-             <div className="bg-[#f2f2f2] rounded-none p-8 flex-grow flex flex-col justify-between shadow-inner shrink-0 h-[35%]">
-                <div className="flex items-center gap-3">
-                   <div className="text-black/80">
-                      <DotMatrixSquare />
-                   </div>
-                   <h2 className="text-4xl font-mono tracking-tighter text-black font-bold leading-none uppercase">
-                     W / 04
-                   </h2>
-                </div>
+             <div className="bg-[#f2f2f2] rounded-none p-8 flex-grow flex flex-col justify-between shadow-inner shrink-0 h-[35%] relative overflow-hidden">
+                <TechGrid dotColor="rgba(0,0,0,0.2)" opacity="opacity-50" maskPosition="center center" />
+                 <div className="flex items-center gap-4">
+                    <div className="text-black">
+                       <DotMatrixSquare />
+                    </div>
+                    <h2 className="text-4xl font-mono tracking-tighter text-black font-medium leading-none uppercase">
+                      W / 04
+                    </h2>
+                 </div>
                 <div className="flex flex-col gap-4">
                    <p className="text-black/60 font-mono text-[11px] leading-relaxed uppercase tracking-tight max-w-[90%]">
                       OUR EXPERTISE BLENDS STRATEGY, ADVANCED MECHANICAL DESIGN, AND TECHNOLOGY HELPING ORGANIZATIONS UNLOCK PRODUCTION GROWTH.

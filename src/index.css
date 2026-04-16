@@ -8,9 +8,18 @@
 
 :root {
   font-family: "Inter", system-ui, sans-serif;
-  line-height: 1.2;
+  line-height: 1.5;
   color: #f4f4f4;
   background-color: #080808;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+p {
+  text-transform: uppercase;
 }
 
 *, *::before, *::after {

@@ -2,13 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { ArrowUpRight, Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrambleText from "./ScrambleText";
+import TechGrid from "./TechGrid";
 
 const Header = ({ isLoading }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCtaHovered, setIsCtaHovered] = useState(false);
-  
+
   // --- CINEMATIC ANIMATION VARIANTS ---
-  
+
   // Custom premium easing
   const ease = [0.16, 1, 0.3, 1];
 
@@ -20,21 +21,21 @@ const Header = ({ isLoading }) => {
   // 5. Info blocks & CTA at 2.5s
 
   const navContainerVars = {
-    animate: { 
+    animate: {
       transition: { staggerChildren: 0.15, delayChildren: 1.5 }
     }
   };
 
   const titleContainerVars = {
-    animate: { 
+    animate: {
       transition: { staggerChildren: 0.2, delayChildren: 2.0 }
     }
   };
 
   const itemFadeUpVars = {
     initial: { opacity: 0, y: 30 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
       transition: { duration: 1.8, delay: 2.5, ease }
     }
@@ -42,8 +43,8 @@ const Header = ({ isLoading }) => {
 
   const ctaFadeInVars = {
     initial: { opacity: 0, y: 30 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
       transition: { duration: 1.8, delay: 3.0, ease }
     }
@@ -51,8 +52,8 @@ const Header = ({ isLoading }) => {
 
   const navItemVars = {
     initial: { opacity: 0, x: -20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       x: 0,
       transition: { duration: 1.5, ease }
     }
@@ -60,8 +61,8 @@ const Header = ({ isLoading }) => {
 
   const lineVars = {
     initial: { scaleX: 0, scaleY: 0 },
-    animate: { 
-      scaleX: 1, 
+    animate: {
+      scaleX: 1,
       scaleY: 1,
       transition: { duration: 2.5, ease }
     }
@@ -69,7 +70,7 @@ const Header = ({ isLoading }) => {
 
   const wordVars = {
     initial: { y: "110%" },
-    animate: { 
+    animate: {
       y: 0,
       transition: { duration: 1.8, ease }
     }
@@ -77,9 +78,9 @@ const Header = ({ isLoading }) => {
 
   const plusVars = {
     initial: { opacity: 0, scale: 0, rotate: -90 },
-    animate: { 
-      opacity: 1, 
-      scale: 1, 
+    animate: {
+      opacity: 1,
+      scale: 1,
       rotate: 0,
       transition: { duration: 1.2, delay: 1.2, ease }
     }
@@ -87,7 +88,7 @@ const Header = ({ isLoading }) => {
 
   const videoFadeVars = {
     initial: { opacity: 0 },
-    animate: { 
+    animate: {
       opacity: 0.6,
       transition: { duration: 3.5, delay: 0.8, ease: "linear" }
     }
@@ -95,18 +96,18 @@ const Header = ({ isLoading }) => {
 
   const cncActiveVars = {
     initial: { opacity: 0, x: 20 },
-    animate: { 
-      opacity: 1, 
-      x: 0, 
-      transition: { delay: 2.2, duration: 1, ease } 
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: { delay: 2.2, duration: 1, ease }
     }
   };
 
   const logoVars = {
     initial: { opacity: 0, y: -20 },
-    animate: { 
-      opacity: 1, 
-      y: 0, 
+    animate: {
+      opacity: 1,
+      y: 0,
       transition: { delay: 1, duration: 1, ease }
     }
   };
@@ -128,23 +129,23 @@ const Header = ({ isLoading }) => {
   ];
 
   return (
-    <motion.section 
+    <motion.section
       initial="initial"
       animate={isLoading ? "initial" : "animate"}
       className="min-h-[100svh] lg:h-screen w-full relative flex flex-col lg:block overflow-x-hidden lg:overflow-hidden bg-[#080808]"
     >
 
       {/* --- THE WIREFRAME: Editorial Grid Lines --- */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        <motion.div 
+      <div className="absolute inset-0 z-20 pointer-events-none max-w-[1700px] mx-auto w-full">
+        <motion.div
           variants={lineVars}
           className="absolute left-[35%] top-0 bottom-0 w-px bg-white/10 hidden lg:block origin-top"
         ></motion.div>
-        <motion.div 
+        <motion.div
           variants={lineVars}
           className="absolute left-[70%] top-0 bottom-0 w-px bg-white/10 hidden lg:block origin-top"
         ></motion.div>
-        <motion.div 
+        <motion.div
           variants={lineVars}
           className="absolute top-[65%] left-0 right-0 h-px bg-white/10 hidden lg:block origin-left"
         ></motion.div>
@@ -160,7 +161,7 @@ const Header = ({ isLoading }) => {
 
       {/* --- BACKGROUND VIDEO --- */}
       <div className="absolute inset-0 z-0 bg-[#080808]">
-        <motion.div 
+        <motion.div
           variants={videoFadeVars}
           className="w-full h-full"
         >
@@ -176,44 +177,47 @@ const Header = ({ isLoading }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/60 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent lg:hidden"></div>
 
-        <motion.div 
+        <motion.div
           variants={cncActiveVars}
           className="absolute top-8 right-6 lg:right-8 hidden lg:flex items-center gap-2 z-10"
         >
-          <motion.div 
-            animate={{ opacity: [1, 0.4, 1] }} 
+          <motion.div
+            animate={{ opacity: [1, 0.4, 1] }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
             className="w-1.5 h-1.5 bg-[#FFC800] rounded-full"
           ></motion.div>
-          <span className="text-[10px] lg:text-[13px] font-mono tracking-widest text-white/50 uppercase">CNC_Active</span>
+          <span className="text-tech-label font-mono text-white/50">CNC_Active</span>
         </motion.div>
       </div>
 
-      {/* --- NAVIGATION --- */}
-      <nav className="relative lg:absolute top-0 w-full flex items-start px-6 md:px-8 lg:px-12 py-6 lg:py-8 z-30 hero-element">
-        <motion.div 
+      {/* --- CONTENT BOUNDARY --- */}
+      <div className="relative w-full h-full max-w-[1700px] mx-auto flex flex-col lg:block">
+        
+        {/* --- NAVIGATION --- */}
+        <nav className="relative lg:absolute top-0 w-full flex items-start px-6 md:px-8 lg:px-12 py-6 lg:py-8 z-30 hero-element">
+        <motion.div
           variants={logoVars}
           className="w-[70%] lg:w-[35%] flex items-center gap-3"
         >
-          <img 
-            src="/logos/Logo-y.svg" 
-            alt="O.S.A Logo" 
+          <img
+            src="/logos/Logo-y.svg"
+            alt="O.S.A Logo"
             className="h-8 lg:h-10 w-auto object-contain"
           />
           <div className="flex flex-col">
             <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
               O.S.A.<span className="text-[#FFC800]"></span>
             </span>
-            <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.5em] text-[#FFC800] uppercase mt-1">
+            <span className="text-[10px] font-mono tracking-blueprint text-[#FFC800] uppercase mt-1">
               Engineering
             </span>
           </div>
         </motion.div>
 
         {/* Desktop Nav */}
-        <motion.div 
+        <motion.div
           variants={navContainerVars}
-          className="hidden lg:flex w-[35%] items-center gap-10 text-[13px] font-mono tracking-widest text-white/50 pl-8"
+          className="hidden lg:flex w-[35%] items-center gap-10 text-[11px] font-mono tracking-blueprint text-white/50 pl-8"
         >
           <motion.a variants={navItemVars} href="#services" className="hover:text-white transition-colors">/ SERVICES</motion.a>
           <motion.a variants={navItemVars} href="#success" className="hover:text-white transition-colors">/ SUCCESS</motion.a>
@@ -222,19 +226,19 @@ const Header = ({ isLoading }) => {
 
         {/* Mobile Menu Icon */}
         <div className="lg:hidden flex-1 flex justify-end">
-          <button 
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex flex-col gap-1.5 items-end group cursor-pointer"
           >
-            <motion.div 
+            <motion.div
               animate={isMenuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
               className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
             ></motion.div>
-            <motion.div 
+            <motion.div
               animate={isMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
               className="w-4 h-[1.5px] bg-white"
             ></motion.div>
-            <motion.div 
+            <motion.div
               animate={isMenuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
               className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
             ></motion.div>
@@ -252,43 +256,43 @@ const Header = ({ isLoading }) => {
             transition={{ duration: 0.8, ease }}
             className="fixed inset-0 z-[100] bg-[#050505] p-6 pt-32 flex flex-col gap-12 lg:hidden"
           >
-             {/* Large Nav Links */}
-             <div className="flex flex-col gap-6">
-               {menuLinks.map((link, idx) => (
-                 <motion.a
-                   key={idx}
-                   href={link.href}
-                   onClick={() => setIsMenuOpen(false)}
-                   initial={{ opacity: 0, x: -30 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
-                   className="text-5xl font-bold tracking-normal uppercase text-white/40 hover:text-[#FFC800] transition-colors"
-                 >
-                   {link.label}<span className="text-[#FFC800]">.</span>
-                 </motion.a>
-               ))}
-             </div>
+            {/* Large Nav Links */}
+            <div className="flex flex-col gap-6">
+              {menuLinks.map((link, idx) => (
+                <motion.a
+                  key={idx}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
+                  className="text-5xl font-bold tracking-normal uppercase text-white/40 hover:text-[#FFC800] transition-colors"
+                >
+                  {link.label}<span className="text-[#FFC800]">.</span>
+                </motion.a>
+              ))}
+            </div>
 
-             {/* Footer Info in Menu */}
-             <motion.div 
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{ delay: 0.6 }}
-               className="mt-auto border-t border-white/10 pt-8"
-             >
-                <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
-                <div className="space-y-4">
-                   <p className="text-[10px] text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">LAT 41.9981 // LNG 21.4254</p>
-                   <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
-                </div>
-             </motion.div>
+            {/* Footer Info in Menu */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-auto border-t border-white/10 pt-8"
+            >
+              <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
+              <div className="space-y-4">
+                <p className="text-[10px] text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">LAT 41.9981 // LNG 21.4254</p>
+                <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
+              </div>
+            </motion.div>
 
-             {/* Close Button UI Support */}
-             <div className="absolute top-6 right-6">
-                <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
-                   <X size={32} />
-                </button>
-             </div>
+            {/* Close Button UI Support */}
+            <div className="absolute top-6 right-6">
+              <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
+                <X size={32} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -298,34 +302,34 @@ const Header = ({ isLoading }) => {
 
         {/* Cinematic Title Reveal */}
         <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
-          <motion.h1 
+          <motion.h1
             variants={titleContainerVars}
-            className="text-fluid-h1 font-bold leading-[0.85] lg:leading-[0.9] tracking-normal uppercase text-white"
+            className="text-fluid-h1 font-bold leading-none tracking-tightest uppercase text-white"
           >
             <div className="overflow-hidden">
               <motion.span variants={wordVars} className="block">Precision</motion.span>
             </div>
             <div className="overflow-hidden">
-              <motion.span variants={wordVars} className="block text-white/40">Engineered.</motion.span>
+              <motion.span variants={wordVars} className="block text-white/30">Engineered.</motion.span>
             </div>
           </motion.h1>
         </div>
       </main>
 
       {/* Info Blocks - Slower Fade In */}
-      <motion.div 
+      <motion.div
         variants={itemFadeUpVars}
         className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] px-6 md:px-8 lg:px-12 py-8 lg:py-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
       >
-        <motion.div 
+        <motion.div
           variants={itemFadeUpVars}
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
         >
-          <span className="text-[#FFC800] text-xs lg:text-[10px] font-mono">01</span>
-          <span className="text-xs lg:text-[10px] font-bold tracking-widest uppercase text-white/70">Industrial</span>
+          <span className="text-[#FFC800] text-[10px] font-mono">01</span>
+          <span className="text-tech-label font-bold text-white/70">Industrial</span>
         </motion.div>
 
-        <p className="text-base lg:text-sm text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">
+        <p className="text-fluid-body text-white/50 uppercase font-mono tracking-tight max-w-sm">
           Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
         </p>
       </motion.div>
@@ -334,37 +338,39 @@ const Header = ({ isLoading }) => {
       <motion.a
         variants={itemFadeUpVars}
         href="#contact"
-        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] px-6 md:px-8 lg:px-12 py-8 lg:py-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline"
+        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] px-6 md:px-8 lg:px-12 py-8 lg:py-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline overflow-hidden"
         onMouseEnter={() => setIsCtaHovered(true)}
         onMouseLeave={() => setIsCtaHovered(false)}
       >
+        <TechGrid dotColor="rgba(0,0,0,0.25)" opacity="opacity-60" maskPosition="center center" />
         <div className="flex justify-between items-start">
-          <motion.span 
+          <motion.span
             variants={itemFadeUpVars}
-            className="font-mono text-xs lg:text-[10px] font-bold tracking-[0.2em]"
+            className="font-mono text-tech-label font-bold"
           >
             INITIATE //
           </motion.span>
-          <motion.div 
+          <motion.div
             variants={itemFadeUpVars}
-            className="font-mono text-xs lg:text-[10px] tracking-widest text-black/50 text-right"
+            className="font-mono text-tech-label text-black/50 text-right"
           >
-            LAT 41.9981<br/>LNG 21.4254
+            LAT 41.9981<br />LNG 21.4254
           </motion.div>
         </div>
 
         <div className="flex justify-between items-end mt-4 lg:mt-0">
-          <motion.h3 
+          <motion.h3
             variants={ctaFadeInVars}
-            className="text-4xl lg:text-5xl font-bold tracking-normal uppercase leading-[0.9]"
+            className="text-fluid-h3 font-bold tracking-tightest uppercase leading-none"
           >
-            <ScrambleText text="Begin" trigger={isCtaHovered} /><br/>
+            <ScrambleText text="Begin" trigger={isCtaHovered} /><br />
             <ScrambleText text="Transmission" trigger={isCtaHovered} />
           </motion.h3>
           <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />
         </div>
       </motion.a>
 
+      </div>
     </motion.section>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Play, Pause } from "lucide-react";
+import TechGrid from "./TechGrid";
 
 const VideoReveal = () => {
   const containerRef = useRef(null);
@@ -49,8 +50,9 @@ const VideoReveal = () => {
       ref={containerRef}
       className="relative w-full bg-[#080808] border-t border-white/5 py-32 lg:py-48 flex flex-col items-center overflow-hidden"
     >
+      <TechGrid opacity="opacity-60" maskPosition="center center" />
       {/* ── Structured Typography & Grid Lines ── */}
-      <div className="w-full px-6 md:px-8 lg:px-12 mb-16 lg:mb-24 flex justify-between items-end border-b border-white/5 pb-8">
+      <div className="w-full max-w-[1700px] mx-auto px-6 md:px-8 lg:px-12 mb-16 lg:mb-24 flex justify-between items-end border-b border-white/5 pb-8">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <div className="h-px w-8 bg-[#FFC800]" />
@@ -76,15 +78,16 @@ const VideoReveal = () => {
       </p>
 
       {/* ── Immersive Video Container block ── */}
-      <div className="w-full px-6 md:px-8 lg:px-12 relative flex justify-center z-10">
+      <div className="w-full max-w-[1700px] mx-auto px-6 md:px-8 lg:px-12 relative flex justify-center z-10">
         
         {/* Shutter Reveal Wrapper using clip-path */}
         <motion.div
           style={{ clipPath }}
-          className="relative w-full h-[60vh] lg:h-[85vh] bg-[#050505] overflow-hidden group cursor-pointer"
+          className="relative w-full h-[60vh] lg:h-[85vh] bg-[#050505] overflow-hidden group cursor-none"
           onClick={togglePlay}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          data-cursor={isPlaying ? "pause" : "play"}
         >
           {/* Animated Video Element */}
           <motion.video
@@ -136,23 +139,6 @@ const VideoReveal = () => {
               </div>
             </div>
           </div>
-
-          {/* Interactive Play/Pause Button (Centered, Glassmorphic) */}
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ 
-              scale: isHovered ? 1 : 0.9, 
-              opacity: isHovered ? 1 : 0 
-            }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/5 backdrop-blur-lg border border-white/10 rounded-full flex items-center justify-center text-white/80 z-20 pointer-events-none"
-          >
-            {isPlaying ? (
-              <Pause className="w-8 h-8 fill-current" />
-            ) : (
-              <Play className="w-8 h-8 fill-current ml-1" />
-            )}
-          </motion.div>
 
         </motion.div>
       </div>
