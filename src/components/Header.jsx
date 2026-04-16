@@ -15,20 +15,20 @@ const Header = ({ isLoading }) => {
 
   // Sequencing:
   // 1. Lines start at 0s
-  // 2. Crosshairs at 1.2s
-  // 3. Navigation at 1.5s (staggered)
-  // 4. Title words at 2.0s (staggered)
-  // 5. Info blocks & CTA at 2.5s
+  // 2. Crosshairs at 0.4s
+  // 3. Navigation at 0.5s (staggered)
+  // 4. Title words at 0.8s (staggered)
+  // 5. Info blocks & CTA at 1.2s
 
   const navContainerVars = {
     animate: {
-      transition: { staggerChildren: 0.15, delayChildren: 1.5 }
+      transition: { staggerChildren: 0.15, delayChildren: 0.5 }
     }
   };
 
   const titleContainerVars = {
     animate: {
-      transition: { staggerChildren: 0.2, delayChildren: 2.0 }
+      transition: { staggerChildren: 0.2, delayChildren: 0.8 }
     }
   };
 
@@ -37,7 +37,7 @@ const Header = ({ isLoading }) => {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1.8, delay: 2.5, ease }
+      transition: { duration: 1.8, delay: 1.2, ease }
     }
   };
 
@@ -46,7 +46,7 @@ const Header = ({ isLoading }) => {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1.8, delay: 3.0, ease }
+      transition: { duration: 1.8, delay: 1.5, ease }
     }
   };
 
@@ -82,7 +82,7 @@ const Header = ({ isLoading }) => {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: { duration: 1.2, delay: 1.2, ease }
+      transition: { duration: 1.2, delay: 0.4, ease }
     }
   };
 
@@ -90,7 +90,7 @@ const Header = ({ isLoading }) => {
     initial: { opacity: 0 },
     animate: {
       opacity: 0.6,
-      transition: { duration: 3.5, delay: 0.8, ease: "linear" }
+      transition: { duration: 3.5, delay: 0.0, ease: "linear" }
     }
   };
 
@@ -99,7 +99,7 @@ const Header = ({ isLoading }) => {
     animate: {
       opacity: 1,
       x: 0,
-      transition: { delay: 2.2, duration: 1, ease }
+      transition: { delay: 1.0, duration: 1, ease }
     }
   };
 
@@ -108,7 +108,7 @@ const Header = ({ isLoading }) => {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { delay: 1, duration: 1, ease }
+      transition: { delay: 0.2, duration: 1, ease }
     }
   };
 
@@ -192,183 +192,183 @@ const Header = ({ isLoading }) => {
 
       {/* --- CONTENT BOUNDARY --- */}
       <div className="relative w-full h-full max-w-[1700px] mx-auto flex flex-col lg:block">
-        
+
         {/* --- NAVIGATION --- */}
         <nav className="relative lg:absolute top-0 w-full flex items-start px-6 md:px-8 lg:px-12 py-6 lg:py-8 z-30 hero-element">
-        <motion.div
-          variants={logoVars}
-          className="w-[70%] lg:w-[35%] flex items-center gap-3"
-        >
-          <img
-            src="/logos/Logo-y.svg"
-            alt="O.S.A Logo"
-            className="h-8 lg:h-10 w-auto object-contain"
-          />
-          <div className="flex flex-col">
-            <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
-              O.S.A.<span className="text-[#FFC800]"></span>
-            </span>
-            <span className="text-[10px] font-mono tracking-blueprint text-[#FFC800] uppercase mt-1">
-              Engineering
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Desktop Nav */}
-        <motion.div
-          variants={navContainerVars}
-          className="hidden lg:flex w-[35%] items-center gap-10 text-[11px] font-mono tracking-blueprint text-white/50 pl-8"
-        >
-          <motion.a variants={navItemVars} href="#services" className="hover:text-white transition-colors">/ SERVICES</motion.a>
-          <motion.a variants={navItemVars} href="#success" className="hover:text-white transition-colors">/ SUCCESS</motion.a>
-          <motion.a variants={navItemVars} href="#gallery" className="hover:text-white transition-colors">/ GALLERY</motion.a>
-        </motion.div>
-
-        {/* Mobile Menu Icon */}
-        <div className="lg:hidden flex-1 flex justify-end">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex flex-col gap-1.5 items-end group cursor-pointer"
-          >
-            <motion.div
-              animate={isMenuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
-              className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
-            ></motion.div>
-            <motion.div
-              animate={isMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
-              className="w-4 h-[1.5px] bg-white"
-            ></motion.div>
-            <motion.div
-              animate={isMenuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
-              className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
-            ></motion.div>
-          </button>
-        </div>
-      </nav>
-
-      {/* --- MOBILE OVERLAY --- */}
-      <AnimatePresence>
-        {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.8, ease }}
-            className="fixed inset-0 z-[100] bg-[#050505] p-6 pt-32 flex flex-col gap-12 lg:hidden"
+            variants={logoVars}
+            className="w-[70%] lg:w-[35%] flex items-center gap-3"
           >
-            {/* Large Nav Links */}
-            <div className="flex flex-col gap-6">
-              {menuLinks.map((link, idx) => (
-                <motion.a
-                  key={idx}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
-                  className="text-5xl font-bold tracking-normal uppercase text-white/40 hover:text-[#FFC800] transition-colors"
-                >
-                  {link.label}<span className="text-[#FFC800]">.</span>
-                </motion.a>
-              ))}
+            <img
+              src="/logos/Logo-y.svg"
+              alt="O.S.A Logo"
+              className="h-8 lg:h-10 w-auto object-contain"
+            />
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold uppercase tracking-[0.15em] leading-none">
+                O.S.A.<span className="text-[#FFC800]"></span>
+              </span>
+              <span className="text-[10px] font-mono tracking-blueprint text-[#FFC800] uppercase mt-1">
+                Engineering
+              </span>
             </div>
+          </motion.div>
 
-            {/* Footer Info in Menu */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-auto border-t border-white/10 pt-8"
+          {/* Desktop Nav */}
+          <motion.div
+            variants={navContainerVars}
+            className="hidden lg:flex w-[35%] items-center gap-10 text-[11px] font-mono tracking-blueprint text-white/50 pl-8"
+          >
+            <motion.a variants={navItemVars} href="#services" className="hover:text-white transition-colors">/ SERVICES</motion.a>
+            <motion.a variants={navItemVars} href="#success" className="hover:text-white transition-colors">/ SUCCESS</motion.a>
+            <motion.a variants={navItemVars} href="#gallery" className="hover:text-white transition-colors">/ GALLERY</motion.a>
+          </motion.div>
+
+          {/* Mobile Menu Icon */}
+          <div className="lg:hidden flex-1 flex justify-end">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex flex-col gap-1.5 items-end group cursor-pointer"
             >
-              <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
-              <div className="space-y-4">
-                <p className="text-[10px] text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">LAT 41.9981 // LNG 21.4254</p>
-                <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
+              <motion.div
+                animate={isMenuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
+                className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
+              ></motion.div>
+              <motion.div
+                animate={isMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
+                className="w-4 h-[1.5px] bg-white"
+              ></motion.div>
+              <motion.div
+                animate={isMenuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
+                className="w-6 h-[1.5px] bg-[#FFC800] origin-center"
+              ></motion.div>
+            </button>
+          </div>
+        </nav>
+
+        {/* --- MOBILE OVERLAY --- */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: "-100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "-100%" }}
+              transition={{ duration: 0.8, ease }}
+              className="fixed inset-0 z-[100] bg-[#050505] p-6 pt-32 flex flex-col gap-12 lg:hidden"
+            >
+              {/* Large Nav Links */}
+              <div className="flex flex-col gap-6">
+                {menuLinks.map((link, idx) => (
+                  <motion.a
+                    key={idx}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + idx * 0.1, duration: 0.8, ease }}
+                    className="text-5xl font-bold tracking-normal uppercase text-white/40 hover:text-[#FFC800] transition-colors"
+                  >
+                    {link.label}<span className="text-[#FFC800]">.</span>
+                  </motion.a>
+                ))}
+              </div>
+
+              {/* Footer Info in Menu */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mt-auto border-t border-white/10 pt-8"
+              >
+                <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase mb-4">Direct // Uplink</div>
+                <div className="space-y-4">
+                  <p className="text-[10px] text-white/50 uppercase leading-normal font-normal font-mono tracking-tight max-w-sm">LAT 41.9981 // LNG 21.4254</p>
+                  <p className="text-[#FFC800] font-mono text-xs">contact@osa-engineering.com</p>
+                </div>
+              </motion.div>
+
+              {/* Close Button UI Support */}
+              <div className="absolute top-6 right-6">
+                <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
+                  <X size={32} />
+                </button>
               </div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* Close Button UI Support */}
-            <div className="absolute top-6 right-6">
-              <button onClick={() => setIsMenuOpen(false)} className="text-white/50 hover:text-[#FFC800]">
-                <X size={32} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* --- MAIN CONTENT --- */}
+        <main className="hero-element relative z-10 flex-1 flex flex-col justify-center w-full px-6 py-20 lg:p-0 pointer-events-none lg:static lg:h-full lg:w-full">
 
-      {/* --- MAIN CONTENT --- */}
-      <main className="hero-element relative z-10 flex-1 flex flex-col justify-center w-full px-6 py-20 lg:p-0 pointer-events-none lg:static lg:h-full lg:w-full">
+          {/* Cinematic Title Reveal */}
+          <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
+            <motion.h1
+              variants={titleContainerVars}
+              className="text-fluid-h1 font-bold leading-none tracking-tightest uppercase text-white"
+            >
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block">Precision</motion.span>
+              </div>
+              <div className="overflow-hidden">
+                <motion.span variants={wordVars} className="block text-white/30">Engineered.</motion.span>
+              </div>
+            </motion.h1>
+          </div>
+        </main>
 
-        {/* Cinematic Title Reveal */}
-        <div className="lg:absolute lg:bottom-[35%] lg:left-8 lg:mb-12">
-          <motion.h1
-            variants={titleContainerVars}
-            className="text-fluid-h1 font-bold leading-none tracking-tightest uppercase text-white"
-          >
-            <div className="overflow-hidden">
-              <motion.span variants={wordVars} className="block">Precision</motion.span>
-            </div>
-            <div className="overflow-hidden">
-              <motion.span variants={wordVars} className="block text-white/30">Engineered.</motion.span>
-            </div>
-          </motion.h1>
-        </div>
-      </main>
-
-      {/* Info Blocks - Slower Fade In */}
-      <motion.div
-        variants={itemFadeUpVars}
-        className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] px-6 md:px-8 lg:px-12 py-8 lg:py-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
-      >
+        {/* Info Blocks - Slower Fade In */}
         <motion.div
           variants={itemFadeUpVars}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
+          className="hero-element relative lg:absolute lg:top-[65%] lg:left-0 w-full lg:w-[35%] h-auto lg:h-[35%] px-6 md:px-8 lg:px-12 py-8 lg:py-10 flex flex-col gap-6 lg:gap-0 lg:justify-between pointer-events-auto z-20 border-t border-white/5 lg:border-none"
         >
-          <span className="text-[#FFC800] text-[10px] font-mono">01</span>
-          <span className="text-tech-label font-bold text-white/70">Industrial</span>
-        </motion.div>
-
-        <p className="text-fluid-body text-white/50 uppercase font-mono tracking-tight max-w-sm">
-          Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
-        </p>
-      </motion.div>
-
-      {/* --- CTA BLOCK --- */}
-      <motion.a
-        variants={itemFadeUpVars}
-        href="#contact"
-        className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] px-6 md:px-8 lg:px-12 py-8 lg:py-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline overflow-hidden"
-        onMouseEnter={() => setIsCtaHovered(true)}
-        onMouseLeave={() => setIsCtaHovered(false)}
-      >
-        <TechGrid dotColor="rgba(0,0,0,0.25)" opacity="opacity-60" maskPosition="center center" />
-        <div className="flex justify-between items-start">
-          <motion.span
-            variants={itemFadeUpVars}
-            className="font-mono text-tech-label font-bold"
-          >
-            INITIATE //
-          </motion.span>
           <motion.div
             variants={itemFadeUpVars}
-            className="font-mono text-tech-label text-black/50 text-right"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
           >
-            LAT 41.9981<br />LNG 21.4254
+            <span className="text-[#FFC800] text-[10px] font-mono">01</span>
+            <span className="text-tech-label font-bold text-white/70">Industrial</span>
           </motion.div>
-        </div>
 
-        <div className="flex justify-between items-end mt-4 lg:mt-0">
-          <motion.h3
-            variants={ctaFadeInVars}
-            className="text-fluid-h3 font-bold tracking-tightest uppercase leading-none"
-          >
-            <ScrambleText text="Begin" trigger={isCtaHovered} /><br />
-            <ScrambleText text="Transmission" trigger={isCtaHovered} />
-          </motion.h3>
-          <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />
-        </div>
-      </motion.a>
+          <p className="text-fluid-body text-white/50 uppercase font-mono tracking-tight max-w-sm">
+            Absolute dimensional stability. Multi-axis reductive protocols transforming concepts into mission-critical structural components.
+          </p>
+        </motion.div>
+
+        {/* --- CTA BLOCK --- */}
+        <motion.a
+          variants={itemFadeUpVars}
+          href="#contact"
+          className="hero-element relative lg:absolute lg:bottom-auto lg:top-[65%] lg:left-[35%] w-full lg:w-[35%] min-h-[160px] lg:min-h-0 lg:h-[35%] bg-[#FFC800] text-[#050505] px-6 md:px-8 lg:px-12 py-8 lg:py-10 z-30 group cursor-pointer hover:bg-white transition-colors duration-500 flex flex-col justify-between pointer-events-auto no-underline overflow-hidden"
+          onMouseEnter={() => setIsCtaHovered(true)}
+          onMouseLeave={() => setIsCtaHovered(false)}
+        >
+          <TechGrid dotColor="rgba(0,0,0,0.25)" opacity="opacity-60" maskPosition="center center" />
+          <div className="flex justify-between items-start">
+            <motion.span
+              variants={itemFadeUpVars}
+              className="font-mono text-tech-label font-bold"
+            >
+              INITIATE //
+            </motion.span>
+            <motion.div
+              variants={itemFadeUpVars}
+              className="font-mono text-tech-label text-black/50 text-right"
+            >
+              LAT 41.9981<br />LNG 21.4254
+            </motion.div>
+          </div>
+
+          <div className="flex justify-between items-end mt-4 lg:mt-0">
+            <motion.h3
+              variants={ctaFadeInVars}
+              className="text-fluid-h3 font-bold tracking-tightest uppercase leading-none"
+            >
+              <ScrambleText text="Begin" trigger={isCtaHovered} /><br />
+              <ScrambleText text="Transmission" trigger={isCtaHovered} />
+            </motion.h3>
+            <ArrowUpRight className="w-10 h-10 lg:w-14 lg:h-14 stroke-[1.5] group-hover:rotate-45 transition-transform duration-500" />
+          </div>
+        </motion.a>
 
       </div>
     </motion.section>

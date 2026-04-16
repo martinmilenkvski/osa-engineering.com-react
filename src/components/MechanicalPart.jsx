@@ -208,17 +208,56 @@ const MechanicalPart = () => {
               </div>
           </section>
 
-          <section className="h-screen flex items-center justify-center p-6 md:p-8 lg:p-12">
-              <div className="bg-[#FFC800] text-[#0f0f0f] p-8 md:p-12 max-w-lg w-full pointer-events-auto shadow-2xl">
-                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/10 pb-4">
-                      <span className="text-tech-label font-mono font-bold">Initiate //</span>
-                      <div className="text-[9px] font-mono text-right tracking-blueprint">
+          <section className="min-h-screen flex items-center justify-center p-6 md:p-8 lg:p-12">
+              <div className="bg-[#FFC800] text-[#0f0f0f] p-10 md:p-14 w-full max-w-4xl pointer-events-auto shadow-2xl">
+                  {/* Header row */}
+                  <div className="flex justify-between items-start mb-8 border-b border-[#0f0f0f]/15 pb-5">
+                      <span className="text-tech-label font-mono font-bold tracking-widest">Perspective 04 // Final</span>
+                      <div className="text-[9px] font-mono text-right tracking-blueprint opacity-60">
                           Lat 42.00 N<br/>Lng 21.43 E
                       </div>
                   </div>
-                  <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none">Begin<br/>Transmission</h2>
-                  <div className="mt-8 flex justify-end">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+
+                  {/* Two-column layout */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+                      {/* Left — headline + single line */}
+                      <div className="flex flex-col justify-between">
+                          <h2 className="text-fluid-h3 font-bold tracking-tightest leading-none mb-4">
+                              Full<br/>Structural<br/>Analysis
+                          </h2>
+                          <p className="font-mono text-fluid-body text-[#1a1a1a] tracking-tight leading-relaxed opacity-80">
+                              360° rotation complete. Flange geometry, bore concentricity, and keyway tolerances — all nominal.
+                          </p>
+                      </div>
+
+                      {/* Right — spec grid (4 cells) */}
+                      <div className="grid grid-cols-2 gap-px bg-[#0f0f0f]/15">
+                          {[
+                              { label: 'Flange Ø', value: '120 mm' },
+                              { label: 'Bore Ø', value: '40 mm' },
+                              { label: 'Overall L', value: '250 mm' },
+                              { label: 'Tolerance', value: 'ISO H7/h6' },
+                          ].map(({ label, value }) => (
+                              <div key={label} className="bg-[#FFC800] p-4">
+                                  <div className="text-[9px] font-mono opacity-60 tracking-widest uppercase mb-1">{label}</div>
+                                  <div className="font-mono font-bold text-sm tracking-wide">{value}</div>
+                              </div>
+                          ))}
+                      </div>
+                  </div>
+
+                  {/* Footer CTA row */}
+                  <div className="border-t border-[#0f0f0f]/15 pt-5 flex items-center justify-between">
+                      <span className="font-mono text-[9px] tracking-widest uppercase opacity-50">
+                          Sequence complete
+                      </span>
+                      <button className="flex items-center gap-2 bg-[#0f0f0f] text-[#FFC800] px-5 py-2.5 font-mono font-bold text-xs tracking-widest uppercase hover:bg-[#1a1a1a] transition-colors">
+                          Initiate Contact
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="7" y1="17" x2="17" y2="7"></line>
+                              <polyline points="7 7 17 7 17 17"></polyline>
+                          </svg>
+                      </button>
                   </div>
               </div>
           </section>
