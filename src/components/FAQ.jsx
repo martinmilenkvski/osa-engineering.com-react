@@ -76,8 +76,8 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="w-full bg-[#080808] border-t border-white/10 relative overflow-hidden">
-      <div className="flex flex-col lg:flex-row min-h-[60vh] max-w-[1700px] mx-auto w-full">
+    <section id="faq" className="w-full bg-[#080808] border-t border-white/10 relative overflow-x-clip">
+      <div className="flex flex-col lg:flex-row lg:items-start min-h-[60vh] max-w-[1700px] mx-auto w-full">
         
         {/* --- LEFT: LOCKED VIEWFINDER --- */}
         <div className="w-full lg:w-[35%] h-auto lg:h-[100svh] lg:sticky lg:top-0 px-6 md:px-8 lg:px-12 py-12 lg:py-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center gap-12 lg:gap-32 relative z-10 shrink-0 bg-[#080808] overflow-hidden">

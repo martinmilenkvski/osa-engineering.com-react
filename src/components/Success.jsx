@@ -5,12 +5,14 @@ import TechGrid from "./TechGrid";
 
 const Success = () => {
   const successData = [
-    { id: "LOG-001", client: "ALKALOID", project: "Chemical Reactor Frame", status: "VERIFIED", val: "±0.005mm", img: "/galleryimg/Gemini_Generated_Image_16kedt16kedt16ke.png" },
-    { id: "LOG-002", client: "TITAN", project: "Kiln Support Roller", status: "ACTIVE", val: "10.5 Tons", img: "/galleryimg/Gemini_Generated_Image_2aiysc2aiysc2aiy.png" },
-    { id: "LOG-003", client: "MAKSTIL", project: "Conveyor Roller Shaft", status: "COMPLETED", val: "4-Axis", img: "/galleryimg/Gemini_Generated_Image_9gdot09gdot09gdo.png" },
-    { id: "LOG-004", client: "LEK", project: "Stainless Bio-Probe", status: "STABLE", val: "Polished", img: "/galleryimg/Gemini_Generated_Image_ct9xuct9xuct9xuc.png" },
-    { id: "LOG-005", client: "ACIBADEM", project: "MRI Table Component", status: "DELIVERED", val: "Non-Mag", img: "/galleryimg/Gemini_Generated_Image_godnqggodnqggodn.png" },
-    { id: "LOG-006", client: "OKTA", project: "Valve Actuator Coupling", status: "MONITORING", val: "High-Temp", img: "/galleryimg/Gemini_Generated_Image_hlpk4whlpk4whlpk.png" },
+    { id: "LOG-001", client: "ALKALOID", project: "Chemical Reactor Frame", status: "VERIFIED", val: "±0.005mm", img: "/success-img/img1.png" },
+    { id: "LOG-002", client: "TITAN", project: "Kiln Support Roller", status: "ACTIVE", val: "10.5 Tons", img: "/success-img/img2.png" },
+    { id: "LOG-003", client: "MAKSTIL", project: "Conveyor Roller Shaft", status: "COMPLETED", val: "4-Axis", img: "/success-img/img3.png" },
+    { id: "LOG-004", client: "LEK", project: "Stainless Bio-Probe", status: "STABLE", val: "Polished", img: "/success-img/img4.png" },
+    { id: "LOG-005", client: "ACIBADEM", project: "MRI Table Component", status: "DELIVERED", val: "Non-Mag", img: "/success-img/img5.png" },
+    { id: "LOG-006", client: "OKTA", project: "Valve Actuator Coupling", status: "MONITORING", val: "High-Temp", img: "/success-img/img6.png" },
+    { id: "LOG-007", client: "FENI", project: "Smelter Cooling Block", status: "VERIFIED", val: "Copper", img: "/success-img/img7.png" },
+    { id: "LOG-008", client: "SASSA", project: "Excavator Hub Assembly", status: "ACTIVE", val: "Ø1200mm", img: "/success-img/img8.png" },
   ];
 
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -23,9 +25,9 @@ const Success = () => {
   const smoothY = useSpring(cursorY, springConfig);
 
   const handleMouseMove = (e) => {
-    // Center the 300x200 box on the cursor
-    cursorX.set(e.clientX - 150);
-    cursorY.set(e.clientY - 100);
+    // Center the 500x333 box on the cursor
+    cursorX.set(e.clientX - 250);
+    cursorY.set(e.clientY - 166);
   };
 
   // --- ANIMATION VARIANTS ---
@@ -71,9 +73,9 @@ const Success = () => {
   const getStatusColor = (status) => ["VERIFIED", "COMPLETED", "DELIVERED"].includes(status) ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]" : "bg-[#FFC800] shadow-[0_0_10px_rgba(255,200,0,0.4)]";
 
   return (
-    <section id="success" className="w-full bg-[#080808] border-t border-white/10 relative overflow-hidden">
+    <section id="success" className="w-full bg-[#080808] border-t border-white/10 relative overflow-x-clip">
       <TechGrid opacity="opacity-30" maskPosition="center center" />
-      <div className="flex flex-col lg:flex-row-reverse max-w-[1700px] mx-auto w-full">
+      <div className="flex flex-col lg:flex-row-reverse lg:items-start max-w-[1700px] mx-auto w-full">
         
         {/* --- RIGHT: LOCKED VIEWFINDER --- */}
         <div className="w-full lg:w-[35%] lg:h-screen lg:sticky lg:top-0 px-6 md:px-8 lg:px-12 py-12 lg:py-16 border-b lg:border-b-0 lg:border-l border-white/10 flex flex-col justify-center gap-20 lg:gap-32">
@@ -151,7 +153,7 @@ const Success = () => {
               <motion.div 
                 key={idx}
                 variants={rowVars}
-                className="flex flex-col lg:grid lg:grid-cols-4 items-start lg:items-center gap-4 lg:gap-0 px-6 md:px-8 lg:px-12 py-8 group hover:bg-white/[0.02] transition-colors duration-500 relative border-b border-white/5 last:border-0"
+                className="flex flex-col lg:grid lg:grid-cols-4 items-start lg:items-center gap-4 lg:gap-0 px-6 md:px-8 lg:px-12 py-10 group hover:bg-white/[0.02] transition-colors duration-500 relative border-b border-white/5 last:border-0"
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
                 onMouseMove={handleMouseMove}
@@ -175,7 +177,7 @@ const Success = () => {
                 </div>
 
                 <div className="flex flex-row lg:flex-col justify-between lg:justify-center items-center lg:items-end w-full lg:w-auto mt-6 lg:mt-0 pt-6 lg:pt-0 border-t border-white/5 lg:border-0">
-                  <div className="text-fluid-h3 font-bold text-white tracking-tightest">{"{item.val}"}</div>
+                  <div className="text-fluid-h3 font-bold text-white tracking-tightest">{item.val}</div>
                   <div className="flex items-center gap-2 mt-1">
                     <div className={`w-1.5 h-1.5 rounded-full ${getStatusColor(item.status)}`}></div>
                     <span className="text-tech-label font-mono text-white/40 uppercase">
@@ -191,9 +193,8 @@ const Success = () => {
         </div>
       </div>
       
-      {/* Floating Image Reveal (Desktop Only) */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[100] overflow-hidden w-[300px] h-[200px] shadow-2xl invisible lg:visible border border-white/10"
+        className="pointer-events-none fixed top-0 left-0 z-[100] overflow-hidden w-[500px] h-[333px] shadow-2xl invisible lg:visible border border-white/10"
         style={{
           x: smoothX,
           y: smoothY,
