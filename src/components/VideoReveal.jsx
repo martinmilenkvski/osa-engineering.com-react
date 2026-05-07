@@ -53,24 +53,24 @@ const VideoReveal = () => {
       <TechGrid opacity="opacity-60" maskPosition="center center" />
       {/* ── Structured Typography & Grid Lines ── */}
       <div className="w-full max-w-[1700px] mx-auto px-6 md:px-8 lg:px-12 mb-16 lg:mb-24 flex justify-between items-end border-b border-white/5 pb-8">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-[#FFC800]" />
+        <p className="hidden md:block text-white/40 uppercase leading-normal font-normal max-w-sm text-left font-mono text-xs tracking-tight">
+          Adaptive motion-control systems <br />
+          operating at sub-micron tolerances. <br />
+          Engineered for the demands of tomorrow.
+        </p>
+
+        <div className="flex flex-col gap-4 items-end text-right">
+          <div className="flex items-center gap-3 justify-end">
             <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFC800] uppercase">
               Index [02]
             </span>
+            <div className="h-px w-8 bg-[#FFC800]" />
           </div>
           <h2 className="text-fluid-h2 font-bold uppercase text-white leading-[0.85] tracking-tighter">
             Precision <br />
             <span className="text-white/30 text-fluid-h2 whitespace-nowrap">In Motion.</span>
           </h2>
         </div>
-
-        <p className="hidden md:block text-white/40 uppercase leading-normal font-normal max-w-sm text-right font-mono text-xs tracking-tight">
-          Adaptive motion-control systems <br />
-          operating at sub-micron tolerances. <br />
-          Engineered for the demands of tomorrow.
-        </p>
       </div>
 
       <p className="md:hidden text-white/40 uppercase leading-normal font-normal max-w-sm text-left font-mono text-xs tracking-tight px-6 mb-16">

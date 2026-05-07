@@ -39,15 +39,15 @@ const LogoMarquee = () => {
   };
 
   const logos = [
-    { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-812" },
-    { name: "Draksler", src: "/logos/Draksler.png", id: "U-441" },
-    { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-290" },
-    { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-717" },
+    { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-812", scale: 1 },
+    { name: "Draksler", src: "/logos/Draksler.png", id: "U-441", scale: 0.9 },
+    { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-290", scale: 0.9 },
+    { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-717", scale: 1 },
     
-    { name: "Alkaloid", src: "/logos/Alkaloid.png", id: "U-813" },
-    { name: "Draksler", src: "/logos/Draksler.png", id: "U-442" },
-    { name: "Foma Systems", src: "/logos/FomaSystems.png", id: "U-291" },
-    { name: "Kromberg & Schubert", src: "/logos/Kromberg.png", id: "U-718" },
+    { name: "Google", src: "/logos/Google.svg", id: "U-G01", scale: 0.8 },
+    { name: "Apple", src: "/logos/Apple.svg", id: "U-A02", scale: 0.65 },
+    { name: "Amazon", src: "/logos/Amazon.svg", id: "U-Z03", scale: 0.85 },
+    { name: "Microsoft", src: "/logos/Microsoft.svg", id: "U-M04", scale: 0.6 },
   ];
 
   return (
@@ -115,6 +115,7 @@ const LogoMarquee = () => {
                   maskSize: 'contain',
                   maskPosition: 'center',
                   maskRepeat: 'no-repeat',
+                  transform: `scale(${logo.scale || 1})`,
                 }}
               />
             </div>
